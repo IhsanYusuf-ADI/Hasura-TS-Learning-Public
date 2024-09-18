@@ -9,13 +9,16 @@ Untuk menambah kolom di database, kalian dapat menggunakan DBeaver sebagai alat 
 
 Setelah DBeaver terinstal, buat koneksi baru ke MySQL dan masukkan detail setup host atau URL JDBC.   
 
-![image](https://github.com/IhsanYusuf-ADI/Hasura-TS-Learning/blob/main/03/images/DBeaver/01%20MySQL.png)
+![image](https://github.com/user-attachments/assets/e1956996-0865-44d9-83f2-9b375d2882d1)
+
   
-![image](https://github.com/IhsanYusuf-ADI/Hasura-TS-Learning/blob/main/03/images/DBeaver/02%20Create%20Connection.png)
+![image](https://github.com/user-attachments/assets/876150a1-e42f-45a9-9501-8c3dd3e63f23)
+
     
 Lakukan tes koneksi sebelum mengklik **Finish** untuk memastikan koneksi berhasil. 
 
-![image](https://github.com/IhsanYusuf-ADI/Hasura-TS-Learning/blob/main/03/images/DBeaver/03%20Test%20Connection.png)  
+![image](https://github.com/user-attachments/assets/22003f61-b7a0-476a-8937-5c22286b753c)
+ 
 
 Jika koneksi sudah terhubung, kalian dapat melakukan berbagai tindakan, seperti:
 
@@ -26,15 +29,18 @@ Jika koneksi sudah terhubung, kalian dapat melakukan berbagai tindakan, seperti:
 
 Berikut tampilan untuk membuat tabel baru di Bbeaver:  
 
-![image](https://github.com/IhsanYusuf-ADI/Hasura-TS-Learning/blob/main/03/images/DBeaver/04%20Create%20Table.png)
+![image](https://github.com/user-attachments/assets/dcad5dc9-f4b5-400f-92fa-0a005db11e2c)
+
   
 Berikut adalah tampilan di DBeaver untuk menambahkan kolom baru pada tabel di database MySQL, sekaligus mengatur tipe data serta menetapkan primary key atau unique key:  
 
-![image](https://github.com/IhsanYusuf-ADI/Hasura-TS-Learning/blob/main/03/images/DBeaver/05%20Create%20Column.png)  
+![image](https://github.com/user-attachments/assets/487f8ffb-afe1-418d-b2f6-33d79a193190)
+
 
 Berikut adalah tampilan di DBeaver untuk menambahkan foreign key pada tabel di database MySQL yang sudah dibuat, guna membentuk relasi antar tabel serta menjaga integritas data:  
 
-![image](https://github.com/IhsanYusuf-ADI/Hasura-TS-Learning/blob/main/03/images/DBeaver/06%20Create%20Foreign%20Key.png)  
+![image](https://github.com/user-attachments/assets/d5429388-96e9-4090-84e3-5b27bd4ef5e1)
+
 
 ## 3. Memasukkan Data Menggunakan GraphQL di Hasura
 
@@ -62,7 +68,8 @@ mutation insert_attendance {
 
 Berikut adalah hasil ketika diterapkan pada GraphQL:
 
-![image](https://github.com/IhsanYusuf-ADI/Hasura-TS-Learning/blob/main/03/images/CRUD/07%20Mutation%20Insert.png)  
+![image](https://github.com/user-attachments/assets/59337d45-70ad-4ea7-a585-412c8756f8e5)
+
   
 ### Mutation Insert Multiple Data  
 
@@ -89,7 +96,8 @@ mutation insert_students {
   
 Berikut adalah hasil ketika diterapkan pada GraphQL:
 
-![image](https://github.com/IhsanYusuf-ADI/Hasura-TS-Learning/blob/main/03/images/CRUD/08%20Mutation%20Insert%20Batch.png)  
+![image](https://github.com/user-attachments/assets/b1e9ee2d-b740-498a-af31-b1dec6cad70a)
+
     
 ## 4. Update Data Menggunakan GraphQL
    
@@ -112,7 +120,8 @@ mutation update_attendance {
 
 Berikut adalah hasil ketika diterapkan pada GraphQL:
 
-![image](https://github.com/IhsanYusuf-ADI/Hasura-TS-Learning/blob/main/03/images/CRUD/09%20Mutation%20Update.png) 
+![image](https://github.com/user-attachments/assets/b710f249-d708-4bac-8330-b153f65c1afc)
+
     
 ### Mutation Update Multiple Data  
 
@@ -140,7 +149,8 @@ mutation {
 
 Berikut adalah hasil ketika diterapkan pada GraphQL:
 
-![image](https://github.com/IhsanYusuf-ADI/Hasura-TS-Learning/blob/main/03/images/CRUD/10%20Mutation%20Update%20Batch%20V1.png)  
+![image](https://github.com/user-attachments/assets/dc745765-5484-49d6-b12a-960f8cc136f0)
+
   
 Jika kalian ingin memperbaiki banyak data yang sudah diinput secara bersamaan tetapi memiliki set value yang sama, kalian dapat menggunakan perintah mutation update GraphQL seperti berikut.
 
@@ -159,7 +169,8 @@ mutation {
 
 Berikut adalah hasil ketika diterapkan pada GraphQL:
 
-![image](https://github.com/IhsanYusuf-ADI/Hasura-TS-Learning/blob/main/03/images/CRUD/11%20Mutation%20Update%20Batch%20V2.png)
+![image](https://github.com/user-attachments/assets/d275569d-9897-4b93-89f1-bfa7b1e0a1a1)
+
     
 ## 5. Menghapus Data Menggunakan GraphQL
    
@@ -177,7 +188,8 @@ mutation delete_attendance {
 
 Berikut adalah hasil ketika diterapkan pada GraphQL:
 
-![image](https://github.com/IhsanYusuf-ADI/Hasura-TS-Learning/blob/main/03/images/CRUD/12%20Mutation%20Delete.png)
+![image](https://github.com/user-attachments/assets/7f1aa752-0c79-4535-bcab-506188703740)
+
     
 ### Mutation Delete Multiple Data  
 
@@ -185,7 +197,7 @@ Berikut adalah hasil ketika diterapkan pada GraphQL:
 mutation {
   delete_attendance(
     where: {
-      id: { _in: [5, 6, 7, 8, 9, 10] }
+      id: { _in: [5, 6, 7] }
     }
   ) {
     affected_rows
@@ -195,7 +207,8 @@ mutation {
 
 Berikut adalah hasil ketika diterapkan pada GraphQL:
 
-![image](https://github.com/IhsanYusuf-ADI/Hasura-TS-Learning/blob/main/03/images/CRUD/13%20Mutation%20Delete%20Batch.png)
+![image](https://github.com/user-attachments/assets/0868d7ab-a4e4-4296-9a99-8d2e50d86d21)
+
     
 
 ## 6. Mengambil Data Menggunakan GraphQL
@@ -219,7 +232,8 @@ query get_attendance {
 
 Berikut adalah hasil ketika diterapkan pada GraphQL:
 
-![image](https://github.com/IhsanYusuf-ADI/Hasura-TS-Learning/blob/main/03/images/CRUD/14%20Query%20Get%20By%20Criteria.png)
+![image](https://github.com/user-attachments/assets/f79da4e4-04ac-4ff2-a8a9-beac8b3a5146)
+
     
 ### Contoh Query Mengambil Semua Data
 
@@ -237,17 +251,20 @@ query {
 
 Berikut adalah hasil ketika diterapkan pada GraphQL:
 
-![image](https://github.com/IhsanYusuf-ADI/Hasura-TS-Learning/blob/main/03/images/CRUD/15%20Query%20Get%20All.png)
+![image](https://github.com/user-attachments/assets/fff10cd6-5dd1-455e-92a9-c65182b6bee5)
+
       
 Fungsi utama query ini adalah untuk mengambil data dari database, baik itu secara keseluruhan maupun berdasarkan filter tertentu seperti pada contoh di atas. Dalam contoh yang telah disebutkan, data dari tabel attendance diambil untuk ditampilkan kepada pengguna atau aplikasi. Selain itu perintah ini dapat Memfilter Data Berdasarkan Kriteria Tertentu: Dengan menambahkan filter (where), kamu bisa mengambil data yang spesifik, seperti data siswa yang hadir pada hari tertentu atau data kehadiran dalam rentang waktu tertentu. Contoh sebelumnya adalah pengmabilan data menggunakan filter class dan date. 
 
 Setelah Anda melakukan perintah CRUD, pastikan data telah masuk atau terbarui dengan memeriksa data di tab Data pada Hasura, seperti yang terlihat pada gambar berikut:
 
-![image](https://github.com/IhsanYusuf-ADI/Hasura-TS-Learning/blob/main/03/images/CRUD/16%20Data%20Show.png)  
+![image](https://github.com/user-attachments/assets/43f51ccd-f039-48fe-b2ef-eaee30d89643)
+
   
 Kalian juga dapat memeriksa Foreign Key Relationships yang telah dibuat sebelumnya melalui DBeaver atau di Hasura. Caranya, masuk ke menu Data, kemudian pilih database yang ingin kalian cek relasinya. Setelah itu, masuk ke bagian Foreign Key Relationships untuk melihat foreign key dan relasi antar tabel. Tampilan di Hasura akan terlihat seperti gambar berikut:
 
-![image](https://github.com/IhsanYusuf-ADI/Hasura-TS-Learning/blob/main/03/images/CRUD/17%20Data%20Relationship.png)
+![image](https://github.com/user-attachments/assets/04054441-fbae-4d64-948d-5e91312239d0)
+
 
 Gambar di atas menunjukkan dua jenis relasi yang ada pada database yang dipilih, yaitu:
 - Object Relationships (one-to-one)
@@ -257,5 +274,6 @@ Pastikan relasi antar tabel yang kalian inginkan atau sudah kalian buat pada DBe
   
 Kalian juga dapat melihat relasi antar tabel pada DBeaver. Kalian cukup pilih database atau table yang ingin kalian lihat relasinya setelah itu pilih ERD untuk mengakses relasi antar tabel seperti pada gambar berikut.  
 
-![image](https://github.com/user-attachments/assets/696044db-828a-4996-8a60-1171c446f2c9)  
+![image](https://github.com/user-attachments/assets/f4e4bcc7-57e3-4ee1-b687-03c3f44e3d35)
+
   
