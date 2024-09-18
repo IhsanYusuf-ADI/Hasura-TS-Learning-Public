@@ -21,7 +21,8 @@ query getLimitedSchedules {
 
 Berikut adalah hasil ketika diterapkan pada GraphQL:
   
-![image](https://github.com/user-attachments/assets/79c02aff-801b-4b7f-b008-c0d2aaa8e2ad)
+![image](https://github.com/user-attachments/assets/277c0a3b-d33d-4b09-b780-5c8dc1ece39f)
+
 
  
 Query ini mengambil 5 data dimulai dari baris ketiga.  
