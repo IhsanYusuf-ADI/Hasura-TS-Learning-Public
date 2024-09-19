@@ -28,6 +28,8 @@ Berikut adalah hasil ketika diterapkan pada GraphQL di Postman.
 ![Screenshot (200)](https://github.com/user-attachments/assets/e16a6d7a-6aed-442a-8a32-1208e294ee73)
 
 
+Dari hasil di atas dapat diketahui bahwa jumlah data pada tabel `todos` adalah satu dan berelasi dengan satu data pada tabel `user`
+
 ### Query 2: GetAllUsers
 ```graphql
 query GetAllUsers {
@@ -47,6 +49,8 @@ Berikut adalah hasil ketika diterapkan pada GraphQL di Postman.
 
 ![Screenshot (201)](https://github.com/user-attachments/assets/326ca41a-df17-4fb0-8945-ad99712d6b1b)
 
+
+Dari hasil di atas dapat diketahui bahwa jumlah data pada tabel `users` adalah satu.
   
 ### Query 3: todoByPK
 ```graphql
@@ -75,6 +79,8 @@ Berikut adalah hasil ketika diterapkan pada GraphQL di Postman.
 
 ![Screenshot (203)](https://github.com/user-attachments/assets/cddfba59-04fc-4deb-9052-612ccda574f4)
   
+
+Dari hasil di atas dapat diketahui bahwa data dengan `id = 1` tabel `todos` adalah **user** dengan nama **ferdy**.
   
 ### Query 4: userByPK
 ```graphql
@@ -95,6 +101,8 @@ Berikut adalah hasil ketika diterapkan pada GraphQL di Postman.
 
 ![Screenshot (204)](https://github.com/user-attachments/assets/b8d7d623-46ce-4ea1-84d9-c8d8faab5bc5)
 
+
+Dari hasil di atas dapat diketahui bahwa data dengan `id = 1` tabel `users` adalah **user** dengan nama **ferdy**.
    
 ---
 
@@ -116,7 +124,9 @@ Query ini digunakan untuk menghitung total jumlah penulis (`countAuthors`) dan j
 Berikut adalah hasil ketika diterapkan pada GraphQL di Postman.
 
 ![Screenshot (205)](https://github.com/user-attachments/assets/40d65029-97ac-4666-ac39-a1353fba4711)
+
   
+Dari hasil di atas dapat diketahui bahwa terdapat 1 row pada tabel `Authors` dan 2 rows pada tabel `Tutorials`.
   
 ### Query 2: getAllAuthors
 ```graphql
@@ -138,6 +148,8 @@ Berikut adalah hasil ketika diterapkan pada GraphQL di Postman.
 
 ![Screenshot (206)](https://github.com/user-attachments/assets/bd1ea91c-97ec-4d53-84da-f6216b2e6c85)
 
+
+Dari hasil di atas dapat diketahui bahwa terdapat 1 `Author` dengan data `usia = 27`, `id = 1`, dan `nama = "bezkoder"`.
   
 ### Query 3: getAllTutorials
 ```graphql
@@ -165,4 +177,5 @@ Berikut adalah hasil ketika diterapkan pada GraphQL di Postman.
 ![Screenshot (208)](https://github.com/user-attachments/assets/bb753465-18ca-4662-85dd-e30dc30d0d91)
 
   
+Dari hasil di atas dapat diketahui bahwa terdapat 2 `Tutorials` dengan satu `Author` yang sama.  
   
