@@ -18,8 +18,10 @@ Cek log masing-masing pod Hasura yang terhubung dengan schema untuk melihat apak
 
 
 ## 3. Query dari Postman (Sumber GraphQL Mati)
-Buat query GraphQL di Postman dan kirim permintaan.
-**Analisis**:  
+Buat query GraphQL di Postman dan kirim permintaan.  
+
+**Analisis**:    
+  
 Apakah ada error di Postman? Terdapat error pada Postman ketika menjalankan query.
 
 ![Screenshot (217)](https://github.com/user-attachments/assets/6370c2a6-4acb-459c-b7a4-ffe69c66cded)
@@ -66,8 +68,10 @@ Scale up deployment menjadi 1 seperti gambar berikut.
 
     
 ## 5. Query dari Postman (Sebelum Reload Schema)
-Kirim query GraphQL dari Postman tanpa melakukan reload schema.
-**Analisis**:  
+Kirim query GraphQL dari Postman tanpa melakukan reload schema.  
+  
+**Analisis**:   
+  
 Apakah ada error di Postman?
 Tidak ditemukan error dapat dilihat pada gambar berikut.
 
