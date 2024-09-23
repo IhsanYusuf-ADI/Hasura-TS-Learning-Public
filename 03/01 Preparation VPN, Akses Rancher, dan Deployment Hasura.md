@@ -1,11 +1,11 @@
 # Panduan Koneksi VPN, Akses Rancher, dan Deployment Hasura
 
 ## 1. Koneksi ke VPN
-Langkah pertama adalah menghubungkan ke VPN menggunakan Pritunl. Dokumentasi resmi untuk penggunaan Pritunl dapat dilihat di link berikut:  
+Langkah pertama adalah menghubungkan ke VPN menggunakan Pritunl. Dokumentasi untuk penggunaan Pritunl dapat dilihat di link berikut:  
 [Dokumentasi Pritunl](https://docs.google.com/document/d/12sWyat7xh3zwIUXlOqk2NLGKayTl3mjG/edit?usp=sharing&ouid=103129292174620109877&rtpof=true&sd=true)
 
 ## 2. Akses Rancher Kantor
-Setelah terhubung ke VPN, Setelah terhubung ke VPN, akses Rancher yang telah dibuat sebelumnya.
+Setelah terhubung ke VPN, akses Rancher yang telah dibuat sebelumnya.
 
 ## 3. Deployment Hasura di Kubernetes
 Setelah masuk ke Rancher, akses Kubernetes dan masuk ke namespace masing-masing. Lakukan deployment Hasura dengan konfigurasi YAML yang bisa diunduh dari:  
