@@ -61,6 +61,40 @@ Error yang ditemukan:
 }
 ```
 
+# Analisis Error Koneksi Remote Schema di Hasura
+
+Error di atas mengindikasikan bahwa Hasura mencoba mengakses _remote schema_ di URL `http://10.100.14.10:8989/query`, namun gagal karena koneksi ke server tersebut ditolak (_Connection refused_). Berikut analisis lebih lanjut tentang error ini:
+
+## Komponen Error
+
+1. **Pesan Utama**:
+    - `"HTTP exception occurred while sending the request to \"http://10.100.14.10:8989/query\""` menunjukkan bahwa terjadi kesalahan HTTP ketika mengirim permintaan ke URL yang ditentukan.
+  
+2. **Internal Error**:
+    - **`Connection failure`**: Menyatakan kegagalan koneksi saat mencoba terhubung ke alamat IP `10.100.14.10` pada port `8989`.
+    - **`does not exist (Connection refused)`**: Ini berarti server di IP dan port yang dimaksud tidak menerima koneksi dari Hasura. Penyebab umum bisa karena server tidak aktif, port yang salah, atau firewall yang memblokir koneksi.
+
+## Kemungkinan Penyebab dan Solusi
+
+1. **Service Tidak Berjalan**:
+    - Alamat IP `10.100.14.10` mungkin adalah pod atau service di dalam cluster Kubernetes. Jika pod atau service di alamat ini tidak berjalan atau belum siap, maka koneksi akan ditolak.
+    - **Solusi**: Pastikan bahwa pod atau service yang terkait dengan IP `10.100.14.10` di Kubernetes berjalan dengan baik. Kamu bisa memeriksa statusnya pada kubernetes dashboard.
+
+2. **Port Salah**:
+    - Jika service yang diakses memiliki port yang berbeda, Hasura tidak akan bisa terhubung ke `8989`. Port mungkin tidak dikonfigurasi dengan benar.
+    - **Solusi**: Periksa apakah port yang digunakan oleh service di alamat `10.100.14.10` sesuai. Jika port berbeda, sesuaikan pengaturan di remote schema Hasura untuk mengakses port yang benar.
+
+3. **Network Policy atau Firewall**:
+    - Jika ada _Network Policy_ di Kubernetes atau firewall eksternal yang memblokir lalu lintas ke port `8989`, Hasura tidak akan bisa terhubung.
+    - **Solusi**: Pastikan tidak ada _Network Policy_ atau firewall yang membatasi akses ke service tersebut. Kamu bisa mengecek Network Policies yang diterapkan di namespace.
+
+## Kesimpulan
+
+- Langkah pertama adalah memeriksa apakah service yang dimaksud (`10.100.14.10:8989`) berjalan dan dapat diakses dari pod Hasura.
+- Jika service berjalan, pastikan port yang digunakan benar dan tidak ada aturan jaringan yang memblokir koneksi.
+
+Dalam kasus ini disebabkan karena `service tidak berjalan`.
+  
 ## 4. Jalankan Lagi Sumber GraphQL  
 Scale up deployment menjadi 1 seperti gambar berikut.
 
