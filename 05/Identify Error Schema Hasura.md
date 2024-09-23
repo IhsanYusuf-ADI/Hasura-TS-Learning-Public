@@ -1,6 +1,6 @@
 # Dokumentasi Skenario Pengujian GraphQL dan Postman
 
-## 1. Matikan Kedua Sumber GQL  
+## 1. Matikan Sumber GraphQL  
 Scale down deployment menjadi 0 seperti gambar berikut.
   
 ![WhatsApp Image 2024-09-23 at 13 31 59](https://github.com/user-attachments/assets/8783c366-1899-49f0-b170-9c119e627457)
@@ -11,13 +11,13 @@ Scale down deployment menjadi 0 seperti gambar berikut.
 - Deployment: todos-graphql
 - Namespace: default
 
-## 2. Analisa Error pada Hasura yang Meremote ke GQL Mas Ferdy  
+## 2. Analisa Error pada Hasura yang Meremote ke GraphQL
 Cek log masing-masing pod Hasura yang terhubung dengan schema untuk melihat apakah ada error. Hasura masih jalan dengan lancar, tidak terjadi error.
   
 ![image](https://github.com/user-attachments/assets/48a66ce0-ba2e-4d3b-83f2-96d2fafbcc55)
 
 
-## 3. Query dari Postman (Sumber GQL Mas Ferdy Mati)
+## 3. Query dari Postman (Sumber GraphQL Mati)
 Buat query GraphQL di Postman dan kirim permintaan.
 **Analisis**:  
 Apakah ada error di Postman? Terdapat error pada Postman ketika menjalankan query.
@@ -59,7 +59,7 @@ Error yang ditemukan:
 }
 ```
 
-## 4. Jalankan Lagi Sumber GQL  
+## 4. Jalankan Lagi Sumber GraphQL  
 Scale up deployment menjadi 1 seperti gambar berikut.
 
 ![Screenshot (215)](https://github.com/user-attachments/assets/faefae21-4a63-4327-ad7a-ff2556be0006)
