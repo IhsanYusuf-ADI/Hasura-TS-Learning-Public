@@ -73,5 +73,24 @@ Buka menu **Settings** pada Hasura Console untuk diarahkan ke halaman pengaturan
 
 ![image](https://github.com/user-attachments/assets/8b383ee9-5cb6-474b-842f-87c9d0592f43)
 
+
+Adapun URL Endpoint yang saya gunakan adalah sebagai berikut:    
+Traces Endpoint
+
+```bash
+http://10.100.13.205:8889/v1/traces
+```
+
+Metrics Endpoint  
+  
+```bash
+http://10.100.13.205:8889/v1/metrics
+```
+
+Logs Endpoint  
+  
+```bash
+http://10.100.13.205:8889/v1/logs
+```
   
 Dengan langkah-langkah ini, Anda dapat menghubungkan Hasura ke OpenTelemetry untuk memantau performa, error, dan logging pada aplikasi Anda secara terintegrasi.
