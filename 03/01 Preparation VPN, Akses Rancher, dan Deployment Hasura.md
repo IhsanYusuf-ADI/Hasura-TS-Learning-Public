@@ -156,7 +156,7 @@ spec:
   
 Sesuaikan port dan pastikan tidak bentrok dengan service lain.  
 
-## 8. Menghubungkan Hasura ke Connector Data Agent.  
+## 7. Menghubungkan Hasura ke Connector Data Agent.  
 Untuk menghubungkan Hasura ke MySQL, gunakan connector data agent yang telah di deploy sebelumnya. Berikut adalah contoh URL yang kupakai untuk koneksi ke connector data agent:
 
 ```bash
