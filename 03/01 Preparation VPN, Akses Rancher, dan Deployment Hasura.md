@@ -160,7 +160,7 @@ Sesuaikan port dan pastikan tidak bentrok dengan service lain.
 Untuk menghubungkan Hasura ke MySQL, gunakan connector data agent yang telah di deploy sebelumnya. Berikut adalah contoh URL yang kupakai untuk koneksi ke connector data agent:
 
 ```bash
-[jdbc:mysql://10.100.13.205:3306/Ihsan?user=Ihsan&password=Ihsan](http://10.100.14.9:8991/)
+http://10.100.14.9:8991/
 ```
   
 ## 8. Menghubungkan Hasura ke MySQL  
