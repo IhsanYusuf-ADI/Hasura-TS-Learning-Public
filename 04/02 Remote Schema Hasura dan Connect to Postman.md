@@ -106,3 +106,50 @@ query MyQuery {
 Hasil dari query akan muncul di bagian bawah seperti pada gambar berikut.  
   
 ![Screenshot (200)](https://github.com/user-attachments/assets/b11805c1-db6e-42fb-aad4-7b613e25e8c4)
+
+# Menghubungkan Hasura ke Postman Menggunakan GraphQL
+
+Selain menggunakan metode HTTP, Anda juga dapat menghubungkan Hasura ke Postman dengan memanfaatkan fitur bawaan Postman untuk GraphQL. Berikut langkah-langkahnya:
+
+### 1. Memilih Mode GraphQL pada Postman
+
+- Buka Postman dan buat request baru.
+- Alih-alih memilih metode `HTTP`, pilihlah `GraphQL` seperti gambar di bawah ini.
+
+![Screenshot (238)](https://github.com/user-attachments/assets/d2a6893b-a7c9-4fa7-99c6-82a248bfd2e3)
+
+
+### 2. Konfigurasi URL dan Header
+
+Setelah memilih mode `GraphQL`, Anda akan diarahkan ke halaman konfigurasi request GraphQL seperti berikut.
+
+![Screenshot (239)](https://github.com/user-attachments/assets/4b2ff14a-d865-4531-bfe5-9d3977ea4ce1)
+
+    
+- Masukkan URL Hasura Anda pada kolom URL.
+- Tambahkan header `x-hasura-admin-secret` dan isi dengan value yang sesuai.
+
+## 3. Menampilkan Query yang Tersedia
+
+Pada halaman query, klik tombol `Use GraphQL Introspection` untuk melihat query yang tersedia pada Hasura. Dengan fitur ini, Anda dapat mengeksplorasi skema GraphQL dan query yang dapat dijalankan.
+
+![Screenshot (240)](https://github.com/user-attachments/assets/419c2303-d5f6-4d22-8ad5-349183c13ebf)
+
+
+## 4. Mengeksplorasi Query GraphQL
+
+Setelah melakukan introspection, Postman akan menampilkan query explorer yang memungkinkan Anda melihat skema GraphQL yang tersedia pada Hasura.
+
+- Pilih query yang ingin dijalankan, kemudian salin query tersebut ke kolom query editor.
+
+![Screenshot (241)](https://github.com/user-attachments/assets/d40cd684-d4d9-42f2-854b-eb4080e66d02)
+
+
+## 5. Menjalankan Query
+
+Setelah memasukkan query pada editor, klik tombol `Query` untuk menjalankan query. Hasil dari query yang dijalankan akan ditampilkan pada panel `Response` di Postman.
+
+![Screenshot (242)](https://github.com/user-attachments/assets/342e444f-d471-4a90-8a6e-578a62f19925)
+
+
+Dengan langkah-langkah di atas, Anda dapat dengan mudah menghubungkan Hasura ke Postman dan menjalankan query GraphQL secara langsung tanpa menggunakan metode HTTP.
