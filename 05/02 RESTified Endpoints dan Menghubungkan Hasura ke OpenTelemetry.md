@@ -196,4 +196,7 @@ http://10.100.13.205:8889/v1/logs
 Dengan langkah-langkah ini, Anda dapat menghubungkan Hasura ke OpenTelemetry untuk memantau performa, error, dan logging pada aplikasi Anda secara terintegrasi. 
 
 **NOTE:**
-Kalian juga dapat melihat keberhasilan menghubungkan Hasura ke OpenTelemetry pada View Logs di pods Hasura yang telah kalian bangun. Coba lakukan refresh pods dengan scale down lalu scale up hasura pods kalian. Selanjutnya, cek view logs pada pod hasura dan temukan log mengenai connectivity Hasura dan OpenTelemetry.
+Kalian juga dapat melihat keberhasilan menghubungkan Hasura ke OpenTelemetry pada View Logs di pods Hasura yang telah kalian bangun. Coba lakukan refresh pods dengan scale down lalu scale up hasura pods kalian. Selanjutnya, cek view logs pada pod hasura dan temukan log mengenai connectivity Hasura dengan OpenTelemetry seperti gambar berikut.  
+
+![image](https://github.com/user-attachments/assets/35857e24-f86f-4cbe-b4ff-9f92570b4f86)
+
