@@ -76,14 +76,13 @@ HASURA_GRAPHQL_METRICS_SECRET=<secret>
 ```
 
   amankan juga endpoint metric dengan token bearer yang diinginkan.   
-   
-  **Note:** Metric Secret dapat diatur terlebih dahulu pada secret setelah itu panggil di deployment.
 
   Berikut merupakan contoh configuration yang ditambahkan pada yaml deployment Hasura.
 
   ![image](https://github.com/user-attachments/assets/79277069-272d-4794-81e1-fa1bb1060798)
  
-
+  **Note:** Metric Secret dapat diatur terlebih dahulu pada secret setelah itu panggil di deployment.  
+  
 3. Gunakan URL endpoint metrik Hasura di Postman.
    Gunakan URL Hasura Console kalian dan tambahkan `/v1/metrics` pada akhir url seperti berikut.
    **Contoh:**
