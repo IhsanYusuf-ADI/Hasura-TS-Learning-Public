@@ -403,68 +403,68 @@ Berikut adalah penjelasan mendetail mengenai tiap baris dari metrics di atas bes
 - **Penjelasan**: Tidak ada one-off event yang diproses.
 
 ## 21. hasura_otel_dropped_logs
-Deskripsi: Jumlah total log yang di-drop karena volume log yang tinggi.
+- **Deskripsi**: Jumlah total log yang di-drop karena volume log yang tinggi.
 Tipe: Counter
-Nilai:
-reason="buffer_full": 0.0
-reason="send_failed": 0.0
-Penjelasan: Tidak ada log yang di-drop karena buffer penuh atau gagal dikirim.
+- **Nilai**:
+  - `reason="buffer_full"`: `0.0`
+  - `reason="send_failed"`: `0.0`
+- **Penjelasan**: Tidak ada log yang di-drop karena buffer penuh atau gagal dikirim.
 
 ## 22. hasura_otel_dropped_spans
-Deskripsi: Jumlah total trace span yang di-drop karena volume trace yang tinggi.
-Tipe: Counter
-Nilai:
-reason="buffer_full": 0.0
-reason="send_failed": 0.0
-Penjelasan: Tidak ada trace span yang di-drop karena buffer penuh atau gagal dikirim.
+- **Deskripsi**: Jumlah total trace span yang di-drop karena volume trace yang tinggi.
+- **Tipe**: Counter
+- **Nilai**:
+  - `reason="buffer_full"`: `0.0`
+  - `reason="send_failed"`: `0.0`
+- **Penjelasan**: Tidak ada trace span yang di-drop karena buffer penuh atau gagal dikirim.
 
 ## 23. hasura_otel_sent_logs
-Deskripsi: Jumlah total log yang berhasil diekspor.
-Tipe: Counter
-Nilai: 152.0
-Penjelasan: Sebanyak 152 log berhasil diekspor ke OpenTelemetry.
+- **Deskripsi**: Jumlah total log yang berhasil diekspor.
+- **Tipe**: Counter
+- **Nilai**: 152.0
+- **Penjelasan**: Sebanyak 152 log berhasil diekspor ke OpenTelemetry.
 
 ## 24. hasura_otel_sent_spans
-Deskripsi: Jumlah total trace span yang berhasil diekspor.
-Tipe: Counter
-Nilai: 3.0
-Penjelasan: Sebanyak 3 trace span berhasil diekspor ke OpenTelemetry.
+- **Deskripsi**: Jumlah total trace span yang berhasil diekspor.
+- **Tipe"": Counter
+- **Nilai**: 3.0
+- *"Penjelasan**: Sebanyak 3 trace span berhasil diekspor ke OpenTelemetry.
 
 ## 25. hasura_pending_events
-Deskripsi: Jumlah event yang belum diproses dalam event queue.
-Tipe: Gauge
-Nilai: 0.0
-Penjelasan: Tidak ada event yang menunggu untuk diproses dalam event queue.
+- **Deskripsi**: Jumlah event yang belum diproses dalam event queue.
+- **Tipe**: Gauge
+- **Nilai**: 0.0
+- **Penjelasan**: Tidak ada event yang menunggu untuk diproses dalam event queue.
 
 ## 26. hasura_pending_http_requests
-Deskripsi: Jumlah HTTP request yang masih tertunda saat ini.
-Tipe: Gauge
-Nilai: 0.0
-Penjelasan: Tidak ada HTTP request yang tertunda saat ini.
+- **Deskripsi**: Jumlah HTTP request yang masih tertunda saat ini.
+- **Tipe**: Gauge
+- **Nilai**: 0.0
+- **Penjelasan**: Tidak ada HTTP request yang tertunda saat ini.
 
 ## 27. hasura_schema_sync_last_received_version
-Deskripsi: Versi terakhir dari schema metadata yang diterima.
-Tipe: Gauge
-Nilai: 308.0
-Penjelasan: Versi schema metadata terakhir yang diterima adalah 308.
+- **Deskripsi**: Versi terakhir dari schema metadata yang diterima.
+- **Tipe**: Gauge
+- **Nilai**: 308.0
+- **Penjelasan**: Versi schema metadata terakhir yang diterima adalah 308.
 
 ## 28. hasura_schema_sync_last_sent_version
-Deskripsi: Versi terakhir dari schema metadata yang dikirim.
-Tipe: Gauge
-Nilai: 308.0
-Penjelasan: Versi schema metadata terakhir yang dikirim adalah 308.
+- **Deskripsi**: Versi terakhir dari schema metadata yang dikirim.
+- **Tipe**: Gauge
+- **Nilai**: 308.0
+- **Penjelasan**: Versi schema metadata terakhir yang dikirim adalah 308.
 
 ## 29. hasura_schema_sync_queue_size
-Deskripsi: Ukuran dari schema sync queue.
-Tipe: Gauge
-Nilai: 0.0
-Penjelasan: Tidak ada item dalam schema sync queue saat ini.
+- **Deskripsi**: Ukuran dari schema sync queue.
+- **Tipe**: Gauge
+- **Nilai**: 0.0
+- **Penjelasan**: Tidak ada item dalam schema sync queue saat ini.
 
 ## 30. hasura_websocket_connections
-Deskripsi: Jumlah WebSocket connections yang aktif.
-Tipe: Gauge
-Nilai: 0.0
-Penjelasan: Tidak ada WebSocket connection yang aktif saat ini.
+- **Deskripsi**: Jumlah WebSocket connections yang aktif.
+- **Tipe**: Gauge
+- **Nilai**: 0.0
+- **Penjelasan**: Tidak ada WebSocket connection yang aktif saat ini.
 
 ## Ringkasan
 Sebagian besar nilai dari metrics menunjukkan bahwa sistem dalam keadaan idle atau belum digunakan secara penuh, kecuali pada beberapa metrik seperti `hasura_http_request_bytes_total`, `hasura_http_response_bytes_total`, dan `hasura_otel_sent_logs`, yang menunjukkan adanya aktivitas seperti HTTP request/response dan OpenTelemetry log.
