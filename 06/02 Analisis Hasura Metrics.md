@@ -268,18 +268,21 @@ Aku sudah melakukan GET Hasura Metrics dan berikut metricsnya.
 Berikut adalah penjelasan mendetail mengenai tiap baris dari metrics di atas beserta nilai-nilainya:
 
 ## 1. hasura_action_request_bytes_total
+- **Baris**: 1-3
 - **Deskripsi**: Total ukuran (dalam bytes) dari HTTP request bodies yang dikirim melalui action. Ini adalah metrik **eksperimental**.
 - **Tipe**: Counter
 - **Nilai**: `0.0`
 - **Penjelasan**: Tidak ada request bodies yang dikirim melalui action hingga saat ini.
 
 ## 2. hasura_action_response_bytes_total
+- **Baris**: 5-7
 - **Deskripsi**: Total ukuran (dalam bytes) dari HTTP response bodies yang diterima melalui action. Ini juga metrik **eksperimental**.
 - **Tipe**: Counter
 - **Nilai**: `0.0`
 - **Penjelasan**: Tidak ada response bodies yang diterima melalui action.
 
 ## 3. hasura_active_subscription_pollers
+- **Baris**: 9-12
 - **Deskripsi**: Jumlah poller subscription yang aktif saat ini.
 - **Tipe**: Gauge
 - **Nilai**:
@@ -288,6 +291,7 @@ Berikut adalah penjelasan mendetail mengenai tiap baris dari metrics di atas bes
 - **Penjelasan**: Tidak ada poller subscription aktif untuk kedua jenis subscription (`live-query` dan `streaming`).
 
 ## 4. hasura_active_subscription_pollers_in_error_state
+- **Baris**: 14-17
 - **Deskripsi**: Jumlah poller subscription yang berada dalam status error saat ini.
 - **Tipe**: Gauge
 - **Nilai**:
@@ -296,6 +300,7 @@ Berikut adalah penjelasan mendetail mengenai tiap baris dari metrics di atas bes
 - **Penjelasan**: Tidak ada poller subscription dalam status error untuk kedua jenis subscription.
 
 ## 5. hasura_cache_request_count
+- **Baris**: 19-22
 - **Deskripsi**: Jumlah total permintaan cache lookup yang diterima.
 - **Tipe**: Counter
 - **Nilai**:
@@ -304,6 +309,7 @@ Berikut adalah penjelasan mendetail mengenai tiap baris dari metrics di atas bes
 - **Penjelasan**: Tidak ada cache request yang terjadi baik dalam status `hit` maupun `miss`.
 
 ## 6. hasura_cron_events_invocation_total
+- **Baris**: 24-27
 - **Deskripsi**: Jumlah total cron events yang di-invoke (dipanggil).
 - **Tipe**: Counter
 - **Nilai**:
@@ -312,6 +318,7 @@ Berikut adalah penjelasan mendetail mengenai tiap baris dari metrics di atas bes
 - **Penjelasan**: Tidak ada cron event yang berhasil atau gagal dipanggil.
 
 ## 7. hasura_cron_events_processed_total
+- **Baris**: 29-32
 - **Deskripsi**: Jumlah total cron events yang sudah diproses.
 - **Tipe**: Counter
 - **Nilai**:
@@ -320,36 +327,42 @@ Berikut adalah penjelasan mendetail mengenai tiap baris dari metrics di atas bes
 - **Penjelasan**: Tidak ada cron event yang diproses sejauh ini.
 
 ## 8. hasura_event_fetch_time_per_batch_seconds
+- **Baris**: 34-49
 - **Deskripsi**: Latency dalam detik untuk fetching batch event dari database.
 - **Tipe**: Histogram
 - **Nilai**: Semua bucket bernilai `0`, artinya tidak ada event yang difetch, dengan total waktu `0.0` detik.
 - **Penjelasan**: Tidak ada event yang difetch dalam batch dari database.
 
 ## 9. hasura_event_trigger_http_workers
+- **Baris**: 51-53
 - **Deskripsi**: Jumlah event trigger HTTP worker yang aktif saat ini.
 - **Tipe**: Gauge
 - **Nilai**: `0.0`
 - **Penjelasan**: Tidak ada HTTP worker event trigger yang aktif.
 
 ## 10. hasura_event_trigger_request_bytes_total
+- **Baris**: 55-57
 - **Deskripsi**: Total ukuran (dalam bytes) dari HTTP request bodies yang dikirim melalui event triggers.
 - **Tipe**: Counter
 - **Nilai**: `0.0`
 - **Penjelasan**: Tidak ada request bodies yang dikirim melalui event triggers.
 
 ## 11. hasura_event_trigger_response_bytes_total
+- **Baris**: 59-61
 - **Deskripsi**: Total ukuran (dalam bytes) dari HTTP response bodies yang diterima melalui event triggers.
 - **Tipe**: Counter
 - **Nilai**: `0.0`
 - **Penjelasan**: Tidak ada response bodies yang diterima melalui event triggers.
 
 ## 12. hasura_events_fetched_per_batch
+- **Baris**: 63-65
 - **Deskripsi**: Jumlah event yang difetch dalam satu batch.
 - **Tipe**: Gauge
 - **Nilai**: `0.0`
 - **Penjelasan**: Tidak ada event yang difetch dalam batch.
 
 ## 13. hasura_graphql_execution_time_seconds
+- **Baris**: 67-88
 - **Deskripsi**: Waktu eksekusi untuk GraphQL requests yang berhasil (tidak termasuk subscriptions).
 - **Tipe**: Histogram
 - **Nilai**:
@@ -358,36 +371,42 @@ Berikut adalah penjelasan mendetail mengenai tiap baris dari metrics di atas bes
 - **Penjelasan**: Hanya ada satu GraphQL query yang dieksekusi dan berhasil dengan waktu eksekusi sangat cepat.
 
 ## 14. hasura_graphql_requests_total
+- **Baris**: 90-92
 - **Deskripsi**: Jumlah total permintaan GraphQL yang diterima (tidak termasuk subscriptions).
 - **Tipe**: Counter
 - **Nilai**: 1 request yang berhasil dengan operation_type `query`.
 - **Penjelasan**: Ada satu permintaan GraphQL yang berhasil dengan operation_type sebagai query.
 
 ## 15. hasura_http_connections
+- **Baris**: 94-96
 - **Deskripsi**: Jumlah HTTP connections yang aktif saat ini (tidak termasuk WebSocket connections).
 - **Tipe**: Gauge
 - **Nilai**: 1.0
 - **Penjelasan**: Ada satu koneksi HTTP aktif.
 
 ## 16. hasura_http_request_bytes_total
+- **Baris**: 98-100
 - **Deskripsi**: Total ukuran (dalam bytes) dari HTTP request bodies yang diterima melalui HTTP server.
 - **Tipe**: Counter
 - **Nilai**: 1978.0
 - **Penjelasan**: Ukuran total dari request HTTP yang diterima adalah 1978 bytes.
 
 ## 17. hasura_http_response_bytes_total
+- **Baris**: 102-104
 - **Deskripsi**: Total ukuran (dalam bytes) dari HTTP response bodies yang dikirim melalui HTTP server.
 - **Tipe**: Counter
 - **Nilai**: 12154.0
 - **Penjelasan**: Ukuran total dari response HTTP yang dikirim adalah 12154 bytes.
 
 ## 18. hasura_metadata_resource_version
+- **Baris**: 106-108
 - **Deskripsi**: Versi resource metadata yang sedang aktif.
 - **Tipe**: Gauge
 - **Nilai**: 307.0
 - **Penjelasan**: Versi resource metadata saat ini adalah 307.
 
 ## 19. hasura_oneoff_events_invocation_total
+- **Baris**: 110-113
 - **Deskripsi**: Total jumlah one-off events yang di-invoke.
 - **Tipe**: Counter
 - **Nilai**:
@@ -396,6 +415,7 @@ Berikut adalah penjelasan mendetail mengenai tiap baris dari metrics di atas bes
 - **Penjelasan**: Tidak ada one-off event yang dipanggil atau diproses.
 
 ## 20. hasura_oneoff_events_processed_total
+- **Baris**: 115-118
 - **Deskripsi**: Total jumlah one-off events yang diproses.
 - **Tipe**: Counter
 - **Nilai**:
@@ -404,6 +424,7 @@ Berikut adalah penjelasan mendetail mengenai tiap baris dari metrics di atas bes
 - **Penjelasan**: Tidak ada one-off event yang diproses.
 
 ## 21. hasura_otel_dropped_logs
+- **Baris**: 120-123
 - **Deskripsi**: Jumlah total log yang di-drop karena volume log yang tinggi.
 Tipe: Counter
 - **Nilai**:
@@ -412,6 +433,7 @@ Tipe: Counter
 - **Penjelasan**: Tidak ada log yang di-drop karena buffer penuh atau gagal dikirim.
 
 ## 22. hasura_otel_dropped_spans
+- **Baris**: 125-128
 - **Deskripsi**: Jumlah total trace span yang di-drop karena volume trace yang tinggi.
 - **Tipe**: Counter
 - **Nilai**:
@@ -420,52 +442,86 @@ Tipe: Counter
 - **Penjelasan**: Tidak ada trace span yang di-drop karena buffer penuh atau gagal dikirim.
 
 ## 23. hasura_otel_sent_logs
+- **Baris**: 130-132
 - **Deskripsi**: Jumlah total log yang berhasil diekspor.
 - **Tipe**: Counter
 - **Nilai**: 152.0
 - **Penjelasan**: Sebanyak 152 log berhasil diekspor ke OpenTelemetry.
 
 ## 24. hasura_otel_sent_spans
+- **Baris**: 134-136
 - **Deskripsi**: Jumlah total trace span yang berhasil diekspor.
 - **Tipe"": Counter
-- **Nilai**: 3.0
-- *"Penjelasan**: Sebanyak 3 trace span berhasil diekspor ke OpenTelemetry.
+- **Nilai**: 25.0
+- *"Penjelasan**: Sebanyak 25 trace span berhasil diekspor ke OpenTelemetry.
 
-## 25. hasura_pending_events
-- **Deskripsi**: Jumlah event yang belum diproses dalam event queue.
-- **Tipe**: Gauge
-- **Nilai**: 0.0
-- **Penjelasan**: Tidak ada event yang menunggu untuk diproses dalam event queue.
+## 25. hasura_scheduled_trigger_request_bytes_total
+- Baris: 138-140
+- Deskripsi: Total ukuran body permintaan HTTP yang dikirim melalui scheduled triggers (eksperimental).
+- Tipe: Counter
+- Nilai: 0.0
+- Penjelasan: Tidak ada body permintaan HTTP yang dikirim melalui scheduled triggers.
 
-## 26. hasura_pending_http_requests
-- **Deskripsi**: Jumlah HTTP request yang masih tertunda saat ini.
-- **Tipe**: Gauge
-- **Nilai**: 0.0
-- **Penjelasan**: Tidak ada HTTP request yang tertunda saat ini.
+## 26. hasura_scheduled_trigger_response_bytes_total
+- Baris: 142-144
+- Deskripsi: Total ukuran body respons HTTP yang diterima melalui scheduled triggers (eksperimental).
+- Tipe: Counter
+- Nilai: 0.0
+- Penjelasan: Tidak ada body respons HTTP yang diterima melalui scheduled triggers.
 
-## 27. hasura_schema_sync_last_received_version
-- **Deskripsi**: Versi terakhir dari schema metadata yang diterima.
-- **Tipe**: Gauge
-- **Nilai**: 308.0
-- **Penjelasan**: Versi schema metadata terakhir yang diterima adalah 308.
+## 27. hasura_websocket_connections
+- Baris: 146-148
+- Deskripsi: Jumlah WebSocket connections yang aktif.
+- Tipe: Gauge
+- Nilai: 0.0
+- Penjelasan: Tidak ada WebSocket connection yang aktif saat ini.
 
-## 28. hasura_schema_sync_last_sent_version
-- **Deskripsi**: Versi terakhir dari schema metadata yang dikirim.
-- **Tipe**: Gauge
-- **Nilai**: 308.0
-- **Penjelasan**: Versi schema metadata terakhir yang dikirim adalah 308.
+## 28. hasura_websocket_message_queue_time
+- Baris: 150-164
+- Deskripsi: Waktu (dalam detik) yang dihabiskan untuk pesan WebSocket yang mengantri dalam antrean WebSocket di mesin GraphQL.
+- Tipe: Histogram
+- Nilai:
+hasura_websocket_message_queue_time_bucket{le="1.0e-6"}: 0
+hasura_websocket_message_queue_time_bucket{le="1.0e-4"}: 0
+hasura_websocket_message_queue_time_bucket{le="1.0e-2"}: 0
+hasura_websocket_message_queue_time_bucket{le="0.1"}: 0
+hasura_websocket_message_queue_time_bucket{le="0.3"}: 0
+hasura_websocket_message_queue_time_bucket{le="1.0"}: 0
+hasura_websocket_message_queue_time_bucket{le="3.0"}: 0
+hasura_websocket_message_queue_time_bucket{le="10.0"}: 0
+hasura_websocket_message_queue_time_bucket{le="30.0"}: 0
+hasura_websocket_message_queue_time_bucket{le="100.0"}: 0
+hasura_websocket_message_queue_time_bucket{le="+Inf"}: 0
+hasura_websocket_message_queue_time_sum: 0.0
+hasura_websocket_message_queue_time_count: 0
+- Penjelasan: Tidak ada waktu antrean untuk pesan WebSocket yang terdeteksi, menunjukkan bahwa tidak ada pesan yang mengantri.
 
-## 29. hasura_schema_sync_queue_size
-- **Deskripsi**: Ukuran dari schema sync queue.
-- **Tipe**: Gauge
-- **Nilai**: 0.0
-- **Penjelasan**: Tidak ada item dalam schema sync queue saat ini.
+## 29. hasura_websocket_message_write_time
+- Baris: 166-180
+- Deskripsi: Waktu yang diperlukan (dalam detik) untuk menulis pesan WebSocket ke dalam buffer pengiriman TCP.
+- Tipe: Histogram
+- Nilai:
+hasura_websocket_message_write_time_bucket{le="1.0e-6"}: 0
+hasura_websocket_message_write_time_bucket{le="1.0e-4"}: 0
+hasura_websocket_message_write_time_bucket{le="1.0e-2"}: 0
+hasura_websocket_message_write_time_bucket{le="0.1"}: 0
+hasura_websocket_message_write_time_bucket{le="0.3"}: 0
+hasura_websocket_message_write_time_bucket{le="1.0"}: 0
+hasura_websocket_message_write_time_bucket{le="3.0"}: 0
+hasura_websocket_message_write_time_bucket{le="10.0"}: 0
+hasura_websocket_message_write_time_bucket{le="30.0"}: 0
+hasura_websocket_message_write_time_bucket{le="100.0"}: 0
+hasura_websocket_message_write_time_bucket{le="+Inf"}: 0
+hasura_websocket_message_write_time_sum: 0.0
+hasura_websocket_message_write_time_count: 0
+- Penjelasan: Tidak ada waktu yang diperlukan untuk menulis pesan WebSocket, menunjukkan bahwa tidak ada pesan yang ditulis ke dalam buffer.
 
-## 30. hasura_websocket_connections
-- **Deskripsi**: Jumlah WebSocket connections yang aktif.
-- **Tipe**: Gauge
-- **Nilai**: 0.0
-- **Penjelasan**: Tidak ada WebSocket connection yang aktif saat ini.
+## 30. hasura_websocket_messages_received_bytes_total
+- Baris: 182-184
+- Deskripsi: Total ukuran pesan WebSocket yang diterima.
+- Tipe: Counter
+- Nilai: 0.0
+- Penjelasan: Tidak ada ukuran pesan WebSocket yang diterima saat ini.
 
 ## Ringkasan
 Sebagian besar nilai dari metrics menunjukkan bahwa sistem dalam keadaan idle atau belum digunakan secara penuh, kecuali pada beberapa metrik seperti `hasura_http_request_bytes_total`, `hasura_http_response_bytes_total`, dan `hasura_otel_sent_logs`, yang menunjukkan adanya aktivitas seperti HTTP request/response dan OpenTelemetry log.
