@@ -451,77 +451,77 @@ Tipe: Counter
 ## 24. hasura_otel_sent_spans
 - **Baris**: 134-136
 - **Deskripsi**: Jumlah total trace span yang berhasil diekspor.
-- **Tipe"": Counter
+- **Tipe**: Counter
 - **Nilai**: 25.0
 - *"Penjelasan**: Sebanyak 25 trace span berhasil diekspor ke OpenTelemetry.
 
 ## 25. hasura_scheduled_trigger_request_bytes_total
-- Baris: 138-140
-- Deskripsi: Total ukuran body permintaan HTTP yang dikirim melalui scheduled triggers (eksperimental).
-- Tipe: Counter
-- Nilai: 0.0
-- Penjelasan: Tidak ada body permintaan HTTP yang dikirim melalui scheduled triggers.
+- **Baris**: 138-140
+- **Deskripsi**: Total ukuran body permintaan HTTP yang dikirim melalui scheduled triggers (eksperimental).
+- **Tipe**: Counter
+- **Nilai**: 0.0
+- **Penjelasan**: Tidak ada body permintaan HTTP yang dikirim melalui scheduled triggers.
 
 ## 26. hasura_scheduled_trigger_response_bytes_total
-- Baris: 142-144
-- Deskripsi: Total ukuran body respons HTTP yang diterima melalui scheduled triggers (eksperimental).
-- Tipe: Counter
-- Nilai: 0.0
-- Penjelasan: Tidak ada body respons HTTP yang diterima melalui scheduled triggers.
+- **Baris**: 142-144
+- **Deskripsi**: Total ukuran body respons HTTP yang diterima melalui scheduled triggers (eksperimental).
+- **Tipe**: Counter
+- **Nilai**: 0.0
+- **Penjelasan**: Tidak ada body respons HTTP yang diterima melalui scheduled triggers.
 
 ## 27. hasura_websocket_connections
-- Baris: 146-148
-- Deskripsi: Jumlah WebSocket connections yang aktif.
-- Tipe: Gauge
-- Nilai: 0.0
-- Penjelasan: Tidak ada WebSocket connection yang aktif saat ini.
+- **Baris**: 146-148
+- **Deskripsi**: Jumlah WebSocket connections yang aktif.
+- **Tipe**: Gauge
+- **Nilai**: 0.0
+- **Penjelasan**: Tidak ada WebSocket connection yang aktif saat ini.
 
 ## 28. hasura_websocket_message_queue_time
-- Baris: 150-164
-- Deskripsi: Waktu (dalam detik) yang dihabiskan untuk pesan WebSocket yang mengantri dalam antrean WebSocket di mesin GraphQL.
-- Tipe: Histogram
-- Nilai:
-hasura_websocket_message_queue_time_bucket{le="1.0e-6"}: 0
-hasura_websocket_message_queue_time_bucket{le="1.0e-4"}: 0
-hasura_websocket_message_queue_time_bucket{le="1.0e-2"}: 0
-hasura_websocket_message_queue_time_bucket{le="0.1"}: 0
-hasura_websocket_message_queue_time_bucket{le="0.3"}: 0
-hasura_websocket_message_queue_time_bucket{le="1.0"}: 0
-hasura_websocket_message_queue_time_bucket{le="3.0"}: 0
-hasura_websocket_message_queue_time_bucket{le="10.0"}: 0
-hasura_websocket_message_queue_time_bucket{le="30.0"}: 0
-hasura_websocket_message_queue_time_bucket{le="100.0"}: 0
-hasura_websocket_message_queue_time_bucket{le="+Inf"}: 0
-hasura_websocket_message_queue_time_sum: 0.0
-hasura_websocket_message_queue_time_count: 0
-- Penjelasan: Tidak ada waktu antrean untuk pesan WebSocket yang terdeteksi, menunjukkan bahwa tidak ada pesan yang mengantri.
+- **Baris**: 150-164
+- **Deskripsi**: Waktu (dalam detik) yang dihabiskan untuk pesan WebSocket yang mengantri dalam antrean WebSocket di mesin GraphQL.
+- **Tipe**: Histogram
+- **Nilai**:
+   - `hasura_websocket_message_queue_time_bucket{le="1.0e-6"}`: `0`
+   - `hasura_websocket_message_queue_time_bucket{le="1.0e-4"}`: `0`
+   - `hasura_websocket_message_queue_time_bucket{le="1.0e-2"}`: `0`
+   - `hasura_websocket_message_queue_time_bucket{le="0.1"}`: `0`
+   - `hasura_websocket_message_queue_time_bucket{le="0.3"}`: `0`
+   - `hasura_websocket_message_queue_time_bucket{le="1.0"}`: `0`
+   - `hasura_websocket_message_queue_time_bucket{le="3.0"}`: `0`
+   - `hasura_websocket_message_queue_time_bucket{le="10.0"}`: `0`
+   - `hasura_websocket_message_queue_time_bucket{le="30.0"}`: `0`
+   - `hasura_websocket_message_queue_time_bucket{le="100.0"}`: `0`
+   - `hasura_websocket_message_queue_time_bucket{le="+Inf"}`: `0`
+   - `hasura_websocket_message_queue_time_sum`: `0.0`
+   - `hasura_websocket_message_queue_time_count`: `0`
+- **Penjelasan**: Tidak ada waktu antrean untuk pesan WebSocket yang terdeteksi, menunjukkan bahwa tidak ada pesan yang mengantri.
 
 ## 29. hasura_websocket_message_write_time
-- Baris: 166-180
-- Deskripsi: Waktu yang diperlukan (dalam detik) untuk menulis pesan WebSocket ke dalam buffer pengiriman TCP.
-- Tipe: Histogram
-- Nilai:
-hasura_websocket_message_write_time_bucket{le="1.0e-6"}: 0
-hasura_websocket_message_write_time_bucket{le="1.0e-4"}: 0
-hasura_websocket_message_write_time_bucket{le="1.0e-2"}: 0
-hasura_websocket_message_write_time_bucket{le="0.1"}: 0
-hasura_websocket_message_write_time_bucket{le="0.3"}: 0
-hasura_websocket_message_write_time_bucket{le="1.0"}: 0
-hasura_websocket_message_write_time_bucket{le="3.0"}: 0
-hasura_websocket_message_write_time_bucket{le="10.0"}: 0
-hasura_websocket_message_write_time_bucket{le="30.0"}: 0
-hasura_websocket_message_write_time_bucket{le="100.0"}: 0
-hasura_websocket_message_write_time_bucket{le="+Inf"}: 0
-hasura_websocket_message_write_time_sum: 0.0
-hasura_websocket_message_write_time_count: 0
-- Penjelasan: Tidak ada waktu yang diperlukan untuk menulis pesan WebSocket, menunjukkan bahwa tidak ada pesan yang ditulis ke dalam buffer.
+- **Baris**: 166-180
+- **Deskripsi**: Waktu yang diperlukan (dalam detik) untuk menulis pesan WebSocket ke dalam buffer pengiriman TCP.
+- **Tipe**: Histogram
+- **Nilai**:
+   - `hasura_websocket_message_write_time_bucket{le="1.0e-6"}`: `0`
+   - `hasura_websocket_message_write_time_bucket{le="1.0e-4"}`: `0`
+   - `hasura_websocket_message_write_time_bucket{le="1.0e-2"}`: `0`
+   - `hasura_websocket_message_write_time_bucket{le="0.1"}`: `0`
+   - `hasura_websocket_message_write_time_bucket{le="0.3"}`: `0`
+   - `hasura_websocket_message_write_time_bucket{le="1.0"}`: `0`
+   - `hasura_websocket_message_write_time_bucket{le="3.0"}`: `0`
+   - `hasura_websocket_message_write_time_bucket{le="10.0"}`: `0`
+   - `hasura_websocket_message_write_time_bucket{le="30.0"}`: `0`
+   - `hasura_websocket_message_write_time_bucket{le="100.0"}`: `0`
+   - `hasura_websocket_message_write_time_bucket{le="+Inf"}`: `0`
+   - `hasura_websocket_message_write_time_sum`: `0.0`
+   - `hasura_websocket_message_write_time_count`: `0`
+- **Penjelasan**: Tidak ada waktu yang diperlukan untuk menulis pesan WebSocket, menunjukkan bahwa tidak ada pesan yang ditulis ke dalam buffer.
 
 ## 30. hasura_websocket_messages_received_bytes_total
-- Baris: 182-184
-- Deskripsi: Total ukuran pesan WebSocket yang diterima.
-- Tipe: Counter
-- Nilai: 0.0
-- Penjelasan: Tidak ada ukuran pesan WebSocket yang diterima saat ini.
+- **Baris**: 182-184
+- **Deskripsi**: Total ukuran pesan WebSocket yang diterima.
+- **Tipe**: Counter
+- **Nilai**: 0.0
+- **Penjelasan**: Tidak ada ukuran pesan WebSocket yang diterima saat ini.
 
 ## Ringkasan
 Sebagian besar nilai dari metrics menunjukkan bahwa sistem dalam keadaan idle atau belum digunakan secara penuh, kecuali pada beberapa metrik seperti `hasura_http_request_bytes_total`, `hasura_http_response_bytes_total`, dan `hasura_otel_sent_logs`, yang menunjukkan adanya aktivitas seperti HTTP request/response dan OpenTelemetry log.
