@@ -74,7 +74,7 @@ Metrik-metrik ini memungkinkan Anda untuk memantau berbagai aspek dari performa 
 
 Aku sudah melakukan GET Hasura Metrics dan berikut metricsnya.
 
-```text
+```bash
 # HELP hasura_action_request_bytes_total Total size of HTTP request bodies sent via actions (experimental)
 # TYPE hasura_action_request_bytes_total counter
 hasura_action_request_bytes_total 0.0
