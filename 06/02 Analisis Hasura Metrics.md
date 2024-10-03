@@ -75,191 +75,192 @@ Metrik-metrik ini memungkinkan Anda untuk memantau berbagai aspek dari performa 
 Aku sudah melakukan GET Hasura Metrics dan berikut metricsnya.
 
 ```bash
-# HELP hasura_action_request_bytes_total Total size of HTTP request bodies sent via actions (experimental)
-# TYPE hasura_action_request_bytes_total counter
-hasura_action_request_bytes_total 0.0
-
-# HELP hasura_action_response_bytes_total Total size of HTTP response bodies received via actions (experimental)
-# TYPE hasura_action_response_bytes_total counter
-hasura_action_response_bytes_total 0.0
-
-# HELP hasura_active_subscription_pollers Current active number of subscription pollers running
-# TYPE hasura_active_subscription_pollers gauge
-hasura_active_subscription_pollers{subscription_kind="live-query"} 0.0
-hasura_active_subscription_pollers{subscription_kind="streaming"} 0.0
-
-# HELP hasura_active_subscription_pollers_in_error_state Current active number of subscription pollers in the error state
-# TYPE hasura_active_subscription_pollers_in_error_state gauge
-hasura_active_subscription_pollers_in_error_state{subscription_kind="live-query"} 0.0
-hasura_active_subscription_pollers_in_error_state{subscription_kind="streaming"} 0.0
-
-# HELP hasura_cache_request_count Total number of incoming requests for cache lookup
-# TYPE hasura_cache_request_count counter
-hasura_cache_request_count{status="hit"} 0.0
-hasura_cache_request_count{status="miss"} 0.0
-
-# HELP hasura_cron_events_invocation_total Total number of cron events invoked
-# TYPE hasura_cron_events_invocation_total counter
-hasura_cron_events_invocation_total{status="failed"} 0.0
-hasura_cron_events_invocation_total{status="success"} 0.0
-
-# HELP hasura_cron_events_processed_total Total number of cron events processed
-# TYPE hasura_cron_events_processed_total counter
-hasura_cron_events_processed_total{status="failed"} 0.0
-hasura_cron_events_processed_total{status="success"} 0.0
-
-# HELP hasura_event_fetch_time_per_batch_seconds Latency of fetching a batch of events from the database
-# TYPE hasura_event_fetch_time_per_batch_seconds histogram
-hasura_event_fetch_time_per_batch_seconds_bucket{le="1.0e-4"} 0
-hasura_event_fetch_time_per_batch_seconds_bucket{le="3.0e-4"} 0
-hasura_event_fetch_time_per_batch_seconds_bucket{le="1.0e-3"} 0
-hasura_event_fetch_time_per_batch_seconds_bucket{le="3.0e-3"} 0
-hasura_event_fetch_time_per_batch_seconds_bucket{le="1.0e-2"} 0
-hasura_event_fetch_time_per_batch_seconds_bucket{le="3.0e-2"} 0
-hasura_event_fetch_time_per_batch_seconds_bucket{le="0.1"} 0
-hasura_event_fetch_time_per_batch_seconds_bucket{le="0.3"} 0
-hasura_event_fetch_time_per_batch_seconds_bucket{le="1.0"} 0
-hasura_event_fetch_time_per_batch_seconds_bucket{le="3.0"} 0
-hasura_event_fetch_time_per_batch_seconds_bucket{le="10.0"} 0
-hasura_event_fetch_time_per_batch_seconds_bucket{le="+Inf"} 0
-hasura_event_fetch_time_per_batch_seconds_sum 0.0
-hasura_event_fetch_time_per_batch_seconds_count 0
-
-# HELP hasura_event_trigger_http_workers Current number of active event trigger HTTP workers
-# TYPE hasura_event_trigger_http_workers gauge
-hasura_event_trigger_http_workers 0.0
-
-# HELP hasura_event_trigger_request_bytes_total Total size of HTTP request bodies sent via event triggers (experimental)
-# TYPE hasura_event_trigger_request_bytes_total counter
-hasura_event_trigger_request_bytes_total 0.0
-
-# HELP hasura_event_trigger_response_bytes_total Total size of HTTP response bodies received via event triggers (experimental)
-# TYPE hasura_event_trigger_response_bytes_total counter
-hasura_event_trigger_response_bytes_total 0.0
-
-# HELP hasura_events_fetched_per_batch Number of events fetched in a batch
-# TYPE hasura_events_fetched_per_batch gauge
-hasura_events_fetched_per_batch 0.0
-
-# HELP hasura_graphql_execution_time_seconds Execution time of successful GraphQL requests (excluding subscriptions)
-# TYPE hasura_graphql_execution_time_seconds histogram
-hasura_graphql_execution_time_seconds_bucket{operation_type="mutation",le="1.0e-2"} 0
-hasura_graphql_execution_time_seconds_bucket{operation_type="mutation",le="3.0e-2"} 0
-hasura_graphql_execution_time_seconds_bucket{operation_type="mutation",le="0.1"} 0
-hasura_graphql_execution_time_seconds_bucket{operation_type="mutation",le="0.3"} 0
-hasura_graphql_execution_time_seconds_bucket{operation_type="mutation",le="1.0"} 0
-hasura_graphql_execution_time_seconds_bucket{operation_type="mutation",le="3.0"} 0
-hasura_graphql_execution_time_seconds_bucket{operation_type="mutation",le="10.0"} 0
-hasura_graphql_execution_time_seconds_bucket{operation_type="mutation",le="+Inf"} 0
-hasura_graphql_execution_time_seconds_sum{operation_type="mutation"} 0.0
-hasura_graphql_execution_time_seconds_count{operation_type="mutation"} 0
-hasura_graphql_execution_time_seconds_bucket{operation_type="query",le="1.0e-2"} 1
-hasura_graphql_execution_time_seconds_bucket{operation_type="query",le="3.0e-2"} 1
-hasura_graphql_execution_time_seconds_bucket{operation_type="query",le="0.1"} 1
-hasura_graphql_execution_time_seconds_bucket{operation_type="query",le="0.3"} 1
-hasura_graphql_execution_time_seconds_bucket{operation_type="query",le="1.0"} 1
-hasura_graphql_execution_time_seconds_bucket{operation_type="query",le="3.0"} 1
-hasura_graphql_execution_time_seconds_bucket{operation_type="query",le="10.0"} 1
-hasura_graphql_execution_time_seconds_bucket{operation_type="query",le="+Inf"} 1
-hasura_graphql_execution_time_seconds_sum{operation_type="query"} 1.464608e-3
-hasura_graphql_execution_time_seconds_count{operation_type="query"} 1
-
-# HELP hasura_graphql_requests_total Number of GraphQL requests received (excluding subscriptions)
-# TYPE hasura_graphql_requests_total counter
-hasura_graphql_requests_total{response_status="success",operation_type="query",parameterized_query_hash="7116865cef017c3b09e5c9271b0e182a6dcf4c01"} 1.0
-
-# HELP hasura_http_connections Current number of active HTTP connections (excluding WebSocket connections)
-# TYPE hasura_http_connections gauge
-hasura_http_connections 1.0
-
-# HELP hasura_http_request_bytes_total Total size of HTTP request bodies received via the HTTP server
-# TYPE hasura_http_request_bytes_total counter
-hasura_http_request_bytes_total 1978.0
-
-# HELP hasura_http_response_bytes_total Total size of HTTP response bodies sent via the HTTP server
-# TYPE hasura_http_response_bytes_total counter
-hasura_http_response_bytes_total 12154.0
-
-# HELP hasura_metadata_resource_version Current metadata resource version
-# TYPE hasura_metadata_resource_version gauge
-hasura_metadata_resource_version 307.0
-
-# HELP hasura_oneoff_events_invocation_total Total number of one-off events invoked
-# TYPE hasura_oneoff_events_invocation_total counter
-hasura_oneoff_events_invocation_total{status="failed"} 0.0
-hasura_oneoff_events_invocation_total{status="success"} 0.0
-
-# HELP hasura_oneoff_events_processed_total Total number of one-off events processed
-# TYPE hasura_oneoff_events_processed_total counter
-hasura_oneoff_events_processed_total{status="failed"} 0.0
-hasura_oneoff_events_processed_total{status="success"} 0.0
-
-# HELP hasura_otel_dropped_logs Total number of log lines dropped due to high log volume
-# TYPE hasura_otel_dropped_logs counter
-hasura_otel_dropped_logs{reason="buffer_full"} 0.0
-hasura_otel_dropped_logs{reason="send_failed"} 0.0
-
-# HELP hasura_otel_dropped_spans Total number of trace spans dropped due to high trace volume
-# TYPE hasura_otel_dropped_spans counter
-hasura_otel_dropped_spans{reason="buffer_full"} 0.0
-hasura_otel_dropped_spans{reason="send_failed"} 0.0
-
-# HELP hasura_otel_sent_logs Total number of successfully exported log lines
-# TYPE hasura_otel_sent_logs counter
-hasura_otel_sent_logs 152.0
-
-# HELP hasura_otel_sent_spans Total number of successfully exported trace spans
-# TYPE hasura_otel_sent_spans counter
-hasura_otel_sent_spans 25.0
-
-# HELP hasura_scheduled_trigger_request_bytes_total Total size of HTTP request bodies sent via scheduled triggers (experimental)
-# TYPE hasura_scheduled_trigger_request_bytes_total counter
-hasura_scheduled_trigger_request_bytes_total 0.0
-
-# HELP hasura_scheduled_trigger_response_bytes_total Total size of HTTP response bodies received via scheduled triggers (experimental)
-# TYPE hasura_scheduled_trigger_response_bytes_total counter
-hasura_scheduled_trigger_response_bytes_total 0.0
-
-# HELP hasura_websocket_connections Current number of active WebSocket connections
-# TYPE hasura_websocket_connections gauge
-hasura_websocket_connections 0.0
-
-# HELP hasura_websocket_message_queue_time The time (in seconds) for which a websocket message remains queued in the GraphQL engine's websocket queue
-# TYPE hasura_websocket_message_queue_time histogram
-hasura_websocket_message_queue_time_bucket{le="1.0e-6"} 0
-hasura_websocket_message_queue_time_bucket{le="1.0e-4"} 0
-hasura_websocket_message_queue_time_bucket{le="1.0e-2"} 0
-hasura_websocket_message_queue_time_bucket{le="0.1"} 0
-hasura_websocket_message_queue_time_bucket{le="0.3"} 0
-hasura_websocket_message_queue_time_bucket{le="1.0"} 0
-hasura_websocket_message_queue_time_bucket{le="3.0"} 0
-hasura_websocket_message_queue_time_bucket{le="10.0"} 0
-hasura_websocket_message_queue_time_bucket{le="30.0"} 0
-hasura_websocket_message_queue_time_bucket{le="100.0"} 0
-hasura_websocket_message_queue_time_bucket{le="+Inf"} 0
-hasura_websocket_message_queue_time_sum 0.0
-hasura_websocket_message_queue_time_count 0
-
-# HELP hasura_websocket_message_write_time The time taken (in seconds) to write a websocket message into the TCP send buffer
-# TYPE hasura_websocket_message_write_time histogram
-hasura_websocket_message_write_time_bucket{le="1.0e-6"} 0
-hasura_websocket_message_write_time_bucket{le="1.0e-4"} 0
-hasura_websocket_message_write_time_bucket{le="1.0e-2"} 0
-hasura_websocket_message_write_time_bucket{le="0.1"} 0
-hasura_websocket_message_write_time_bucket{le="0.3"} 0
-hasura_websocket_message_write_time_bucket{le="1.0"} 0
-hasura_websocket_message_write_time_bucket{le="3.0"} 0
-hasura_websocket_message_write_time_bucket{le="10.0"} 0
-hasura_websocket_message_write_time_bucket{le="30.0"} 0
-hasura_websocket_message_write_time_bucket{le="100.0"} 0
-hasura_websocket_message_write_time_bucket{le="+Inf"} 0
-hasura_websocket_message_write_time_sum 0.0
-hasura_websocket_message_write_time_count 0
-
-# HELP hasura_websocket_messages_received_bytes_total Total size of WebSocket messages received
-# TYPE hasura_websocket_messages_received_bytes_total counter
-hasura_websocket_messages_received_bytes_total 0.0
-
+1   # HELP hasura_action_request_bytes_total Total size of HTTP request bodies sent via actions (experimental)
+2   # TYPE hasura_action_request_bytes_total counter
+3   hasura_action_request_bytes_total 0.0
+4  
+5   # HELP hasura_action_response_bytes_total Total size of HTTP response bodies received via actions (experimental)
+6   # TYPE hasura_action_response_bytes_total counter
+7   hasura_action_response_bytes_total 0.0
+8  
+9   # HELP hasura_active_subscription_pollers Current active number of subscription pollers running
+10  # TYPE hasura_active_subscription_pollers gauge
+11  hasura_active_subscription_pollers{subscription_kind="live-query"} 0.0
+12  hasura_active_subscription_pollers{subscription_kind="streaming"} 0.0
+13  
+14  # HELP hasura_active_subscription_pollers_in_error_state Current active number of subscription pollers in the error state
+15  # TYPE hasura_active_subscription_pollers_in_error_state gauge
+16  hasura_active_subscription_pollers_in_error_state{subscription_kind="live-query"} 0.0
+17  hasura_active_subscription_pollers_in_error_state{subscription_kind="streaming"} 0.0
+18  
+19  # HELP hasura_cache_request_count Total number of incoming requests for cache lookup
+20  # TYPE hasura_cache_request_count counter
+21  hasura_cache_request_count{status="hit"} 0.0
+22  hasura_cache_request_count{status="miss"} 0.0
+23  
+24  # HELP hasura_cron_events_invocation_total Total number of cron events invoked
+25  # TYPE hasura_cron_events_invocation_total counter
+26  hasura_cron_events_invocation_total{status="failed"} 0.0
+27  hasura_cron_events_invocation_total{status="success"} 0.0
+28  
+29  # HELP hasura_cron_events_processed_total Total number of cron events processed
+30  # TYPE hasura_cron_events_processed_total counter
+31  hasura_cron_events_processed_total{status="failed"} 0.0
+32  hasura_cron_events_processed_total{status="success"} 0.0
+33  
+34  # HELP hasura_event_fetch_time_per_batch_seconds Latency of fetching a batch of events from the database
+35  # TYPE hasura_event_fetch_time_per_batch_seconds histogram
+36  hasura_event_fetch_time_per_batch_seconds_bucket{le="1.0e-4"} 0
+37  hasura_event_fetch_time_per_batch_seconds_bucket{le="3.0e-4"} 0
+38  hasura_event_fetch_time_per_batch_seconds_bucket{le="1.0e-3"} 0
+39  hasura_event_fetch_time_per_batch_seconds_bucket{le="3.0e-3"} 0
+40  hasura_event_fetch_time_per_batch_seconds_bucket{le="1.0e-2"} 0
+41  hasura_event_fetch_time_per_batch_seconds_bucket{le="3.0e-2"} 0
+42  hasura_event_fetch_time_per_batch_seconds_bucket{le="0.1"} 0
+43  hasura_event_fetch_time_per_batch_seconds_bucket{le="0.3"} 0
+44  hasura_event_fetch_time_per_batch_seconds_bucket{le="1.0"} 0
+45  hasura_event_fetch_time_per_batch_seconds_bucket{le="3.0"} 0
+46  hasura_event_fetch_time_per_batch_seconds_bucket{le="10.0"} 0
+47  hasura_event_fetch_time_per_batch_seconds_bucket{le="+Inf"} 0
+48  hasura_event_fetch_time_per_batch_seconds_sum 0.0
+49  hasura_event_fetch_time_per_batch_seconds_count 0
+50  
+51  # HELP hasura_event_trigger_http_workers Current number of active event trigger HTTP workers
+52  # TYPE hasura_event_trigger_http_workers gauge
+53  hasura_event_trigger_http_workers 0.0
+54  
+55  # HELP hasura_event_trigger_request_bytes_total Total size of HTTP request bodies sent via event triggers (experimental)
+56  # TYPE hasura_event_trigger_request_bytes_total counter
+57  hasura_event_trigger_request_bytes_total 0.0
+58  
+59  # HELP hasura_event_trigger_response_bytes_total Total size of HTTP response bodies received via event triggers (experimental)
+60  # TYPE hasura_event_trigger_response_bytes_total counter
+61  hasura_event_trigger_response_bytes_total 0.0
+62  
+63  # HELP hasura_events_fetched_per_batch Number of events fetched in a batch
+64  # TYPE hasura_events_fetched_per_batch gauge
+65  hasura_events_fetched_per_batch 0.0
+66  
+67  # HELP hasura_graphql_execution_time_seconds Execution time of successful GraphQL requests (excluding subscriptions)
+68  # TYPE hasura_graphql_execution_time_seconds histogram
+69  hasura_graphql_execution_time_seconds_bucket{operation_type="mutation",le="1.0e-2"} 0
+70  hasura_graphql_execution_time_seconds_bucket{operation_type="mutation",le="3.0e-2"} 0
+71  hasura_graphql_execution_time_seconds_bucket{operation_type="mutation",le="0.1"} 0
+72  hasura_graphql_execution_time_seconds_bucket{operation_type="mutation",le="0.3"} 0
+73  hasura_graphql_execution_time_seconds_bucket{operation_type="mutation",le="1.0"} 0
+74  hasura_graphql_execution_time_seconds_bucket{operation_type="mutation",le="3.0"} 0
+75  hasura_graphql_execution_time_seconds_bucket{operation_type="mutation",le="10.0"} 0
+76  hasura_graphql_execution_time_seconds_bucket{operation_type="mutation",le="+Inf"} 0
+77  hasura_graphql_execution_time_seconds_sum{operation_type="mutation"} 0.0
+78  hasura_graphql_execution_time_seconds_count{operation_type="mutation"} 0
+79  hasura_graphql_execution_time_seconds_bucket{operation_type="query",le="1.0e-2"} 1
+80  hasura_graphql_execution_time_seconds_bucket{operation_type="query",le="3.0e-2"} 1
+81  hasura_graphql_execution_time_seconds_bucket{operation_type="query",le="0.1"} 1
+82  hasura_graphql_execution_time_seconds_bucket{operation_type="query",le="0.3"} 1
+83  hasura_graphql_execution_time_seconds_bucket{operation_type="query",le="1.0"} 1
+84  hasura_graphql_execution_time_seconds_bucket{operation_type="query",le="3.0"} 1
+85  hasura_graphql_execution_time_seconds_bucket{operation_type="query",le="10.0"} 1
+86  hasura_graphql_execution_time_seconds_bucket{operation_type="query",le="+Inf"} 1
+87  hasura_graphql_execution_time_seconds_sum{operation_type="query"} 1.464608e-3
+88  hasura_graphql_execution_time_seconds_count{operation_type="query"} 1
+89  
+90  # HELP hasura_graphql_requests_total Number of GraphQL requests received (excluding subscriptions)
+91  # TYPE hasura_graphql_requests_total counter
+92 
+ hasura_graphql_requests_total{response_status="success",operation_type="query",parameterized_query_hash="7116865cef017c3b09e5c9271b0e182a6dcf4c01"} 1.0
+93  
+94  # HELP hasura_http_connections Current number of active HTTP connections (excluding WebSocket connections)
+95  # TYPE hasura_http_connections gauge
+96  hasura_http_connections 1.0
+97  
+98  # HELP hasura_http_request_bytes_total Total size of HTTP request bodies received via the HTTP server
+99  # TYPE hasura_http_request_bytes_total counter
+100 hasura_http_request_bytes_total 1978.0
+101  
+102 # HELP hasura_http_response_bytes_total Total size of HTTP response bodies sent via the HTTP server
+103 # TYPE hasura_http_response_bytes_total counter
+104 hasura_http_response_bytes_total 12154.0
+105  
+106 # HELP hasura_metadata_resource_version Current metadata resource version
+107 # TYPE hasura_metadata_resource_version gauge
+108 hasura_metadata_resource_version 307.0
+109  
+110 # HELP hasura_oneoff_events_invocation_total Total number of one-off events invoked
+111 # TYPE hasura_oneoff_events_invocation_total counter
+112 hasura_oneoff_events_invocation_total{status="failed"} 0.0
+113 hasura_oneoff_events_invocation_total{status="success"} 0.0
+114  
+115 # HELP hasura_oneoff_events_processed_total Total number of one-off events processed
+116 # TYPE hasura_oneoff_events_processed_total counter
+117 hasura_oneoff_events_processed_total{status="failed"} 0.0
+118 hasura_oneoff_events_processed_total{status="success"} 0.0
+119  
+120 # HELP hasura_otel_dropped_logs Total number of log lines dropped due to high log volume
+121 # TYPE hasura_otel_dropped_logs counter
+122 hasura_otel_dropped_logs{reason="buffer_full"} 0.0
+123 hasura_otel_dropped_logs{reason="send_failed"} 0.0
+124  
+125 # HELP hasura_otel_dropped_spans Total number of trace spans dropped due to high trace volume
+126 # TYPE hasura_otel_dropped_spans counter
+127 hasura_otel_dropped_spans{reason="buffer_full"} 0.0
+128 hasura_otel_dropped_spans{reason="send_failed"} 0.0
+129  
+130 # HELP hasura_otel_sent_logs Total number of successfully exported log lines
+131 # TYPE hasura_otel_sent_logs counter
+132 hasura_otel_sent_logs 152.0
+133 
+134 # HELP hasura_otel_sent_spans Total number of successfully exported trace spans
+135 # TYPE hasura_otel_sent_spans counter
+136 hasura_otel_sent_spans 25.0
+137 
+138 # HELP hasura_scheduled_trigger_request_bytes_total Total size of HTTP request bodies sent via scheduled triggers (experimental)
+139 # TYPE hasura_scheduled_trigger_request_bytes_total counter
+140 hasura_scheduled_trigger_request_bytes_total 0.0
+141 
+142 # HELP hasura_scheduled_trigger_response_bytes_total Total size of HTTP response bodies received via scheduled triggers (experimental)
+143 # TYPE hasura_scheduled_trigger_response_bytes_total counter
+144 hasura_scheduled_trigger_response_bytes_total 0.0
+145 
+146 # HELP hasura_websocket_connections Current number of active WebSocket connections
+147 # TYPE hasura_websocket_connections gauge
+148 hasura_websocket_connections 0.0
+149 
+150 # HELP hasura_websocket_message_queue_time The time (in seconds) for which a websocket message remains queued in the GraphQL engine's websocket queue
+151 # TYPE hasura_websocket_message_queue_time histogram
+152 hasura_websocket_message_queue_time_bucket{le="1.0e-6"} 0
+153 hasura_websocket_message_queue_time_bucket{le="1.0e-4"} 0
+154 hasura_websocket_message_queue_time_bucket{le="1.0e-2"} 0
+155 hasura_websocket_message_queue_time_bucket{le="0.1"} 0
+156 hasura_websocket_message_queue_time_bucket{le="0.3"} 0
+157 hasura_websocket_message_queue_time_bucket{le="1.0"} 0
+158 hasura_websocket_message_queue_time_bucket{le="3.0"} 0
+159 hasura_websocket_message_queue_time_bucket{le="10.0"} 0
+160 hasura_websocket_message_queue_time_bucket{le="30.0"} 0
+161 hasura_websocket_message_queue_time_bucket{le="100.0"} 0
+162 hasura_websocket_message_queue_time_bucket{le="+Inf"} 0
+163 hasura_websocket_message_queue_time_sum 0.0
+164 hasura_websocket_message_queue_time_count 0
+165 
+166 # HELP hasura_websocket_message_write_time The time taken (in seconds) to write a websocket message into the TCP send buffer
+167 # TYPE hasura_websocket_message_write_time histogram
+168 hasura_websocket_message_write_time_bucket{le="1.0e-6"} 0
+169 hasura_websocket_message_write_time_bucket{le="1.0e-4"} 0
+170 hasura_websocket_message_write_time_bucket{le="1.0e-2"} 0
+171 hasura_websocket_message_write_time_bucket{le="0.1"} 0
+172 hasura_websocket_message_write_time_bucket{le="0.3"} 0
+173 hasura_websocket_message_write_time_bucket{le="1.0"} 0
+174 hasura_websocket_message_write_time_bucket{le="3.0"} 0
+175 hasura_websocket_message_write_time_bucket{le="10.0"} 0
+176 hasura_websocket_message_write_time_bucket{le="30.0"} 0
+177 hasura_websocket_message_write_time_bucket{le="100.0"} 0
+178 hasura_websocket_message_write_time_bucket{le="+Inf"} 0
+179 hasura_websocket_message_write_time_sum 0.0
+180 hasura_websocket_message_write_time_count 0
+181 
+182 # HELP hasura_websocket_messages_received_bytes_total Total size of WebSocket messages received
+183 # TYPE hasura_websocket_messages_received_bytes_total counter
+184 hasura_websocket_messages_received_bytes_total 0.0
+185
 ```
 
 # Penjelasan Mendetail Metrics Hasura
