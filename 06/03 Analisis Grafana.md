@@ -16,78 +16,141 @@ Tugas:
 1. Lakukan Hit di API Hasura mas Ferdy
 2. Lakukan Analiasa Panel
 
-## Fitur Utama Grafana:
+## Hasura HTTP Graphql
+**Dashboard** ini menyediakan gambaran menyeluruh tentang performa query dan mutation di Hasura, termasuk metrik seperti latency, error rate, dan transfer data. Anda dapat menggunakan data ini untuk memantau performa aplikasi secara real-time dan melakukan analisis jika ada masalah performa atau error. 
 
-### 1. Dashboard
-Fitur inti Grafana adalah kemampuan untuk membuat **dashboard**. Dashboard terdiri dari panel-panel yang menampilkan data dari berbagai sumber. Fleksibilitas dashboard memungkinkan pengguna untuk menyesuaikan cara data divisualisasikan dan diinteraksikan.
+![image](https://github.com/user-attachments/assets/df77d06a-4b4b-4316-9869-b0b884fec371)
 
-### 2. Data Sources
-Grafana terintegrasi dengan berbagai sumber data, termasuk:
-- **Prometheus**: Alat monitoring dan pemberi peringatan open-source.
-- **Elasticsearch**: Mesin pencarian dan analisis terdistribusi.
-- **InfluxDB**: Basis data time-series yang dioptimalkan untuk menyimpan metrik kecepatan tinggi.
-- **MySQL, PostgreSQL, dan basis data SQL lainnya**: Untuk menjalankan query dan memvisualisasikan data terstruktur.
+### Total Queries
+Metrik ini menunjukkan jumlah total query yang dieksekusi di dashboard atau panel tertentu. Ini adalah metrik penting untuk mengamati **beban sistem** dan mengidentifikasi potensi bottleneck.  
 
-### 3. Total Queries
-Metrik ini menunjukkan jumlah total query yang dieksekusi di dashboard atau panel tertentu. Ini adalah metrik penting untuk mengamati **beban sistem** dan mengidentifikasi potensi bottleneck.
+![image](https://github.com/user-attachments/assets/4d69ab3b-ec32-4c2d-8f4b-fe2cca3864fc)
 
-### 4. Query Latency
-Menampilkan waktu yang dibutuhkan untuk menjalankan query dan mengembalikan data. **Latency** adalah indikator kinerja yang penting, karena query yang lambat dapat mempengaruhi responsivitas sistem secara keseluruhan.
+  
+Angka ini menunjukkan total permintaan GraphQL yang diajukan ke server Hasura dalam periode waktu yang dipilih. Di sini terlihat bahwa ada 54 permintaan.  
 
-### 5. Top Queries
-Menampilkan query yang paling sering dijalankan atau yang paling banyak menggunakan sumber daya, membantu mengidentifikasi masalah kinerja pada pemrosesan query.
+### Query Latency (P95):
+Menyediakan metrik yang berguna untuk mengukur performa aplikasi. P95 lebih mencerminkan latensi dalam skenario dunia nyata dibandingkan rata-rata (mean), karena ia memperhitungkan lonjakan dan outlier yang dapat mempengaruhi pengalaman pengguna.  
 
-### 6. Panel dan Visualisasi
-Grafana mendukung berbagai jenis panel untuk visualisasi data, antara lain:
-- **Grafik**: Grafik garis, batang, dan scatter.
-- **Stat**: Data numerik dengan ambang batas yang dapat dikonfigurasi untuk peringatan.
-- **Gauge dan Progress Bar**: Untuk menampilkan nilai dalam rentang tertentu.
-- **Heatmap**: Visualisasi kepadatan atau volume data dari waktu ke waktu.
-- **Tabel**: Menampilkan data dalam bentuk tabel dengan filter.
-
-### 7. Query Editor
-**Query Editor** memungkinkan pengguna menulis dan mengubah query untuk mengambil data dari sumber data mereka. Fitur ini juga menyediakan:
-- **Auto-complete**: Membantu menulis query dengan lebih cepat.
-- **Dukungan Variabel**: Memungkinkan query dinamis menggunakan variabel dari dashboard.
-
-### 8. Alerting
-Grafana menyediakan mekanisme **alerting** bawaan untuk memberi tahu pengguna saat ambang batas tertentu tercapai. Anda dapat mengonfigurasi aturan peringatan, menetapkan tingkat keparahan, dan memilih di mana peringatan akan dikirim (email, Slack, PagerDuty, dll.).
-
-### 9. Variabel
-**Variabel** dalam Grafana berfungsi seperti template, memungkinkan Anda menggunakan pengaturan dashboard di beberapa tampilan. Ini berguna untuk mengubah query secara dinamis tanpa mengedit satu per satu.
-
-### 10. Templating
-Templating memungkinkan pengguna membuat dashboard yang dapat digunakan kembali dengan menggunakan variabel untuk memperbarui query dan visualisasi secara dinamis. Ini memudahkan penerapan dashboard yang sama untuk beberapa lingkungan atau dataset.
-
-### 11. Tombol View, Edit, dan Inspect
-- **View**: Memungkinkan pengguna untuk melihat lebih dalam dashboard atau panel tanpa mengubah konfigurasinya.
-- **Edit**: Membuka editor panel di mana Anda dapat mengubah query, tipe visualisasi, dan pengaturan lainnya.
-- **Inspect**: Menyediakan detail lebih lanjut tentang data panel, termasuk data mentah, waktu eksekusi query, dan statistik kinerja.
-
-### 12. Anotasi
-**Anotasi** adalah penanda yang dapat Anda tambahkan ke grafik Grafana untuk menandai kejadian penting, memudahkan korelasi antara perubahan metrik dengan kejadian seperti deployment atau insiden.
-
-### 13. Tim dan Izin
-Grafana mendukung **multi-user environments** dan memungkinkan pembuatan tim. Izin dapat diberikan pada dashboard atau panel tertentu, membatasi siapa yang dapat melihat atau mengedit konten.
-
-### 14. Plugin
-Grafana mendukung berbagai **plugin** untuk memperluas fungsionalitasnya, dari opsi visualisasi tambahan hingga sumber data dan aplikasi seperti **Loki** untuk log, **Tempo** untuk tracing, dan lainnya.
-
-### 15. Snapshots
-Pengguna dapat membuat **snapshot** dari dashboard mereka, yang menangkap keadaan dashboard pada waktu tertentu. Snapshot ini dapat dibagikan secara publik atau disimpan untuk analisis di kemudian hari.
-
-### 16. Ekspor dan Impor Data
-Grafana menyediakan kemampuan untuk mengekspor data atau panel ke dalam berbagai format untuk dibagikan atau dianalisis. Grafana juga mendukung impor dashboard yang sudah dibuat sebelumnya dari Grafana Labs dan komunitas.
-
-### 17. Pelaporan
-Grafana menawarkan fitur **pelaporan** di mana pengguna dapat mengekspor dashboard ke format PDF atau gambar dan mengirim laporan terjadwal melalui email.
-
-### 18. Fitur Cloud dan Enterprise
-- **Grafana Cloud**: Layanan Grafana yang sepenuhnya dikelola.
-- **Grafana Enterprise**: Menawarkan fitur tambahan untuk tim, seperti RBAC (Role-Based Access Control), integrasi sumber data tambahan, dan dukungan jangka panjang.
-
-![image](https://github.com/user-attachments/assets/013b006e-f43b-4447-859a-c1142fc78a6d)
+![image](https://github.com/user-attachments/assets/eaadc894-a339-4dd4-b1df-ad42ffc5adbc)
 
 
-![image](https://github.com/user-attachments/assets/e61f4157-b4cf-4439-9dd8-4abc673d57ff)
+Bagian ini menunjukkan latency (waktu tunda) untuk permintaan query GraphQL yang masuk. Angka "P95" artinya latensi di percentil ke-95, yaitu latensi maksimum yang dialami 95% dari total query. Di sini ditampilkan bahwa latensinya adalah 42.2 ms.  
+  
+### Total Mutations:
+Berguna untuk memahami seberapa sering data berubah di sistem. Banyaknya mutation bisa berarti pengguna aktif memodifikasi data atau aplikasi banyak melakukan operasi backend.
+
+![image](https://github.com/user-attachments/assets/65682042-7646-40f1-ae7c-b179d198c4e0)
+
+  
+Menunjukkan jumlah total mutation (modifikasi data) yang dilakukan melalui query GraphQL dalam periode waktu yang dipilih. Di sini ada satu mutation.  
+
+### Mutation Latency (P95):
+Latensi rendah di sini berarti mutation diproses dengan cepat, yang penting dalam aplikasi yang membutuhkan data yang selalu diperbarui secara real-time atau hampir real-time.
+
+![image](https://github.com/user-attachments/assets/77681e56-155d-48a3-bc06-39bdf49e73bf)
+
+
+Mirip dengan Query Latency, bagian ini menunjukkan latency dari operasi mutation dengan nilai percentile ke-95. Latensinya saat ini adalah 9.50 ms.
+
+### Top Queries:
+Membantu mengidentifikasi query mana yang paling sering digunakan atau mengonsumsi banyak sumber daya. Ini bermanfaat untuk mengoptimalkan atau memperbaiki performa dari query tersebut.
+
+![image](https://github.com/user-attachments/assets/612be44e-051a-418d-8a3a-69dbf5e5e481)
+
+
+Menampilkan layanan atau operasi GraphQL yang paling sering digunakan selama periode yang dipilih. Dalam contoh ini, layanan "hasuraferdy" yang melakukan dua query.
+
+### Top Mutations:
+Berguna untuk mengetahui operasi perubahan data yang paling sering dilakukan. Misalnya, jika ada mutation spesifik yang sering terjadi, Anda bisa memantau apakah ada masalah kinerja terkait.
+
+![image](https://github.com/user-attachments/assets/984a5776-daa6-40fe-b7fa-b6b2979787e4)
+
+  
+Dalam hal ini adalah daftar mutation yang paling sering dilakukan dalam periode waktu yang ditentukan, tetapi di sini tidak ada data yang ditampilkan.  
+
+### Query Request Rate:
+Berguna untuk melacak seberapa banyak permintaan yang masuk ke server dalam kurun waktu tertentu. Lonjakan pada request rate bisa menunjukkan lonjakan aktivitas pengguna.
+
+![image](https://github.com/user-attachments/assets/1ab116d5-6079-4b80-9c32-f1b61d0810e9)
+
+
+Grafik ini menampilkan jumlah permintaan query yang diajukan ke server Hasura per satuan waktu. Pada grafik ini, tidak ada permintaan yang terlihat pada interval waktu terakhir.
+
+### Mutation Request Rate:
+Memantau frekuensi perubahan data. Metrik ini bisa membantu memahami kapan aplikasi melakukan banyak operasi perubahan data, yang mungkin berdampak pada kinerja.  
+
+![image](https://github.com/user-attachments/assets/199137ec-1a69-4cbd-a88e-4f669cd835a0)
+
+
+Grafik ini menampilkan frekuensi permintaan mutation yang dilakukan selama periode waktu tertentu. Pada gambar ini juga tidak ada data yang terlihat.
+
+### Query Error Rate:
+Sangat penting untuk melacak error. Jika tingkat error tinggi, ini bisa menunjukkan masalah pada aplikasi, misalnya karena query yang tidak valid atau masalah dengan infrastruktur.
+
+![image](https://github.com/user-attachments/assets/2fc9a2d1-2f58-495f-9384-9459fd5f2329)
+
+
+Grafik ini menunjukkan frekuensi error yang terjadi selama pemrosesan query GraphQL. Pada gambar ini, tidak ada error yang tercatat.
+
+### Mutation Error Rate:
+Memantau error dalam mutation penting karena kegagalan mutation bisa menyebabkan data yang salah atau tidak konsisten. Hal ini juga dapat mengganggu pengalaman pengguna aplikasi.
+
+![image](https://github.com/user-attachments/assets/b04d5463-a083-413d-b09a-a575fe81dc5e)
+
+
+Menunjukkan jumlah error yang terjadi selama operasi mutation. Tidak ada error yang tercatat di sini.
+
+### Query Latency (P95) (Detail per waktu):
+Bermanfaat untuk melihat pola perubahan latensi. Misalnya, lonjakan pada waktu tertentu mungkin menunjukkan waktu beban puncak atau masalah performa yang bersifat sementara.
+
+![image](https://github.com/user-attachments/assets/14a60a49-ced2-4c22-b2cd-98f9b876f479)
+
+
+Grafik ini memetakan latensi query ke waktu selama periode tertentu, membantu Anda melihat bagaimana latensi berubah sepanjang waktu. Ada beberapa lonjakan latensi, tetapi secara umum tetap rendah.
+
+### Mutation Latency (P95) (Detail per waktu):
+Berguna untuk memastikan operasi mutation tetap cepat dan tidak mengalami penundaan selama penggunaan.
+
+![image](https://github.com/user-attachments/assets/1bc7bcd2-74dd-4a36-98d5-7a3af5714b9b)
+
+  
+Grafik yang sama seperti pada Query Latency, tetapi untuk operasi mutation. Di sini mutation tampaknya jarang terjadi, dengan beberapa titik data pada grafik.
+
+### HTTP Connections:
+Memantau jumlah koneksi membantu mengidentifikasi beban pada server. Peningkatan tajam dalam jumlah koneksi mungkin mengindikasikan peningkatan lalu lintas atau adanya masalah dengan penanganan sesi koneksi.
+
+![image](https://github.com/user-attachments/assets/fae5fd6f-c0e8-4a96-9444-f83a86ebb2df)
+
+
+Grafik ini menunjukkan jumlah koneksi HTTP yang sedang berlangsung antara klien dan server Hasura. Jumlahnya bervariasi, tetapi sebagian besar stabil di sekitar 1 koneksi.
+
+### Cache Request Rate:
+Pemanfaatan cache yang baik bisa meningkatkan performa aplikasi. Ketiadaan data di sini mungkin menunjukkan bahwa cache tidak aktif atau tidak dioptimalkan.
+
+![image](https://github.com/user-attachments/assets/325f9108-c87c-4160-96de-b9a648f233a8)
+
+
+Grafik ini seharusnya menunjukkan permintaan yang masuk ke cache, tetapi saat ini tidak ada data yang tercatat di sini.
+
+### HTTP Data Transfer:
+Metrik ini bisa memberikan wawasan tentang berapa banyak data yang dikirim dan diterima aplikasi. Jika ada transfer data yang besar, itu bisa menjadi indikator penggunaan berat oleh pengguna atau operasi besar di aplikasi.
+
+![image](https://github.com/user-attachments/assets/8af0adb0-f420-43c7-ad19-3ab4db95d89f)
+
+
+Grafik ini menampilkan jumlah data yang ditransfer melalui HTTP selama periode waktu tertentu. Tampak ada fluktuasi pada transfer data di berbagai waktu.
+
+Action Data Transfer:
+Memantau action di Hasura membantu memastikan bahwa data yang terkait dengan operasi spesifik berjalan dengan lancar dan efisien.
+
+![image](https://github.com/user-attachments/assets/2a303715-2383-42d5-9a80-4d0c34404c42)
+
+
+Ini menampilkan data yang ditransfer terkait dengan action di Hasura. Namun, tidak ada data yang tercatat pada grafik ini.
+
+
+![image](https://github.com/user-attachments/assets/4af59f25-c8b7-46a6-aef2-7651ad864556)
+
+![image](https://github.com/user-attachments/assets/36983f5f-f4bc-4aba-b23f-c368b2d672ee)
 
