@@ -16,7 +16,7 @@ Tugas:
 1. Lakukan Hit di API Hasura mas Ferdy
 2. Lakukan Analiasa Panel
 
-## Hasura HTTP Graphql
+## 1. Hasura HTTP Graphql
 **Dashboard** ini menyediakan gambaran menyeluruh tentang performa query dan mutation di Hasura, termasuk metrik seperti latency, error rate, dan transfer data. Anda dapat menggunakan data ini untuk memantau performa aplikasi secara real-time dan melakukan analisis jika ada masalah performa atau error. 
 
 ![image](https://github.com/user-attachments/assets/df77d06a-4b4b-4316-9869-b0b884fec371)
@@ -268,7 +268,7 @@ Opsi ini memungkinkan Anda untuk mengimpor panel dari pustaka panel yang telah d
 **Fungsi**: Ini berguna saat Anda ingin menduplikasi panel dari dashboard lain atau dari lokasi lain di dalam dashboard yang sama.
 Opsi ini memungkinkan Anda untuk menempelkan panel yang sudah di-copy sebelumnya.
 
-## Hasura Health
+## 2. Hasura Health
 **Dashboard** ini berfokus pada kesehatan dan performa layanan Hasura, khususnya dalam memastikan metadata konsisten, memeriksa status kesehatan sumber daya, serta memonitor koneksi ke database PostgreSQL. Memantau status ini membantu memastikan bahwa layanan berjalan dengan baik dan siap untuk menangani permintaan dengan efektif.
 
 ![image](https://github.com/user-attachments/assets/36983f5f-f4bc-4aba-b23f-c368b2d672ee)
@@ -424,7 +424,7 @@ Opsi ini memungkinkan Anda untuk mengimpor panel dari pustaka panel yang telah d
 **Fungsi**: Ini berguna saat Anda ingin menduplikasi panel dari dashboard lain atau dari lokasi lain di dalam dashboard yang sama.
 Opsi ini memungkinkan Anda untuk menempelkan panel yang sudah di-copy sebelumnya.
 
-## Additional Menu Dashboard
+## 3. Additional Menu Dashboard
 
 ![Screenshot (278)](https://github.com/user-attachments/assets/731dc79d-78ce-4e34-b49b-e5c0705022d3)
 
