@@ -227,7 +227,7 @@ Tombol ini digunakan untuk menyegarkan dashboard secara manual.
 ![image](https://github.com/user-attachments/assets/f9af677a-cc47-483f-96d7-b5367a890544)
 
 
-Pengertian: Tombol ini memperbesar rentang waktu tampilan data.
+Tombol ini memperbesar rentang waktu tampilan data.
 
 ### Save Dashboard (Button):
 **Fungsi**: Sangat berguna jika Anda telah mengonfigurasi berbagai filter dan tampilan yang ingin disimpan untuk referensi atau penggunaan di masa depan.
@@ -383,7 +383,7 @@ Tombol ini digunakan untuk menyegarkan dashboard secara manual.
 ![image](https://github.com/user-attachments/assets/f9af677a-cc47-483f-96d7-b5367a890544)
 
 
-Pengertian: Tombol ini memperbesar rentang waktu tampilan data.
+Tombol ini memperbesar rentang waktu tampilan data.
 
 ### Save Dashboard (Button):
 **Fungsi**: Sangat berguna jika Anda telah mengonfigurasi berbagai filter dan tampilan yang ingin disimpan untuk referensi atau penggunaan di masa depan.
@@ -431,19 +431,19 @@ Opsi ini memungkinkan Anda untuk menempelkan panel yang sudah di-copy sebelumnya
 Dropdown ini menyediakan berbagai opsi untuk berinteraksi dengan panel di Grafana. Berikut penjelasan dari masing-masing fitur:
 
 ### View:
-**Pengertian**: Opsi ini memungkinkan Anda untuk melihat panel dalam mode tampilan.
+**Pengertian**: Opsi ini memungkinkan Anda untuk melihat panel dalam mode tampilan.  
 **Fungsi**: Menampilkan panel tanpa opsi edit, hanya untuk melihat data yang ada. Anda juga bisa menekan tombol shortcut v untuk langsung masuk ke mode ini.
 
 ### Edit:
-**Pengertian**: Mengaktifkan mode pengeditan untuk panel.
+**Pengertian**: Mengaktifkan mode pengeditan untuk panel.  
 **Fungsi**: Membuka editor panel di mana Anda bisa mengubah pengaturan visualisasi, sumber data, atau query yang mendasari panel. Shortcut e dapat digunakan untuk akses cepat.
 
 ### Share:
-**Pengertian**: Menampilkan opsi untuk membagikan panel atau dashboard.
+**Pengertian**: Menampilkan opsi untuk membagikan panel atau dashboard.  
 **Fungsi**: Anda bisa membagikan panel dengan membuat link atau menyematkannya ke halaman lain. Ada juga opsi untuk membagikan dashboard secara keseluruhan. Shortcut p s bisa digunakan untuk membuka fitur ini.
 
 ### Explore:
-**Pengertian**: Memungkinkan Anda untuk mengeksplorasi lebih lanjut data yang ada pada panel.
+**Pengertian**: Memungkinkan Anda untuk mengeksplorasi lebih lanjut data yang ada pada panel.  
 **Fungsi**: Menggunakan mode eksplorasi data di Grafana, di mana Anda bisa melihat lebih detail query dan data yang terkait. Shortcut x dapat digunakan untuk masuk ke mode eksplorasi ini.
 
 ### Inspect:
@@ -456,15 +456,15 @@ Membuka menu untuk menginspeksi data yang digunakan dalam panel.
 Menu Inspect ini menyediakan opsi untuk menganalisis lebih dalam tentang data yang ditampilkan pada panel di Grafana. Berikut adalah penjelasan dari setiap sub-menu di dalamnya:
 
 #### Data:
-**Pengertian**: Menampilkan data mentah yang digunakan oleh panel ini.
+**Pengertian**: Menampilkan data mentah yang digunakan oleh panel ini.  
 **Fungsi**: Anda bisa melihat hasil query yang sedang digunakan dalam bentuk tabel, grafik, atau format mentah lainnya. Fitur ini bermanfaat untuk melihat apakah data yang diterima sudah sesuai dengan yang diharapkan atau tidak.
 
 #### Query:
-**Pengertian**: Menunjukkan query yang digunakan untuk menghasilkan data pada panel.
+**Pengertian**: Menunjukkan query yang digunakan untuk menghasilkan data pada panel.  
 **Fungsi**: Berguna untuk memeriksa dan memvalidasi query yang Anda gunakan untuk mengambil data. Ini termasuk query yang digunakan dari sumber data seperti Prometheus, InfluxDB, atau lainnya.
 
 #### Panel JSON:
-**Pengertian**: Menampilkan konfigurasi JSON dari panel tersebut.
+**Pengertian**: Menampilkan konfigurasi JSON dari panel tersebut.  
 **Fungsi**: Berguna untuk melihat dan mengedit konfigurasi panel secara manual, seperti pengaturan visualisasi, query, dan data lainnya. JSON ini bisa disalin dan digunakan untuk menduplikasi panel di dashboard lain.  
   
 Dengan menu Inspect, Anda dapat memahami lebih dalam tentang bagaimana panel bekerja, data apa yang ditarik, dan bagaimana panel dikonfigurasikan, yang sangat membantu dalam troubleshooting atau optimasi.
@@ -479,24 +479,24 @@ Menampilkan opsi tambahan yang berkaitan dengan panel.
 Menu More... di dalam panel Grafana memberikan beberapa opsi tambahan untuk mengelola panel tersebut. Berikut penjelasan dari tiap fitur di dalamnya:
   
 #### Duplicate:
-**Pengertian**: Membuat salinan panel yang sama di dashboard saat ini.
+**Pengertian**: Membuat salinan panel yang sama di dashboard saat ini.  
 **Fungsi**: Berguna jika Anda ingin membuat panel yang identik dan memodifikasinya tanpa mengubah panel asli. Misalnya, untuk melihat data yang sama tetapi dengan visualisasi yang berbeda.
 
 #### Copy:
-**Pengertian**: Menyalin konfigurasi panel.
+**Pengertian**: Menyalin konfigurasi panel.  
 **Fungsi**: Mengambil seluruh pengaturan dari panel ini dan menyimpannya ke clipboard Anda, sehingga bisa dipaste ke dashboard lain atau digunakan untuk memodifikasi panel di tempat lain.
 
 #### Create library panel:
-**Pengertian**: Menjadikan panel ini sebagai panel pustaka (library panel).
+**Pengertian**: Menjadikan panel ini sebagai panel pustaka (library panel).  
 **Fungsi**: Anda dapat membuat panel ini tersedia secara umum di berbagai dashboard lain. Jika Anda mengubah panel pustaka, semua tempat yang menggunakan panel ini juga akan diperbarui.
 
 #### Get help:
-**Pengertian**: Menyediakan opsi untuk bantuan lebih lanjut terkait panel.
+**Pengertian**: Menyediakan opsi untuk bantuan lebih lanjut terkait panel.  
 **Fungsi**: Opsi ini membantu pengguna untuk mendapatkan dokumentasi atau panduan terkait penggunaan atau konfigurasi panel di Grafana.
   
 Fitur More... ini sangat berguna untuk manajemen panel lanjutan dan penghematan waktu ketika ingin menggunakan kembali atau menduplikasi panel dengan cepat.
 
 ### Remove:
-**Pengertian**: Menghapus panel dari dashboard.
+**Pengertian**: Menghapus panel dari dashboard.  
 **Fungsi**: Opsi ini akan menghapus panel dari dashboard saat ini. Shortcut p r bisa digunakan untuk menghapus panel dengan cepat.
 Dropdown ini dirancang agar pengguna dapat dengan mudah mengelola, mengedit, dan menganalisis data pada panel mereka di dashboard Grafana.
