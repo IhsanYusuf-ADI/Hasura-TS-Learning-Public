@@ -457,15 +457,176 @@ Menu Inspect ini menyediakan opsi untuk menganalisis lebih dalam tentang data ya
 
 #### Data:
 **Pengertian**: Menampilkan data mentah yang digunakan oleh panel ini.  
-**Fungsi**: Anda bisa melihat hasil query yang sedang digunakan dalam bentuk tabel, grafik, atau format mentah lainnya. Fitur ini bermanfaat untuk melihat apakah data yang diterima sudah sesuai dengan yang diharapkan atau tidak.
+**Fungsi**: Anda bisa melihat hasil query yang sedang digunakan dalam bentuk tabel, grafik, atau format mentah lainnya. Fitur ini bermanfaat untuk melihat apakah data yang diterima sudah sesuai dengan yang diharapkan atau tidak. Fitur ini sering digunakan untuk menganalisis data mentah dari query yang diproses dalam panel. Selain itu, fitur ini mempermudah pengguna untuk mendapatkan laporan data dalam format yang dapat dibagikan atau dianalisis lebih lanjut di luar Grafana.
+
+![image](https://github.com/user-attachments/assets/d179b61c-7d61-43a8-8163-27dc8cc639d4)
+
+
+Fitur ini adalah bagian dari Inspect panel di Grafana yang digunakan untuk menganalisis lebih dalam data yang ditampilkan di panel. Dalam tab Data dari fitur Inspect, ada beberapa opsi dan informasi yang bisa Anda eksplorasi:
+  
+##### Show Data Frame:  
+**Fungsi**: Dropdown ini memungkinkan Anda memilih frame data yang ingin dilihat. Dalam contoh gambar, hanya ada satu frame data yang disebut "Total (1)".  
+**Penggunaan**: Anda bisa memilih frame yang berisi data yang relevan, terutama jika ada beberapa frame yang tersedia di panel.
+  
+##### Formatted Data:
+**Fungsi**: Ketika opsi ini diaktifkan, data yang ditampilkan akan diformat sesuai dengan aturan tampilan dan override yang diterapkan di panel asli.    
+**Penggunaan**: Menampilkan data dalam format yang lebih rapi sesuai pengaturan panel, berguna untuk visualisasi yang lebih mudah dipahami.
+  
+##### Download CSV:
+**Fungsi**: Anda dapat mengunduh data yang sedang ditampilkan dalam format CSV untuk dianalisis lebih lanjut di Excel atau alat spreadsheet lainnya.  
+**Penggunaan**: Berguna ketika Anda ingin melakukan analisis lanjutan atau menyimpan data untuk pelaporan.
+
+##### Download for Excel:
+**Fungsi**: Opsi ini memungkinkan untuk mendownload file CSV dengan format khusus yang lebih mudah diimpor ke dalam Excel, termasuk header tambahan.  
+**Penggunaan**: Membuat proses download lebih nyaman untuk pengguna Excel, terutama untuk memudahkan manipulasi data.
+
+##### Data Table:
+**Fungsi**: Tabel yang menampilkan data aktual dari query yang dilakukan oleh panel. Dalam contoh, data berisi Time (waktu pengambilan data) dan Total (nilai total dari data yang dikumpulkan).
+**Penggunaan**: Berguna untuk melihat rincian hasil query secara langsung, terutama untuk menganalisis pola data dalam kurun waktu tertentu.
 
 #### Query:
 **Pengertian**: Menunjukkan query yang digunakan untuk menghasilkan data pada panel.  
 **Fungsi**: Berguna untuk memeriksa dan memvalidasi query yang Anda gunakan untuk mengambil data. Ini termasuk query yang digunakan dari sumber data seperti Prometheus, InfluxDB, atau lainnya.
 
+![image](https://github.com/user-attachments/assets/0cd66a56-414e-49ba-b2cf-d66ed7b0c2a2)
+
+Gambar di atas menunjukkan antarmuka Query Inspector di Grafana. Fitur ini digunakan untuk memantau dan memeriksa query Prometheus yang dijalankan terhadap data dari Hasura. Berikut penjelasan dari elemen-elemen yang ada di layar tersebut:
+
+##### 1. Total Queries
+Bagian ini menampilkan jumlah total query yang dijalankan, yaitu dua query dengan total waktu eksekusi 84 ms.
+
+###### 2. Query Inspector Tabs
+Ada beberapa tab seperti:
+- **Data:** Menampilkan hasil data dari query yang dijalankan.
+- **Stats:** Menunjukkan statistik terkait query.
+- **JSON:** Menampilkan representasi JSON dari query yang dijalankan.
+- **Query:** Menampilkan sintaks query Prometheus yang digunakan.
+
+##### 3. Query Inspector
+Menunjukkan detail dari query yang dijalankan pada panel:
+- **Expr:** Ini adalah ekspresi PromQL (Prometheus Query Language) yang digunakan:
+    ```promql
+    SUM(increase(hasura_graphql_requests_total{operation_type="query", instance=~"10\.100\.13\.24:8889", job=~"hasuraferdy"}[1800s]))
+    ```
+    Ini berarti query tersebut menghitung total permintaan (request) GraphQL yang berhasil (`response_status="success"`) selama periode waktu tertentu (dalam detik `[1800s]`) untuk instance `10.100.13.24:8889` pada job `hasuraferdy`.
+
+- **Step:** Menunjukkan interval langkah waktu untuk query, yaitu 5 detik.
+
+##### 4. Request Details
+Bagian ini menunjukkan detail dari request yang dikirimkan ke API, termasuk:
+- **URL:** `/api/ds/query`
+- **Method:** `POST`
+- **Data:**
+    - `queries` (Array): Berisi dua query yang dikirimkan.
+    - `range`: Menunjukkan rentang waktu yang digunakan dalam query.
+    - `from` dan `to`: Menunjukkan timestamp waktu mulai dan berakhir dari query yang dijalankan.
+
+##### 5. Response Details
+Menampilkan objek response yang diterima dari server, yang biasanya berisi data hasil query atau pesan error jika ada kesalahan.
+
+##### Penggunaan Fitur ini
+Fitur ini biasanya digunakan untuk:
+- Menganalisis performa query.
+- Mengecek hasil query dalam format JSON untuk memudahkan debugging.
+- Memeriksa permintaan (request) yang dikirimkan ke server backend (Prometheus) untuk memvalidasi konfigurasi query.
+- Melihat statistik jumlah query yang dijalankan dan hasil yang diterima dalam berbagai format (Data, JSON).
+
+Secara keseluruhan, *Query Inspector* di Grafana ini sangat membantu untuk memeriksa dan mengoptimalkan query yang digunakan pada sistem monitoring.
+
 #### Panel JSON:
 **Pengertian**: Menampilkan konfigurasi JSON dari panel tersebut.  
-**Fungsi**: Berguna untuk melihat dan mengedit konfigurasi panel secara manual, seperti pengaturan visualisasi, query, dan data lainnya. JSON ini bisa disalin dan digunakan untuk menduplikasi panel di dashboard lain.  
+**Fungsi**: Berguna untuk melihat dan mengedit konfigurasi panel secara manual, seperti pengaturan visualisasi, query, dan data lainnya. JSON ini bisa disalin dan digunakan untuk menduplikasi panel di dashboard lain. 
+
+![image](https://github.com/user-attachments/assets/d1f741bc-5713-4f27-82df-7a602c5179c5)
+
+
+Gambar di atas menunjukkan tampilan *JSON Inspector* pada Grafana. Fitur ini digunakan untuk melihat representasi JSON dari konfigurasi panel yang ada di Grafana. Berikut adalah penjelasan dari elemen-elemen yang terlihat:
+
+##### 1. Panel JSON Viewer
+Di bagian ini, pengguna dapat melihat dan memodifikasi representasi JSON dari panel Grafana yang sedang aktif. JSON ini mencakup semua pengaturan dan konfigurasi panel, seperti sumber data, gaya tampilan, format angka, dan banyak lagi.
+
+##### 2. JSON Structure Details
+Pada JSON yang ditampilkan, beberapa informasi penting dapat diperhatikan:
+
+- **`datasource`**:
+    ```json
+    {
+        "type": "prometheus",
+        "uid": "bacf5660-d711-4cea-9045-7349e2548deb"
+    }
+    ```
+    Bagian ini menunjukkan bahwa *datasource* yang digunakan adalah Prometheus. `uid` adalah identifikasi unik dari *datasource* tersebut.
+
+- **`description`**:
+    ```json
+    "description": "Number of GraphQL Query requests"
+    ```
+    Deskripsi ini memberikan informasi bahwa panel ini dirancang untuk menampilkan jumlah permintaan (request) GraphQL yang dilakukan. Deskripsi ini biasanya digunakan untuk memberikan konteks atau informasi tambahan terkait dengan panel tersebut.
+
+- **`fieldConfig`**:
+    Bagian ini berisi konfigurasi untuk tampilan dan pemformatan field yang ada di panel. Beberapa sub-elemen penting:
+    - **`thresholds`**:
+        Mengatur batas nilai yang digunakan untuk menentukan warna atau indikasi tertentu pada nilai data.
+        ```json
+        "mode": "absolute",
+        "steps": [
+            {
+                "color": "green",
+                "value": null
+            }
+        ]
+        ```
+        Mode ini menggunakan `absolute` dan menetapkan warna hijau untuk nilai data. Nilai `null` menunjukkan bahwa semua data dianggap valid tanpa ada batasan (threshold) tertentu yang diterapkan.
+
+    - **`color`**:
+        ```json
+        {
+            "mode": "thresholds"
+        }
+        ```
+        Menentukan mode pewarnaan pada panel sesuai dengan `thresholds` yang telah ditentukan sebelumnya.
+
+    - **`decimals`** dan **`unit`**:
+        - `decimals`: Mengatur jumlah desimal yang akan ditampilkan.
+        - `unit`: Menentukan satuan dari data yang ditampilkan, dalam kasus ini `none` menunjukkan bahwa tidak ada satuan khusus.
+
+- **`overrides`**:
+    Menampilkan pengaturan khusus atau pengecualian untuk field-field tertentu. Bagian ini kosong (`[]`) yang berarti tidak ada konfigurasi pengecualian yang diterapkan.
+
+##### 3. Editing Options
+- **Select Source**: Pengguna dapat memilih sumber panel JSON lain jika ada lebih dari satu panel yang sedang dibuka atau diedit.
+- **Apply Button**: Tombol ini digunakan untuk menerapkan perubahan yang dilakukan pada JSON tersebut ke panel Grafana yang sedang aktif.
+
+##### Penggunaan Fitur ini:
+- Memungkinkan pengguna untuk melihat dan memodifikasi detail konfigurasi panel secara manual.
+- Berguna untuk melakukan pengaturan lanjutan atau debugging jika ada kesalahan pada tampilan atau data yang tidak sesuai.
+- Memudahkan dalam menyalin pengaturan panel dari satu dashboard ke dashboard lain atau untuk melakukan impor/ekspor konfigurasi panel.
+
+Fitur ini biasanya digunakan oleh pengguna yang sudah familiar dengan struktur JSON dan memerlukan kontrol yang lebih presisi terhadap pengaturan panel di Grafana.
+
+#### Stats:
+Fitur Stats ini membantu pengguna untuk mengevaluasi performa query yang dijalankan pada panel, termasuk waktu yang dibutuhkan dan volume data yang ditarik. Ini dapat digunakan untuk mengoptimalkan query jika performa atau waktu load dianggap terlalu lama.
+
+![image](https://github.com/user-attachments/assets/d958a010-a76f-4c05-8294-c0dae3364f89)
+
+
+Fitur yang ditampilkan pada gambar ini adalah bagian dari Inspect Panel di Grafana, lebih tepatnya di tab Stats. Fitur ini menyediakan ringkasan statistik dari query yang dijalankan pada panel.
+
+##### Total request time:
+**Fungsi**: Menunjukkan waktu total yang dibutuhkan untuk mengeksekusi semua query yang terkait dengan panel ini.  
+**Penggunaan**: Berguna untuk memahami seberapa cepat panel dapat menarik data. Dalam contoh, query membutuhkan 68 ms.
+
+##### Data processing time:
+**Fungsi**: Waktu yang diperlukan untuk memproses data setelah data diterima. Ini mencakup waktu untuk memformat atau mengolah data agar sesuai dengan kebutuhan panel.  
+**Penggunaan**: Menganalisis efisiensi pemrosesan data, di sini membutuhkan sekitar 0.100 ms.
+
+##### Number of queries:
+**Fungsi**: Menampilkan jumlah query yang dijalankan untuk menghasilkan data yang ditampilkan di panel.  
+**Penggunaan**: Berguna untuk melihat kompleksitas panel. Dalam contoh, ada 2 query yang dijalankan.
+
+##### Total number rows:
+**Fungsi**: Menunjukkan jumlah total baris data yang dihasilkan oleh query.  
+**Penggunaan**: Informasi ini berguna untuk memahami volume data yang ditampilkan. Di contoh ini, ada 361 baris data.
   
 Dengan menu Inspect, Anda dapat memahami lebih dalam tentang bagaimana panel bekerja, data apa yang ditarik, dan bagaimana panel dikonfigurasikan, yang sangat membantu dalam troubleshooting atau optimasi.
 
