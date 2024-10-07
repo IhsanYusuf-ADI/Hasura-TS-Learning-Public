@@ -149,6 +149,125 @@ Grafik ini menampilkan jumlah data yang ditransfer melalui HTTP selama periode w
 
 Ini menampilkan data yang ditransfer terkait dengan action di Hasura. Namun, tidak ada data yang tercatat pada grafik ini.
 
+### Source (Dropdown):
+**Fungsi**: Memilih sumber metrik untuk ditampilkan di dashboard. Misalnya, jika Anda mengumpulkan metrik dari beberapa monitoring system seperti Prometheus atau InfluxDB, Anda dapat memilih salah satunya.
+
+![image](https://github.com/user-attachments/assets/4e291bec-b956-4b40-93e1-571c5f27af07)
+
+
+Filter ini memungkinkan pengguna untuk memilih sumber data (source) dari mana metrik diambil. Dalam konteks ini, metrik yang digunakan berasal dari Prometheus. Dengan filter ini, Anda bisa memutuskan untuk melihat metrik dari sumber yang berbeda jika ada beberapa sumber data yang terhubung.
+
+### Job (Dropdown):
+**Fungsi**: Anda bisa memilih job yang ingin dipantau performanya. Jika Anda menjalankan beberapa aplikasi pada Kubernetes cluster, Anda dapat memilih hanya satu aplikasi untuk dilihat.
+
+![image](https://github.com/user-attachments/assets/1c9a400a-7f53-4e36-8f99-91527ce48585)
+
+
+Filter ini memberikan opsi untuk memilih pekerjaan (job) tertentu yang dimonitor oleh Prometheus. Sebuah job biasanya mengacu pada aplikasi atau proses spesifik yang terpantau, misalnya aplikasi Hasura atau PostgreSQL.
+
+### Instance (Dropdown):
+**Fungsi**: Memilih instansi tertentu untuk difokuskan. Ini memudahkan pengguna dalam mengisolasi masalah performa pada satu server atau node tertentu.
+
+![image](https://github.com/user-attachments/assets/7744e9fd-589f-4f39-9234-9d02ba86b5e5)
+
+
+Filter ini memungkinkan pengguna untuk memilih instansi (instance) tertentu dari sebuah job. Sebagai contoh, jika Anda menjalankan beberapa instansi aplikasi Hasura di beberapa node, Anda dapat memilih salah satu node atau server tertentu yang ingin Anda pantau.
+
+### Time Range Selector (Last 15 Minutes):
+**Fungsi**: Memilih rentang waktu tertentu untuk melihat bagaimana performa aplikasi atau sistem dalam periode tersebut. Ini berguna untuk melihat perubahan performa atau potensi masalah dalam interval waktu tertentu.
+
+![image](https://github.com/user-attachments/assets/d55df755-28ba-424c-a807-c6679817f725)
+
+
+Filter ini mengatur rentang waktu (time range) dari data yang ditampilkan pada dashboard. Secara default, dashboard akan menampilkan data dari 15 menit terakhir, namun pengguna bisa memilih rentang waktu lainnya, seperti 1 jam terakhir, 24 jam terakhir, atau membuat rentang waktu kustom.
+
+### Operation Type (Dropdown):
+**Fungsi**: Sangat berguna untuk memisahkan jenis operasi yang ingin Anda pantau. Misalnya, jika Anda hanya ingin melihat metrik dari Query tanpa melibatkan Mutation atau Subscription, filter ini sangat membantu.
+
+![image](https://github.com/user-attachments/assets/164121b8-63a7-448f-8c04-b477dc46f78b)
+
+
+Ini memungkinkan pengguna untuk memfilter jenis operasi GraphQL yang sedang dipantau, seperti Query, Mutation, atau Subscription.
+
+### Operation Name (Dropdown):
+**Fungsi**: Berguna saat Anda ingin memantau kinerja atau kesehatan dari operasi GraphQL tertentu, seperti operasi getUser atau createPost.
+
+![image](https://github.com/user-attachments/assets/d7db70fc-a334-426d-bddc-f8b12e1bd85d)
+
+
+Dropdown ini memungkinkan pengguna memilih berdasarkan nama operasi yang spesifik. Dalam GraphQL, operasi sering diberi nama untuk memudahkan identifikasi.
+
+### Query Hash (Dropdown):
+**Fungsi**: Dapat digunakan untuk melacak kinerja query unik secara spesifik jika ada banyak query yang mirip tetapi ingin dipantau secara terpisah.
+
+![image](https://github.com/user-attachments/assets/87b7d75d-a28b-4601-986e-0e2f6470bc7b)
+
+
+Filter ini memisahkan metrik berdasarkan hash dari query yang digunakan. Query hash merupakan identifikasi unik dari query GraphQL yang dijalankan.
+
+### 5s (Refresh Interval):
+**Fungsi**: Berguna untuk memastikan dashboard terus diperbarui dengan data terbaru secara otomatis. Interval ini bisa diubah untuk penyegaran yang lebih lambat atau lebih cepat sesuai kebutuhan.
+
+![image](https://github.com/user-attachments/assets/b25e04ef-cee5-4774-a561-32bcab3c9d8b)
+
+
+Dropdown ini mengatur interval waktu penyegaran otomatis dashboard, dalam hal ini setiap 5 detik.
+
+### Refresh Dashboard (Button):
+**Fungsi**: Berguna jika Anda ingin langsung mendapatkan data terbaru tanpa menunggu interval penyegaran otomatis.
+
+![image](https://github.com/user-attachments/assets/8e64b7bc-1e49-41d4-baaa-9c266967dfcf)
+
+
+Tombol ini digunakan untuk menyegarkan dashboard secara manual.
+
+### Time Range Zoom Out (Button):
+**Fungsi**: Membantu Anda mendapatkan gambaran yang lebih luas mengenai data metrik, misalnya dari rentang waktu yang lebih lama, untuk menganalisis tren performa.
+
+![image](https://github.com/user-attachments/assets/f9af677a-cc47-483f-96d7-b5367a890544)
+
+
+Pengertian: Tombol ini memperbesar rentang waktu tampilan data.
+
+### Save Dashboard (Button):
+**Fungsi**: Sangat berguna jika Anda telah mengonfigurasi berbagai filter dan tampilan yang ingin disimpan untuk referensi atau penggunaan di masa depan.
+
+![image](https://github.com/user-attachments/assets/abbccf77-8ff5-44ad-a3ce-957aa67568fe)
+
+
+Fitur ini digunakan untuk menyimpan pengaturan dashboard yang telah Anda sesuaikan.
+
+### Dashboard Settings (Button):
+**Fungsi**: Fitur ini memberikan kontrol lebih lanjut untuk mengedit struktur dashboard atau konfigurasi visual yang lebih mendalam.
+
+![image](https://github.com/user-attachments/assets/156a3edd-85fc-4473-bafd-7e794ec0ec20)
+
+
+Ini memungkinkan akses ke pengaturan dashboard seperti tata letak, penyesuaian metrik, atau pengelolaan data yang lebih mendetail.
+
+### Dropdown Add
+
+![image](https://github.com/user-attachments/assets/30e09b59-454d-432d-9d5d-23f95697fe5d)
+
+
+Dropdown Add ini digunakan untuk menambahkan elemen baru pada dashboard Grafana. Berikut penjelasan setiap opsinya:
+
+#### Visualization:
+**Fungsi**: Setelah memilih ini, Anda dapat menentukan tipe visualisasi data yang diinginkan seperti grafik, bar, tabel, heatmap, dan lain-lain, sesuai dengan data yang akan dimonitor.
+Opsi ini digunakan untuk menambahkan panel visualisasi baru pada dashboard.
+
+#### Row:
+**Fungsi**: Berguna untuk mengorganisir panel-panel pada dashboard secara rapi dengan menempatkannya dalam baris tertentu. Ini membantu dalam pengelompokan panel yang terkait.
+Opsi ini digunakan untuk menambahkan baris baru pada layout dashboard.
+
+#### Import from library:
+**Fungsi**: Sangat berguna jika Anda ingin menggunakan panel yang sudah ada atau standar perusahaan yang telah disimpan dalam pustaka, sehingga tidak perlu membuat panel dari awal.
+Opsi ini memungkinkan Anda untuk mengimpor panel dari pustaka panel yang telah disimpan atau dibuat sebelumnya.
+
+#### Paste panel:
+**Fungsi**: Ini berguna saat Anda ingin menduplikasi panel dari dashboard lain atau dari lokasi lain di dalam dashboard yang sama.
+Opsi ini memungkinkan Anda untuk menempelkan panel yang sudah di-copy sebelumnya.
+
 ## Hasura Health
 **Dashboard** ini berfokus pada kesehatan dan performa layanan Hasura, khususnya dalam memastikan metadata konsisten, memeriksa status kesehatan sumber daya, serta memonitor koneksi ke database PostgreSQL. Memantau status ini membantu memastikan bahwa layanan berjalan dengan baik dan siap untuk menangani permintaan dengan efektif.
 
@@ -209,3 +328,98 @@ Panel ini seharusnya menunjukkan waktu tunda (latency) dari pengecekan kesehatan
 
 
 Grafik ini menunjukkan jumlah koneksi aktif ke PostgreSQL yang terkait dengan sumber testsejuta dan default dalam kurun waktu yang ditentukan.
+
+### Source (Dropdown):
+**Fungsi**: Dengan memilih source, pengguna dapat memfokuskan tampilan dashboard hanya pada data yang dikumpulkan oleh sumber tertentu. Ini memudahkan pengguna untuk memantau layanan yang relevan tanpa perlu melihat data dari semua sumber sekaligus.
+
+![image](https://github.com/user-attachments/assets/e8e05142-0783-470a-b1b6-79cafb013950)
+
+
+Dropdown ini memungkinkan pengguna memilih source data mana yang ingin ditampilkan. Source di sini merujuk pada sistem monitoring seperti Prometheus, yang bertanggung jawab mengumpulkan dan menyajikan data metrik.
+
+### Job (Dropdown):
+**Fungsi**: Memilih job tertentu membantu pengguna untuk mempersempit fokus pemantauan hanya pada proses-proses spesifik yang penting bagi mereka, seperti hanya melihat job untuk database tanpa melihat aplikasi.
+
+![image](https://github.com/user-attachments/assets/74cc2423-6f42-4c83-a256-f6f952595a7b)
+
+
+Dropdown ini menyediakan pilihan untuk memilih job tertentu yang dipantau. Job merujuk pada proses atau layanan tertentu yang dikonfigurasi dalam monitoring, seperti proses aplikasi Hasura atau database PostgreSQL.
+
+### Instance (Dropdown):
+**Fungsi**: Menggunakan filter instance membantu memantau performa dan kesehatan dari satu server tertentu, tanpa terganggu oleh data dari server lainnya.
+
+![image](https://github.com/user-attachments/assets/22cfa64b-64f5-4be6-9c0d-37b61d5fd82c)
+
+
+Dropdown ini memungkinkan pengguna memilih instance atau server spesifik yang sedang dipantau. Ini berguna ketika ada beberapa instansi yang dikelola, seperti beberapa server Hasura yang berjalan secara paralel.
+
+### Time Range Selector (Last 15 Minutes):
+**Fungsi**: Fitur ini berguna untuk menganalisis tren performa atau kejadian dalam rentang waktu tertentu, membantu pengguna untuk melihat pola atau masalah yang baru saja terjadi.
+
+![image](https://github.com/user-attachments/assets/732c5237-2ca8-4e7d-b290-6f8b553244de)
+
+
+Dropdown ini memungkinkan pengguna memilih jangka waktu data yang ditampilkan, seperti 15 menit terakhir, 1 jam terakhir, atau bahkan rentang waktu kustom.
+
+### 5s (Refresh Interval):
+**Fungsi**: Berguna untuk memastikan dashboard terus diperbarui dengan data terbaru secara otomatis. Interval ini bisa diubah untuk penyegaran yang lebih lambat atau lebih cepat sesuai kebutuhan.
+
+![image](https://github.com/user-attachments/assets/b25e04ef-cee5-4774-a561-32bcab3c9d8b)
+
+
+Dropdown ini mengatur interval waktu penyegaran otomatis dashboard, dalam hal ini setiap 5 detik.
+
+### Refresh Dashboard (Button):
+**Fungsi**: Berguna jika Anda ingin langsung mendapatkan data terbaru tanpa menunggu interval penyegaran otomatis.
+
+![image](https://github.com/user-attachments/assets/8e64b7bc-1e49-41d4-baaa-9c266967dfcf)
+
+
+Tombol ini digunakan untuk menyegarkan dashboard secara manual.
+
+### Time Range Zoom Out (Button):
+**Fungsi**: Membantu Anda mendapatkan gambaran yang lebih luas mengenai data metrik, misalnya dari rentang waktu yang lebih lama, untuk menganalisis tren performa.
+
+![image](https://github.com/user-attachments/assets/f9af677a-cc47-483f-96d7-b5367a890544)
+
+
+Pengertian: Tombol ini memperbesar rentang waktu tampilan data.
+
+### Save Dashboard (Button):
+**Fungsi**: Sangat berguna jika Anda telah mengonfigurasi berbagai filter dan tampilan yang ingin disimpan untuk referensi atau penggunaan di masa depan.
+
+![image](https://github.com/user-attachments/assets/abbccf77-8ff5-44ad-a3ce-957aa67568fe)
+
+
+Fitur ini digunakan untuk menyimpan pengaturan dashboard yang telah Anda sesuaikan.
+
+### Dashboard Settings (Button):
+**Fungsi**: Fitur ini memberikan kontrol lebih lanjut untuk mengedit struktur dashboard atau konfigurasi visual yang lebih mendalam.
+
+![image](https://github.com/user-attachments/assets/156a3edd-85fc-4473-bafd-7e794ec0ec20)
+
+
+Ini memungkinkan akses ke pengaturan dashboard seperti tata letak, penyesuaian metrik, atau pengelolaan data yang lebih mendetail.
+
+### Dropdown Add
+
+![image](https://github.com/user-attachments/assets/30e09b59-454d-432d-9d5d-23f95697fe5d)
+
+
+Dropdown Add ini digunakan untuk menambahkan elemen baru pada dashboard Grafana. Berikut penjelasan setiap opsinya:
+
+#### Visualization:
+**Fungsi**: Setelah memilih ini, Anda dapat menentukan tipe visualisasi data yang diinginkan seperti grafik, bar, tabel, heatmap, dan lain-lain, sesuai dengan data yang akan dimonitor.
+Opsi ini digunakan untuk menambahkan panel visualisasi baru pada dashboard.
+
+#### Row:
+**Fungsi**: Berguna untuk mengorganisir panel-panel pada dashboard secara rapi dengan menempatkannya dalam baris tertentu. Ini membantu dalam pengelompokan panel yang terkait.
+Opsi ini digunakan untuk menambahkan baris baru pada layout dashboard.
+
+#### Import from library:
+**Fungsi**: Sangat berguna jika Anda ingin menggunakan panel yang sudah ada atau standar perusahaan yang telah disimpan dalam pustaka, sehingga tidak perlu membuat panel dari awal.
+Opsi ini memungkinkan Anda untuk mengimpor panel dari pustaka panel yang telah disimpan atau dibuat sebelumnya.
+
+#### Paste panel:
+**Fungsi**: Ini berguna saat Anda ingin menduplikasi panel dari dashboard lain atau dari lokasi lain di dalam dashboard yang sama.
+Opsi ini memungkinkan Anda untuk menempelkan panel yang sudah di-copy sebelumnya.
