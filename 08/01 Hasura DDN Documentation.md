@@ -202,7 +202,7 @@ Console memudahkan pengujian query, memberikan feedback, mengeksplorasi API, ser
    Buat akun atau masuk ke akunmu di https://console.hasura.io.
 
 2. **Buat Proyek atau Eksplorasi Proyek Contoh**  
-   Kamu bisa mengikuti quickstart untuk membuat proyekmu sendiri, atau eksplorasi proyek contoh eCommerce Supergraph API yang dibangun di Hasura DDN. Cari proyek contoh "eCommerce App" di bagian *Sample Projects*.
+   Kita bisa mengikuti quickstart untuk membuat proyekmu sendiri, atau eksplorasi proyek contoh eCommerce Supergraph API yang dibangun di Hasura DDN. Cari proyek contoh "eCommerce App" di bagian *Sample Projects*.
 
 Mulai gunakan *explorer* untuk mengeksplorasi lebih lanjut API melalui console.  
   
@@ -217,37 +217,35 @@ Hasura menyediakan *console* — GUI berbasis web yang memiliki halaman *explore
 
 Console juga memungkinkan interaksi dan pemantauan API secara langsung.
 
-#### Langkah Eksplorasi Supergraph
-
-##### Langkah 1. Eksplorasi Supergraph
+#### Langkah 1. Eksplorasi Supergraph
 Klik tombol *Explorer* di menu samping untuk melihat visualisasi keseluruhan supergraph. 
 
 ![image](https://github.com/user-attachments/assets/1569893a-6dc1-4386-b8b7-bda9ae24bdf9)
 
 
-Kamu bisa melihat subgraph, sumber data, dan hubungan di antara mereka. Ada opsi untuk mengubah tampilan sesuai kebutuhan.
+Kita bisa melihat subgraph, sumber data, dan hubungan di antara mereka. Ada opsi untuk mengubah tampilan sesuai kebutuhan.
 
-##### Langkah 2. Eksplorasi Subgraph
+#### Langkah 2. Eksplorasi Subgraph
 Klik salah satu subgraph untuk melihat rinciannya, seperti konektor, model, dan perintah yang ada di dalamnya.
 
 ![image](https://github.com/user-attachments/assets/9313bfae-50c5-496f-8073-5e2026099603)
 
 
-##### Langkah 3. Eksplorasi Sumber Data
-Jika terdapat banyak konektor di dalam subgraph, kamu bisa fokus pada satu konektor dan melihat model serta perintah terkaitnya.
+#### Langkah 3. Eksplorasi Sumber Data
+Jika terdapat banyak konektor di dalam subgraph, kita bisa fokus pada satu konektor dan melihat model serta perintah terkaitnya.
 
 ![image](https://github.com/user-attachments/assets/0ff7f346-062a-42ca-b71b-710ee7c537aa)
 
 
-##### Langkah 4. Eksplorasi Model atau Perintah
-Console memungkinkan pencarian entitas berdasarkan nama. Misalnya, kamu bisa mengetik "Carts" dan melihat detail model yang terkait. 
+#### Langkah 4. Eksplorasi Model atau Perintah
+Console memungkinkan pencarian entitas berdasarkan nama. Misalnya, kita bisa mengetik "Carts" dan melihat detail model yang terkait. 
 
 ![image](https://github.com/user-attachments/assets/7fae9899-2888-412f-8055-66b514eb09aa)
 
 
-Dari sini, kamu dapat melihat visualisasi entitas, hubungan, izin, dan bahkan menjalankan contoh query.
+Dari sini, kita dapat melihat visualisasi entitas, hubungan, izin, dan bahkan menjalankan contoh query.
 
-##### Signature
+#### Signature
 Setiap model atau perintah memiliki *signature* yang menunjukkan input dan outputnya.
 
 - **Model**: Biasanya tidak memiliki input dan mengembalikan tipe data model.
@@ -263,7 +261,7 @@ Setiap model atau perintah memiliki *signature* yang menunjukkan input dan outpu
 
 
 
-##### Root Fields di GraphQL
+#### Root Fields di GraphQL
 Root fields menentukan bagaimana data dapat diakses melalui query GraphQL. Contoh untuk model Cart:
 
 - **Select Many**: `app_carts() => Carts` - Untuk query beberapa entri cart.
@@ -291,40 +289,104 @@ query {
   
 Query pertama menggunakan kolom "Select Many" untuk mengambil beberapa keranjang, sedangkan kueri kedua menggunakan kolom "Select Unique" untuk mengambil keranjang tertentu berdasarkan ID.
   
-##### Output Fields
+#### Output Fields
 Output fields menunjukkan struktur dan tipe data yang bisa diambil dari model atau perintah.
 
 ![image](https://github.com/user-attachments/assets/ae697c1f-333e-4565-9ce5-e10bed3fdd52)
 
 
-##### Arguments
+#### Arguments
 Argumen memungkinkan penyaringan, pengurutan, atau modifikasi data dalam query atau mutasi. Di Hasura, argumen membuat API lebih fleksibel.
 
 ![image](https://github.com/user-attachments/assets/9e4ebde9-c607-4eff-9933-59c6b58dafbe)
 
 
-##### Relationships
+#### Relationships
 Hubungan menunjukkan bagaimana model terhubung dengan model lainnya. Misalnya, model Cart memiliki hubungan dengan pengguna melalui field userId yang terhubung dengan id di tabel Users.
 
 ![image](https://github.com/user-attachments/assets/13daa706-3c15-4fbc-b8d7-f3ec5870bc25)
 
 
-##### Permissions
+#### Permissions
 Izin mendefinisikan kontrol akses untuk model atau perintah. Misalnya, pengguna dengan peran admin dapat melihat informasi cart tetapi tidak bisa membuat, mengubah, atau menghapus cart.
 
 ![image](https://github.com/user-attachments/assets/ed5e16cd-51ee-4f5d-85dc-3458c95f8f6c)
 
 
-### Berinteraksi dengan Supergraph Anda  
-Sekarang, kamu bisa mulai berinteraksi dan menguji API menggunakan GraphiQL explorer.Berinteraksi dengan API seharusnya menjadi tugas yang sederhana, namun sering kali menjadi rumit dan membingungkan. Developer sering harus berpindah antar berbagai alat untuk menguji query, menambahkan header, dan melacak permintaan. Pendekatan ini tidak hanya memperlambat alur kerja, tetapi juga tidak efisien dalam proses debugging. Tanpa tracing terintegrasi, mengidentifikasi dan menyelesaikan masalah menjadi sangat memakan waktu.
+### Berinteraksi dengan Supergraph Kita  
+Sekarang, kita bisa mulai berinteraksi dan menguji API menggunakan GraphiQL explorer.Berinteraksi dengan API seharusnya menjadi tugas yang sederhana, namun sering kali menjadi rumit dan membingungkan. Developer sering harus berpindah antar berbagai alat untuk menguji query, menambahkan header, dan melacak permintaan. Pendekatan ini tidak hanya memperlambat alur kerja, tetapi juga tidak efisien dalam proses debugging. Tanpa tracing terintegrasi, mengidentifikasi dan menyelesaikan masalah menjadi sangat memakan waktu.
 
 Kurangnya umpan balik secara langsung juga berarti bahwa setiap perubahan pada API atau query memerlukan verifikasi manual, yang semakin memperlambat pengembangan. Menyadari masalah ini, Hasura DDN menyediakan solusi komprehensif melalui GraphiQL explorer, dirancang untuk menyederhanakan dan mempercepat proses interaksi API.
 
-Dengan Hasura DDN, Anda dapat menggunakan GraphiQL explorer untuk membuat dan menguji query langsung dalam console, dengan fitur berikut:
+Dengan Hasura DDN, kita dapat menggunakan GraphiQL explorer untuk membuat dan menguji query langsung dalam console, dengan fitur berikut:
 
 - **Definisi Skema**: Melihat seluruh skema GraphQL dan dokumentasi untuk semua query dan mutasi yang tersedia.
 - **Pengujian Query Terintegrasi**: Menguji query dengan header dan melihat hasil secara real-time, semuanya dalam satu tempat.
 - **Tracing Terbina**: Melacak query dengan cepat untuk mengidentifikasi hambatan kinerja dan mengoptimalkan secara efisien.
-- **Alur Kerja Terpadu**: Menghemat waktu dan mengurangi perpindahan antar alat dengan semua yang Anda butuhkan dalam satu antarmuka.
+- **Alur Kerja Terpadu**: Menghemat waktu dan mengurangi perpindahan antar alat dengan semua yang kita butuhkan dalam satu antarmuka.
+
+
+#### Langkah 1: Uji API Supergraph Anda
+Mulailah dengan membuat query untuk menguji API supergraph Anda. Berikut contoh query yang bisa Anda gunakan dengan aplikasi e-commerce sampel kami:
+
+```graphql
+query UsersAndOrders {
+  users_users {
+    id
+    name
+    orders {
+      id
+      createdAt
+      status
+    }
+  }
+}
+```
+
+![image](https://github.com/user-attachments/assets/9baa0f45-3ec1-4d85-90b8-da4d8ca6337c)
+
+
+Gunakan bagian request di sisi kiri komponen GraphiQL untuk menulis query Anda. Jika Anda tidak yakin apa yang harus diketik, tekan `CTRL + SPACE` untuk melihat opsi yang tersedia. Tambahkan variabel untuk query dinamis menggunakan bagian Variabel di bawah query. Respon akan muncul di sisi kanan.
+
+#### Langkah 2: Lihat Tracing Query
+Setelah menguji query Anda, klik tombol View Trace di pojok kanan bawah GraphiQL explorer untuk melihat tracing. Anda akan melihat detail seperti langkah-langkah eksekusi query, topologi, dan rencana eksekusi.
+
+![image](https://github.com/user-attachments/assets/6d7a9bf5-01e3-467a-9855-5fa6f00ea38e)
+
+
+#### Langkah 3: Jelajahi Skema API dan Dokumentasi
+Navigasikan ke tab Schema untuk melihat definisi skema API Anda. Setiap query diawali dengan nama subgraph dan bisa diklik untuk menghasilkan query uji. Klik ikon buku untuk menjelajahi dokumentasi API secara rinci.
+
+#### Fitur Lanjutan
+- **Switch Builds**: Di bagian atas halaman GraphiQL, Anda dapat beralih antara build API yang berbeda menggunakan build manager. Sistem build Hasura DDN yang immutable memungkinkan Anda membuat dan menguji API secara iteratif.
+  ![image](https://github.com/user-attachments/assets/f563fb56-5bbb-4052-86ab-19b84cc85992)
+
+- **Tambah Header**: Gunakan tabel header di bawah build manager untuk menambahkan header kustom. Secara default, `content-type` dan `hasura_cloud_pat` sudah ada. Tambahkan variabel sesi (misalnya, `x-hasura-role`) atau token otentikasi (misalnya, `Bearer JWT`) untuk menguji izin dan hubungan.
+  ![image](https://github.com/user-attachments/assets/47f58725-b705-40bb-bc7c-e635000a30c7)
 
   
+### Pantau Supergraph Anda
+Setelah Anda menguji API, melihat tracing, dan menjelajahi skema, pelajari cara memantau kinerja API Anda.  
+  
+Memantau kinerja API dan mendapatkan wawasan yang dapat ditindaklanjuti sangat penting untuk menjaga sistem yang efisien dan responsif. Namun, proses ini seringkali terhambat oleh beberapa tantangan utama, seperti penggunaan alat yang terpisah sehingga sulit mengumpulkan dan menganalisis metrik secara terpadu. Keterlambatan dalam mendapatkan wawasan akibat agregasi data dan analisis dapat memperlambat pengambilan keputusan dan berdampak pada kinerja API.
+
+Selain itu, pengaturan dan pemeliharaan alat pemantauan memerlukan upaya dan keahlian yang cukup besar, menambah kompleksitas dan beban sumber daya.
+
+Hasura DDN menyederhanakan pemantauan kinerja dengan menyediakan:
+
+- **Wawasan Instan**: Akses metrik dan jejak utama secara real-time di halaman *insights*.
+- **Pemantauan Terintegrasi**: Pantau kinerja langsung dari *console* tanpa memerlukan alat tambahan.
+- **Optimasi Proaktif**: Identifikasi dan atasi masalah kinerja dengan cepat, memastikan API *supergraph* berjalan lancar dan efisien.
+
+#### Langkah 1. Lihat metrik kinerja
+Anda dapat mengakses metrik kinerja utama untuk proyek dan setiap build:
+
+![image](https://github.com/user-attachments/assets/4b6f74d3-5458-44e6-95d8-f83752f60b4c)
+
+
+#### Langkah 2. Lihat jejak (traces)
+Klik tab *Traces* di bagian atas halaman untuk melihat data jejak per permintaan, dengan rincian yang sama seperti menggunakan tombol *View Trace* di *GraphiQL explorer*.
+
+![image](https://github.com/user-attachments/assets/54dc5c3a-253b-4f25-85b4-4ca78e889b41)
+
+
