@@ -327,7 +327,7 @@ Dengan Hasura DDN, kita dapat menggunakan GraphiQL explorer untuk membuat dan me
 
 
 #### Langkah 1: Uji API Supergraph Kita
-Mulailah dengan membuat query untuk menguji API supergraph kita. Berikut contoh query yang bisa kita gunakan dengan aplikasi e-commerce sampel kami:
+Mulailah dengan membuat query untuk menguji API supergraph kita. Berikut contoh query yang bisa kita gunakan dengan aplikasi e-commerce sampel:
 
 ```graphql
 query UsersAndOrders {
@@ -522,7 +522,7 @@ Ini akan membuka `https://console.hasura.io/local/graphql` dan memungkinkan kita
 **Hasura Console menampilkan skema kosong**
 
 **Pengaturan privasi di beberapa browser**  
-Pengaturan privasi, alat privasi, atau ekstensi browser kita mungkin mencegah Konsol mengakses instansi Hasura lokal kita. Hal ini bisa terjadi karena fitur yang dirancang untuk melindungi privasi dan keamanan kita. Jika kita mengalami salah satu masalah ini, kami menyarankan untuk menonaktifkan pengaturan ini untuk domain `console.hasura.io`.
+Pengaturan privasi, alat privasi, atau ekstensi browser kita mungkin mencegah Konsol mengakses instansi Hasura lokal kita. Hal ini bisa terjadi karena fitur yang dirancang untuk melindungi privasi dan keamanan kita. Jika kita mengalami salah satu masalah ini, disarankan untuk menonaktifkan pengaturan ini untuk domain `console.hasura.io`.
 
 **Chrome dan Firefox** adalah browser yang direkomendasikan untuk pengalaman terbaik dengan Hasura Console termasuk untuk pengembangan lokal.
 
@@ -574,7 +574,7 @@ ddn subgraph init my_subgraph --dir ./my_subgraph --target-supergraph ./supergra
   
 Perintah ini akan menampilkan pesan sukses (dan petunjuk untuk menambahkan konektor ke subgraph).
   
-Kami meneruskan beberapa nilai ke perintah `subgraph init`:
+Hasura DDN meneruskan beberapa nilai ke perintah `subgraph init`:
   
 **Subgraph name**: Kita menamai subgraph dengan nama `my_subgraph`.
 
@@ -661,7 +661,7 @@ ddn model update <model-name>
 ```
   
 **Memiliki banyak model?**
-Jika kita memiliki sejumlah besar model dan ingin memperbaruinya secara massal, kami punya solusi untuk itu.
+Jika kita memiliki sejumlah besar model dan ingin memperbaruinya secara massal, Hasura DDN punya solusi untuk itu.
 
 Jalankan perintah berikut:
 ```bash
@@ -679,7 +679,7 @@ ddn model add <connector-link-name> <collection-name>
 ```
   
 **Memiliki banyak model baru untuk ditambahkan?**
-Jika kita memiliki sejumlah besar model, perintah, atau hubungan dan ingin menambahkannya secara massal, kami memiliki solusi yang sama seperti sebelumnya.
+Jika kita memiliki sejumlah besar model, perintah, atau hubungan dan ingin menambahkannya secara massal, Hasura DDN memiliki solusi yang sama seperti sebelumnya.
 
 Jalankan perintah berikut:
 ```bash
@@ -691,7 +691,7 @@ ddn relationship add <connector-link-name> '*'
 Kita akan melihat informasi output CLI tentang model mana yang sama dan mana yang telah berubah.
 
 ##### Apa yang dilakukan ini?
-Dengan memperbarui file `my_connector.hml`, kami telah menyediakan Hasura dengan tautan antara sumber data asli kami dan tipe yang pada akhirnya akan kami ekspos melalui API kami.
+Dengan memperbarui file `my_connector.hml`, Hasura DDN telah menyediakan Hasura dengan tautan antara sumber data asli Hasura DDN dan tipe yang pada akhirnya akan Hasura DDN ekspos melalui API Hasura DDN.
 
 Pastikan untuk membuat build baru sebelum menguji API kita:
 
@@ -737,7 +737,7 @@ ddn console --local
 ```
   
 Pengaturan privasi di beberapa browser
-Pengaturan browser kita atau alat privasi mungkin mencegah Konsol mengakses instance Hasura lokal kita. Jika kita mengalami masalah ini, kami sarankan untuk menonaktifkan pengaturan tersebut untuk domain console.hasura.io.
+Pengaturan browser kita atau alat privasi mungkin mencegah Konsol mengakses instance Hasura lokal kita. Jika kita mengalami masalah ini, disarankan untuk menonaktifkan pengaturan tersebut untuk domain console.hasura.io.
 
 Chrome dan Firefox adalah browser yang direkomendasikan untuk pengalaman terbaik dengan Konsol Hasura, termasuk untuk pengembangan lokal.
 
@@ -758,8 +758,8 @@ query MyFirstQuery {
   
 Semua tipe diberi namespace dengan subgraph tempat mereka berada.
 
-**Apa yang dilakukan ini?**  
-Saat kita mengeksekusi perintah di atas, CLI menggunakan metadata Hasura di direktori kita — yang dihasilkan berdasarkan sumber data kita — untuk membuat build lokal supergraph kita. Build lokal ini tidak dapat diubah dan dapat digunakan untuk menguji perubahan pada API kita.
+**Apa yang sedang kita lakukan?**  
+Saat kita mengeksekusi perintah di atas, CLI menggunakan metadata Hasura di direktori kita yang dihasilkan berdasarkan sumber data kita untuk membuat build lokal supergraph kita. Build lokal ini tidak dapat diubah dan dapat digunakan untuk menguji perubahan pada API kita.
 
 **Langkah Selanjutnya**
 Sekarang kita memiliki build dari supergraph kita, kita dapat melakukan lebih banyak hal dengannya. Berikut beberapa saran untuk melompat di sekitar bagian Getting Started sesuai minat kita:
@@ -769,3 +769,110 @@ Sekarang kita memiliki build dari supergraph kita, kita dapat melakukan lebih ba
 - **Buat relasi** antar model
 - **Ubah data** kita dengan Hasura DDN
   
+## Deploy Supergraph  
+Kita akan mendepoloy supergraph kita ke Hasura DDN, layanan yang terdistribusi secara global, sangat tersedia, dan sangat cepat!
+
+![image](https://github.com/user-attachments/assets/2df3adba-c8e7-40e7-ae0f-d46603513cad)
+
+
+### Langkah-langkah untuk Mendepoloy Supergraph ke Hasura DDN
+**Required:**
+- DDN CLI
+- Supergraph baru atau yang sudah ada
+- Subgraph baru atau yang sudah ada
+- Konektor data baru atau yang sudah ada
+- Proyek baru atau yang sudah ada
+
+#### Langkah 1: Bangun dan deploy supergraph kita
+Jalankan perintah berikut:
+
+```bash
+ddn supergraph build create
+```
+
+**Proyek sudah diset dalam konteks**. Ingat, karena kita telah menyetel konteks proyek, kita tidak perlu menyertakan nama proyek sebagai flag dalam perintah.
+
+#### Langkah 2: Jelajahi supergraph kita di Konsol Hasura
+CLI akan memberikan versi build dan **Console URL Build**. Klik pada URL tersebut!
+
+Kita dapat menjelajahi API untuk build ini di Konsol Hasura!
+
+#### Langkah 3: Terapkan supergraph kita sebagai endpoint proyek.
+Build yang diterapkan adalah build default yang disajikan oleh endpoint proyek Hasura DDN kita.
+
+Untuk menerapkan build, jalankan:
+  
+```bash
+ddn supergraph build apply <supergraph-build-version>
+```
+  
+**Apa yang dilakukan pada langkah ini?**  
+Ketika kita menjalankan perintah di atas, CLI menggunakan konfigurasi yang kita berikan untuk membuat build supergraph yang tidak dapat diubah di Hasura DDN. Build ini sekarang dapat diakses melalui endpoint GraphQL build dan di Konsol Hasura untuk dieksplorasi.
+
+Rekan tim dapat menjelajahi API, berinteraksi dengan itu, dan memberikan umpan balik sebelum kita melakukan iterasi dan membuat build baru untuk pengujian. Jika kita siap, kita dapat menerapkan build agar disajikan oleh endpoint proyek. Jika kita merasa telah menerapkannya terlalu cepat, kita dapat dengan mudah menggulung kembali dengan menerapkan build yang lebih lama.
+
+Saat ini, kita memiliki semua bahan dan pengetahuan untuk membuat supergraph yang kokoh yang menggabungkan data dari berbagai sumber dan mengagregasikannya menjadi API yang andal dan berkinerja tinggi. Sebelum pindah ke produksi, pertimbangkan sumber daya di bawah ini:
+
+**Migrasi**  
+Hasura merekomendasikan sejumlah solusi pihak ketiga untuk mengelola migrasi database. Umumnya, pengguna menerapkan migrasi melalui CI/CD dengan Flyway atau sumber daya serupa.
+
+**Apakah Hasura mengelola migrasi?**  
+Di v2, Hasura menyediakan alat migrasi bawaan. Namun, karena metadata v3 terpisah dari sumber data yang mendasarinya, kita bebas mengelola migrasi sesuai keinginan kita.
+
+**Optimasi Kinerja**
+Hasura menyediakan serangkaian alat observabilitas langsung di konsol DDN proyek. Kita dapat melihat jejak, rencana query, dan statistik penggunaan umum. Ini sangat berguna untuk mendiagnosis bottlenecks dan masalah umum dengan kinerja aplikasi kita.
+
+**CI/CD**
+Kita dapat membuat pipeline untuk deploy menggunakan alat apa pun yang kita inginkan. Direkomendasikan untuk menginisialisasi repositori git sejak awal proses pembuatan proyek dan memberikan operabilitas dengan variabel lingkungan, sehingga kita dapat mengikuti praktik terbaik alur kerja git untuk bergerak antara lingkungan pengembangan, staging, dan produksi. Selain itu, Hasura DDN menyediakan GitHub Action yang dapat dikonfigurasi untuk secara otomatis mengelola deploy kita.
+
+## Kolaborator  
+Hasura DDN memungkinkan beberapa pengguna dan tim untuk bekerja sama sebagai kolaborator pada proyek dengan memberikan peran dan izin khusus kepada setiap pengguna.
+
+**Hanya Tersedia di DDN Base dan lebih tinggi**  
+Untuk menambahkan kolaborator, proyek kita harus merupakan proyek DDN Base atau DDN Advanced.
+
+### Peran yang Tersedia  
+**Project Owner** = Memiliki semua kemampuan proyek termasuk penghapusan. Saat ini, kepemilikan proyek tidak dapat dialihkan.  
+#### Supergraph  
+**Admin Supergraph** = Sama dengan Project Owner, kecuali penghapusan proyek.     
+**Read Only** = Pengguna dengan peran ini hanya dapat menjelajahi dan memvisualisasikan API.
+#### Subgraph  
+**Admin Subgraph** = Memiliki semua kemampuan terkait subgraph: membuat build subgraph, menerapkan build subgraph ke endpoint, membuat supergraph dengan patch subgraph, mengundang admin subgraph lainnya.  
+**Developer** = Sama seperti Admin Subgraph, kecuali kemampuan mengundang orang lain dan menerapkan build subgraph ke endpoint.
+
+### Cara Mengundang Kolaborator
+#### Langkah 1: Navigasi ke bagian Kolaborator
+Buka konsol proyek kita di [https://console.hasura.io](https://console.hasura.io) dan pilih proyek dari daftar proyek yang tersedia. Setelah proyek terbuka, klik **Pengaturan** di pojok kiri bawah, kemudian pilih **Kolaborator** dari menu Pengaturan Proyek:
+
+![image](https://github.com/user-attachments/assets/7967ce60-318e-4c5e-95d0-686382bbe172)
+
+
+#### Langkah 2: Masukkan informasi
+Klik tombol **+ Undang Kolaborator** di pojok kanan atas bagian Kolaborator, masukkan alamat email kolaborator, tingkat akses supergraph atau subgraph, dan pilih peran mereka, serta untuk akses subgraph, peran mereka per subgraph.
+
+![image](https://github.com/user-attachments/assets/8e84bbe7-9ace-4c0b-9b88-02db8f4b689f)
+
+
+Pengundang akan menerima email dengan tautan yang memungkinkan mereka menerima undangan dan bergabung dengan proyek.
+
+### Cara Menerima Undangan Kolaborasi  
+#### Langkah 1: Klik tautan di email kita  
+Dari email kita, klik tombol **Lihat undangan**. Ini akan mengarahkan kita ke [https://console.hasura.io](https://console.hasura.io) di mana kita dapat menerima undangan dan kemudian menjelajahi serta berkontribusi pada proyek sesuai peran kita.
+
+#### Langkah 2: Jelajahi proyek  
+Dari proyek baru kita, kita dapat menjelajahi konsol dengan:
+- Menjalankan query dari GraphiQL explorer.
+- Memvisualisasikan supergraph dengan tab Explorer.
+- Melihat kolaborator lain yang hadir dalam proyek.
+
+#### Langkah 3: Pelajari cara mengembangkan secara lokal  
+Pemilik proyek kemungkinan memiliki repositori Git dengan konten proyek yang tersedia di layanan seperti GitHub. Untuk menjalankan supergraph secara lokal dan berkontribusi pada supergraph yang dideploy.
+
+### Izinkan Pengguna Meminta Akses  
+Kita dapat menyesuaikan pengaturan proyek kita untuk memungkinkan pengguna meminta akses saat menavigasi ke URL proyek kita. Untuk melakukan ini, klik tombol **Bagikan** di navigasi atas proyek kita dan pilih **Minta Akses**.
+
+![image](https://github.com/user-attachments/assets/33b9558f-f520-45e6-9341-0982f11bf954)
+
+
+Setiap kali seorang pengguna meminta akses, kita dapat menyetujui atau menolak permintaan tersebut dari modal ini.
+
