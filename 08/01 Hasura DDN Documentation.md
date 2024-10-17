@@ -90,3 +90,91 @@ Dalam beberapa langkah, kita bisa menghubungkan sumber data, mendefinisikan API,
 
 Baik menggunakan proyek sampel atau data kita sendiri, kita bisa langsung menjalankannya. Proses setup Hasura yang intuitif memungkinkan kita fokus pada pengembangan, bukan konfigurasi, sehingga kita dapat dengan cepat merilis pembaruan produk.
 
+## Quickstart Supergraph API - Hasura DDN
+
+### Prasyarat
+
+1. **Install DDN CLI**  
+   Unduh CLI terbaru untuk Windows:  
+   ```bash
+   curl.exe -L https://graphql-engine-cdn.hasura.io/ddn/cli/v4/latest/cli-ddn-windows-amd64.exe -o ddn.exe
+   ```
+     
+   Tambahkan executable ke PATH sistem agar bisa dijalankan dari terminal.
+
+2. **Install Docker**  
+   Pastikan Docker Compose versi 2.27.1 atau lebih baru sudah terpasang.
+     
+### Langkah-Langkah  
+
+1. **Login ke CLI**
+   Jalankan perintah berikut untuk autentikasi:
+
+   ```bash
+   ddn auth login
+   ```
+  
+2. **Inisialisasi Supergraph**
+   Buat direktori proyek dan inisialisasi supergraph:
+
+   ```bash
+   mkdir hasura_project && cd hasura_project
+   ddn supergraph init .
+   ```
+  
+3. **Hubungkan ke Sumber Data**
+   Inisialisasi konektor data dengan memilih jenis konektor dan memasukkan variabel yang dibutuhkan:
+
+   ```bash
+   ddn connector init my_connector -i
+   ```
+  
+4. **Introspeksi Sumber Data**
+   Jalankan introspeksi sumber data:
+   
+   ```bash
+   ddn connector introspect my_connector
+   ```
+   
+5. **Tambahkan Sumber Daya**
+   Buat metadata untuk model, command, dan relasi:
+   
+   ```bash
+   ddn model add my_connector '*'
+   ddn relationship add my_connector '*'
+   ```
+   
+6. **Build Supergraph untuk Pengembangan Lokal**
+   Buat build lokal supergraph:
+   
+   ```bash
+   ddn supergraph build local
+   ```
+   
+7. **Jalankan Supergraph**
+   Mulai supergraph menggunakan Docker:
+   ```bash
+   ddn run docker-start
+   ```
+   
+8. **Deploy ke Hasura DDN**
+   Inisialisasi proyek di Hasura DDN:
+   
+   ```bash
+   ddn project init
+   ```
+   
+9. **Build dan Deploy Supergraph**
+   Bangun dan deploy supergraph ke Hasura DDN:
+   
+   ```bash
+   ddn supergraph build create
+   ```
+
+### Langkah Selanjutnya
+- **Integrasi Logika Bisnis**: Tambahkan logika khusus ke API menggunakan lambda connectors (TypeScript/Python).
+- **Tambah Otorisasi**: Buat aturan akses untuk entitas di supergraph.
+- **Iterasi API**: Lakukan pembaruan pada metadata Hasura saat ada perubahan pada schema sumber data.
+- **Hubungkan Sumber Data**: Buat relasi antar sumber data untuk query efisien.
+- **Tambah Subgraph Baru**: Mudah mengelola subgraph oleh tim berbeda dengan metadata terpisah.
+  
