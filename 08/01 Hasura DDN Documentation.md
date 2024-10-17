@@ -365,7 +365,7 @@ Navigasikan ke tab Schema untuk melihat definisi skema API Anda. Setiap query di
   ![image](https://github.com/user-attachments/assets/47f58725-b705-40bb-bc7c-e635000a30c7)
 
   
-### Pantau Supergraph Anda
+### Monitor Supergraph Anda
 Setelah Anda menguji API, melihat tracing, dan menjelajahi skema, pelajari cara memantau kinerja API Anda.  
   
 Memantau kinerja API dan mendapatkan wawasan yang dapat ditindaklanjuti sangat penting untuk menjaga sistem yang efisien dan responsif. Namun, proses ini seringkali terhambat oleh beberapa tantangan utama, seperti penggunaan alat yang terpisah sehingga sulit mengumpulkan dan menganalisis metrik secara terpadu. Keterlambatan dalam mendapatkan wawasan akibat agregasi data dan analisis dapat memperlambat pengambilan keputusan dan berdampak pada kinerja API.
@@ -389,4 +389,383 @@ Klik tab *Traces* di bagian atas halaman untuk melihat data jejak per permintaan
 
 ![image](https://github.com/user-attachments/assets/54dc5c3a-253b-4f25-85b4-4ca78e889b41)
 
+## Build a Supergraph  
+Dengan gambaran lengkap tentang semua yang ditawarkan oleh *console*, saatnya untuk *Build an API*
+  
+### Prasyarat
+Pastikan Anda telah menginstal perangkat lunak berikut dengan versi minimum yang sesuai di mesin Anda:
 
+#### Langkah 1. Instal dan Otorisasi Hasura CLI
+Unduh CLI sesuai dengan sistem operasi Anda:
+
+- **macOS dan Linux**: Ikuti panduan instalasi untuk sistem Anda.
+- **Windows**: Unduh binary `cli-ddn-windows-amd64.exe` dan jalankan.
+
+```bash
+curl.exe -L https://graphql-engine-cdn.hasura.io/ddn/cli/v4/latest/cli-ddn-windows-amd64.exe -o ddn.exe
+```
+Jika muncul peringatan "Unrecognized application" di Windows, klik "Run anyway".
+
+Tambahkan executable ini ke PATH sistem Anda:
+
+1. Cari path penuh ke executable, contohnya: `C:\Program Files\cli-ddn-windows-amd64.exe`.
+
+2. Ubah nama file ke ddn agar lebih mudah digunakan.
+
+3. Buka System Properties:
+
+- Tekan `Win + X`, pilih System.
+- Klik `Advanced system settings` di sisi kiri.
+
+4. Edit variabel PATH:
+
+- Di jendela `Environment Variables`, temukan bagian `System variables` dan pilih `Path`, lalu klik `Edit`.
+- Tambahkan path ke executable yang sudah diubah tadi.
+  
+5. Verifikasi dengan membuka Command Prompt atau PowerShell, lalu jalankan:
+
+```bash
+ddn
+```
+
+##### Login dengan CLI  
+Setelah instalasi, jalankan perintah berikut untuk mengautentikasi sesi CLI dengan Hasura DDN:
+
+```bash
+ddn auth login
+```
+  
+#### Langkah 2. Instal Ekstensi Hasura di VS Code  
+Jika belum memiliki Visual Studio Code, unduh dan instal. Kemudian instal ekstensi Hasura untuk mendapatkan fitur seperti autocomplete, saran kontekstual, dan validasi langsung.
+
+#### Langkah 3. Instal Docker Compose v2.27.1 atau lebih baru
+Instal Docker untuk pengembangan lokal. Versi Docker Compose yang dibutuhkan adalah v2.27.1 atau lebih tinggi. Untuk memeriksa versi:
+
+```bash
+docker compose version
+```
+Unduh versi terbaru Docker [di sini](https://docs.docker.com/engine/install/).
+
+##### Browser yang Kompatibel dengan Konsol
+Beberapa pengaturan atau ekstensi browser dapat menghalangi akses ke instance lokal Hasura. Jika menemui masalah, disarankan untuk menonaktifkan pengaturan tersebut di domain `console.hasura.io`. **Chrome** dan **Firefox** direkomendasikan untuk pengalaman terbaik.
+
+### Create a Supergraph  
+Kita akan membuat sebuah supergraph.
+
+Supergraph Anda adalah gabungan dari semua subgraph, berbagai sumber data, dan logika bisnisnya. Saat kita "membangun" supergraph, kita membuat API GraphQL.
+
+![image](https://github.com/user-attachments/assets/29cab821-32a4-437b-9f8b-9c73a58312fb)
+
+
+#### Langkah-langkah
+**Diperlukan:**
+- DDN CLI, ekstensi VS Code, dan Docker terinstal
+
+##### Langkah 1. Inisialisasi supergraph
+Untuk menginisialisasi supergraph, dari direktori kosong, jalankan perintah berikut:
+```
+ddn supergraph init .
+```
+
+**Menentukan direktori**  
+Alih-alih menggunakan . (penanda direktori "ini"), Anda dapat menggunakan flag `--dir` dan nama direktori pada perintah `supergraph init` untuk membuat supergraph di direktori tertentu. Jika direktori tersebut tidak ada, maka akan dibuat.
+
+##### Langkah 2. Jalankan supergraph
+Dengan Docker daemon berjalan di mesin Anda, Anda bisa segera memulai Hasura Engine, supergraph, dan layanan pendukungnya.
+
+Jalankan:
+```
+ddn run docker-start
+```
+
+**CLI dan direktori build**  
+
+CLI secara otomatis membuat direktori build saat menjalankan perintah `ddn supergraph init`. Direktori ini berisi semua file JSON yang diperlukan untuk mengonfigurasi dan menjalankan supergraph Anda. File JSON di dalamnya sudah direferensikan dalam file `docker compose.yaml`, memungkinkan Anda untuk langsung memulai layanan.
+
+Perintah `docker-start` didefinisikan di `hasura/context.yaml`. Perintah ini menetapkan variabel lingkungan `HASURA_DDN_PAT` menggunakan nilai yang diambil dari perintah `ddn auth print-pat`, kemudian menggunakan Docker Compose untuk memulai layanan Hasura yang didefinisikan di file `compose.yaml`. PAT adalah personal access token Anda yang dihasilkan oleh Hasura DDN dan digunakan oleh CLI.
+
+**Menjalankan Docker daemon sebagai pengguna non-root**  
+
+Jika Anda menjalankan Docker daemon sebagai pengguna non-root (mode rootless), versi 26.0 kini memungkinkan Anda menonaktifkan isolasi host-loopback default yang mencegah komunikasi kembali ke mesin host.
+
+Untuk menonaktifkan fitur ini, setel variabel lingkungan `DOCKERD_ROOTLESS_ROOTLESSKIT_DISABLE_HOST_LOOPBACK` ke `false` sebelum memulai daemon.
+
+Ini akan memungkinkan komunikasi container-ke-host melalui alamat `10.0.2.2`.
+
+Anda juga harus mengubah baris ini di file `compose.yaml` baik untuk layanan utama maupun konektor untuk mencerminkan perubahan ini:
+
+```yaml
+extra_hosts:
+  - local.hasura.dev=host-gateway
+```
+menjadi:  
+
+```yaml
+Salin kode
+extra_hosts:
+  - local.hasura.dev=10.0.2.2
+```
+
+##### Langkah 3. Lihat API supergraph Anda
+Di jendela terminal baru, Anda bisa meluncurkan konsol proyek lokal Anda menggunakan CLI.
+
+Dari jendela terminal baru, jalankan:
+```
+ddn console --local
+```
+
+Ini akan membuka `https://console.hasura.io/local/graphql` dan memungkinkan Anda melihat API (yang masih kosong) berjalan di mesin Anda menggunakan Hasura Console!
+
+![image](https://github.com/user-attachments/assets/3307236c-344e-426b-a6c1-f89e0bef5bc5)
+
+
+**Hasura Console menampilkan skema kosong**
+
+**Pengaturan privasi di beberapa browser**  
+Pengaturan privasi, alat privasi, atau ekstensi browser Anda mungkin mencegah Konsol mengakses instansi Hasura lokal Anda. Hal ini bisa terjadi karena fitur yang dirancang untuk melindungi privasi dan keamanan Anda. Jika Anda mengalami salah satu masalah ini, kami menyarankan untuk menonaktifkan pengaturan ini untuk domain `console.hasura.io`.
+
+**Chrome dan Firefox** adalah browser yang direkomendasikan untuk pengalaman terbaik dengan Hasura Console termasuk untuk pengembangan lokal.
+
+##### Langkah 4. Buat build baru untuk supergraph Anda
+Hasura menggunakan sistem build yang immutable yang menyediakan snapshot stabil API Anda di setiap titik dalam proses pengembangan.
+
+Mari buat build baru:
+```
+ddn supergraph build local
+```
+
+Perintah di atas akan meregenerasi semua JSON untuk supergraph kita. Karena kita menggunakan subcommand `local`, hasilnya akan disimpan di direktori lokal `./engine` secara default, yang direferensikan dalam `docker-compose.yaml`. Kita tidak akan melihat perubahan pada API yang dideploy saat ini, tetapi begitu kita mulai menambahkan subgraph dan sumber data, kita perlu menjalankan perintah ini untuk memperbarui API kita.
+
+Sebagai fitur kenyamanan, saat menginisialisasi supergraph, kita juga mengatur konteks dalam CLI. Ini menghilangkan kebutuhan untuk menetapkan nilai default yang sering digunakan (seperti flag `--supergraph` atau `--subgraph`) saat menjalankan perintah CLI.
+
+**Apa yang dilakukan oleh langkah ini?**  
+CLI membuat semua file yang dibutuhkan untuk pengembangan lokal dan cloud di direktori proyek lokal Anda, termasuk file docker compose untuk pengembangan lokal dan file bantuan untuk VS Code. Kita kemudian memulai Hasura Engine dan semua layanan yang dibutuhkan untuk menjalankan supergraph secara lokal dan melihat Hasura Console untuk melihat API kosong kita. Akhirnya, kita menetapkan konteks untuk supergraph dan membuat build baru — meskipun kosong — dari supergraph kita.
+
+**Memulai supergraph baru atau bergabung dengan yang sudah ada**  
+`ddn supergraph init` akan selalu menjadi perintah pertama yang Anda jalankan saat memulai proyek baru. Namun, Anda mungkin tiba di sini setelah diundang untuk bergabung dengan proyek yang sudah ada. Dalam kasus tersebut, supergraph Anda sudah ada; Anda cukup meng-clone repositori yang berisi supergraph dan melanjutkan ke bagian berikutnya.
+
+Bagaimanapun cara Anda memulai supergraph Anda, Anda harus membuat build dan kemudian menjalankannya menggunakan Docker. Ini adalah alur kerja tipikal saat memulai proyek baru atau melanjutkan proyek yang sudah ada.
+
+### Membuat Subgraph  
+Kita akan menambahkan subgraph ke supergraph.
+
+Subgraph adalah cara untuk mengorganisasi data dan memungkinkan Anda menghubungkan beberapa sumber data ke supergraph Anda. Sebuah supergraph harus memiliki setidaknya satu subgraph, jika Anda ingin menjalankannya.
+
+#### Default
+
+Ketika Anda menginisialisasi supergraph baru, CLI akan membuat subgraph default yang disebut **app**. Namun, Anda bisa mengikuti panduan ini untuk menambahkan subgraph berikutnya, memperluas API Anda.
+
+![image](https://github.com/user-attachments/assets/fb7c123d-70e0-49ac-878a-8a9f6a72ef52)
+
+
+#### Langkah-langkah Membuat Subgraph
+
+##### Syarat:
+- DDN CLI, ekstensi VS Code, dan Docker terinstal
+- Supergraph baru atau yang sudah ada
+
+##### Langkah 1. Inisialisasi Subgraph
+
+Jalankan perintah berikut, dengan menyesuaikan nama yang diinginkan dan lokasi penyimpanan metadata untuk subgraph Anda:
+
+```bash
+ddn subgraph init my_subgraph --dir ./my_subgraph --target-supergraph ./supergraph.yaml
+```
+  
+Perintah ini akan menampilkan pesan sukses (dan petunjuk untuk menambahkan konektor ke subgraph).
+  
+Kami meneruskan beberapa nilai ke perintah `subgraph init`:
+  
+**Subgraph name**: Kita menamai subgraph dengan nama `my_subgraph`.
+
+**Directory**: `--dir`, kita menentukan direktori di mana subgraph akan dibuat. CLI akan membuat direktori ini.
+
+**Target supergraph**: `--target-supergraph`, kita menentukan supergraph lokal dan cloud yang dibuat saat menginisialisasi supergraph.
+
+**Apa yang dilakukan `subgraph init`?**
+Perintah ini membuat direktori subgraph baru dan file subgraph.yaml. CLI juga mengedit file konfigurasi supergraph untuk menambahkan subgraph ini.
+
+Subgraph ini adalah tempat untuk mengatur objek metadata yang mendefinisikan API kita. Tanpa konektor data, subgraph ini hanyalah placeholder yang belum banyak berfungsi.
+
+##### Langkah 2. Set Konteks Subgraph
+Selanjutnya, kita akan mengatur konteks subgraph dengan perintah berikut:
+
+```bash
+ddn context set subgraph ./my_subgraph/subgraph.yaml
+```
+
+**Apa yang dilakukan `context set subgraph`?**
+Perintah ini memperbarui pasangan kunci-nilai dalam file konteks proyek di folder `.hasura`, sehingga subgraph yang digunakan adalah yang kita tentukan.
+
+##### Langkah 3. Kustomisasi Prefiks
+Untuk menghindari bentrokan antara root fields dan nama tipe GraphQL, Anda dapat menyesuaikan prefiks untuk setiap subgraph. Misalnya, jika dua subgraph memiliki tipe `Users`, Anda bisa menerapkan prefiks berbeda untuk membedakannya.
+
+Tambahkan baris berikut di `subgraph.yaml`:
+
+```yaml
+kind: Subgraph
+version: v2
+definition:
+  name: my_subgraph
+  generator:
+    rootPath: .
+    graphqlRootFieldPrefix: my_subgraph_
+    graphqlTypeNamePrefix: My_subgraph_
+```
+  
+Dengan ini, setiap subgraph tetap unik dan tidak terjadi konflik nama.
+
+### Menghubungkan ke Data
+Anda dapat menghubungkan berbagai jenis data ke Hasura DDN.
+
+Koneksi dilakukan melalui **data connector**, sebuah perangkat lunak yang independen dari Hasura Engine yang memfasilitasi koneksi.
+
+Anda dapat menggunakan data connector "siap pakai" yang dibuat oleh Hasura, yang dibuat oleh komunitas, atau Anda dapat membuat sendiri.
+
+Data connector dapat digunakan langsung melalui **Hasura Connector Hub** menggunakan CLI. Connector Hub adalah daftar connector yang dikelola untuk menghubungkan sumber data Anda.
+
+Data connector mengenkapsulasi sumber data melalui layanan web dengan mengimplementasikan protokol dalam spesifikasi NDC.
+
+Anda dapat menghubungkan sumber data cloud atau lokal melalui data connector ke Hasura DDN.
+
+Anda dapat menggunakan CLI untuk menambahkan data connector untuk sumber data Anda dan menghasilkan metadata Hasura.
+
+#### Memperbarui Metadata Sumber Data  
+Dalam siklus pengembangan sehari-hari Anda, ada kemungkinan besar skema sumber data Anda akan berubah. Ketika ini terjadi, Anda perlu memperbarui konfigurasi data connector dan metadata supergraph agar sesuai dengan perubahan skema ini.
+
+![image](https://github.com/user-attachments/assets/f23180e9-b6c3-4380-bd26-5276d0ca78cf)
+
+
+##### Langkah 1. Introspeksi Sumber Data
+**Required:**
+- DDN CLI, ekstensi VS Code, dan Docker terpasang
+- Supergraph baru atau yang sudah ada
+- Subgraph baru atau yang sudah ada
+- Connector yang sudah diinisialisasi.
+
+Kita dapat menjalankan perintah `connector introspect` untuk membiarkan CLI introspeksi skema sumber data, memperbarui konfigurasi connector, dan juga memperbarui objek metadata `DataConnectorLink` yang sesuai agar supergraph dapat berinteraksi dengan connector.
+
+Jalankan perintah berikut, perbarui nama yang dirujuk sesuai dengan connector Anda:
+
+```bash
+ddn connector introspect my_connector
+```
+
+Setelah perintah ini dijalankan, Anda dapat membuka file `my_subgraph/metadata/my_connector.hml` dan melihat skema DataConnectorLink yang sepenuhnya diperbarui untuk mencocokkan perubahan skema sumber data Anda.
+
+##### Langkah 2. Perbarui atau Tambah Model
+Jika skema model yang ada berubah di sumber data Anda, perbarui untuk memastikan metadata Hasura Anda sesuai dengan skema sumber data.
+
+```bash
+ddn model update <model-name>
+```
+  
+**Memiliki banyak model?**
+Jika Anda memiliki sejumlah besar model dan ingin memperbaruinya secara massal, kami punya solusi untuk itu.
+
+Jalankan perintah berikut:
+```bash
+ddn model update "*"
+```
+  
+Anda akan melihat informasi output CLI tentang model mana yang sama dan mana yang telah berubah.
+
+Sebagai alternatif, jika Anda memiliki model yang perlu ditambahkan (misalnya, tabel baru di sumber data Anda), Anda perlu membuat file `hml` untuk sumber daya ini.
+
+Jalankan perintah berikut:
+
+```bash
+ddn model add <connector-link-name> <collection-name>
+```
+  
+**Memiliki banyak model baru untuk ditambahkan?**
+Jika Anda memiliki sejumlah besar model, perintah, atau hubungan dan ingin menambahkannya secara massal, kami memiliki solusi yang sama seperti sebelumnya.
+
+Jalankan perintah berikut:
+```bash
+ddn model add <connector-link-name> ''
+ddn command add <connector-link-name> ''
+ddn relationship add <connector-link-name> '*'
+```
+  
+Anda akan melihat informasi output CLI tentang model mana yang sama dan mana yang telah berubah.
+
+##### Apa yang dilakukan ini?
+Dengan memperbarui file `my_connector.hml`, kami telah menyediakan Hasura dengan tautan antara sumber data asli kami dan tipe yang pada akhirnya akan kami ekspos melalui API kami.
+
+Pastikan untuk membuat build baru sebelum menguji API Anda:
+
+```bash
+ddn supergraph build local
+```
+  
+### Build Supergraph & Lakukan Query  
+Setelah menghubungkan sumber data dan mengekspos model, Anda dapat membuat build lokal baru untuk supergraph Anda. Build adalah keadaan metadata yang dikompilasi dan tidak dapat diubah yang digunakan oleh Hasura Engine untuk menjalankan API Anda.
+
+![image](https://github.com/user-attachments/assets/9b5e964f-0173-423e-a411-63594ca60fff)
+
+
+**Required:**
+- DDN CLI, ekstensi VS Code, dan Docker terinstal
+- Proyek baru atau yang sudah ada
+- Setidaknya satu subgraph
+- Setidaknya satu konektor data yang berjalan
+- Model dan/atau Perintah ditambahkan ke subgraph Anda
+
+#### Langkah 1: Buat build supergraph
+Jalankan perintah berikut, sesuaikan jalur yang disebutkan dengan struktur direktori Anda:
+  
+```bash
+ddn supergraph build local
+```
+  
+Ini akan membuat build supergraph Anda yang terletak di direktori /engine/build.
+
+**Jalankan mesin Anda!**  
+Ingin menguji supergraph Anda? Pastikan layanan Anda masih berjalan dengan perintah berikut:
+  
+```bash
+ddn run docker-start
+```
+  
+Jika Anda belum menyertakan konektor Anda dalam `compose.yaml`, jangan lupa untuk memulainya juga.
+
+Anda dapat memeriksa API lokal Anda dengan membuka konsol Hasura menggunakan CLI:
+  
+```bash
+ddn console --local
+```
+  
+Pengaturan privasi di beberapa browser
+Pengaturan browser Anda atau alat privasi mungkin mencegah Konsol mengakses instance Hasura lokal Anda. Jika Anda mengalami masalah ini, kami sarankan untuk menonaktifkan pengaturan tersebut untuk domain console.hasura.io.
+
+Chrome dan Firefox adalah browser yang direkomendasikan untuk pengalaman terbaik dengan Konsol Hasura, termasuk untuk pengembangan lokal.
+
+#### Langkah 2: Tulis query pertama Anda
+Gunakan explorer GraphiQL untuk menulis query atau menyusunnya menggunakan menu di sisi kiri konsol. Ketika Anda siap, tekan tombol run untuk mengeksekusi query Anda.
+
+Contoh, jika kita memiliki model Carts, kita dapat menjalankan query berikut:
+  
+```graphql
+query MyFirstQuery {
+  carts {
+    id
+    isComplete
+    userId
+  }
+}
+```
+  
+Semua tipe diberi namespace dengan subgraph tempat mereka berada.
+
+**Apa yang dilakukan ini?**  
+Saat Anda mengeksekusi perintah di atas, CLI menggunakan metadata Hasura di direktori Anda — yang dihasilkan berdasarkan sumber data Anda — untuk membuat build lokal supergraph Anda. Build lokal ini tidak dapat diubah dan dapat digunakan untuk menguji perubahan pada API Anda.
+
+**Langkah Selanjutnya**
+Sekarang Anda memiliki build dari supergraph Anda, Anda dapat melakukan lebih banyak hal dengannya. Berikut beberapa saran untuk melompat di sekitar bagian Getting Started sesuai minat Anda:
+
+- **Deploy ke cloud** untuk membuat API Anda tersedia untuk dunia
+- **Tambahkan izin** ke model Anda
+- **Buat relasi** antar model
+- **Ubah data** Anda dengan Hasura DDN
+  
