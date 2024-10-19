@@ -167,7 +167,7 @@ Untuk melihat daftar layanan di namespace monitoring, gunakan perintah `kubectl 
 
 Sekarang, kita dapat mengakses dashboard Blackbox Exporter melalui internet. Untuk itu, kita memerlukan IP publik dari salah satu node dan nomor port 30500.
 
-Output yang akan kita dapatkan adalah:
+Output yang akan kita dapatkan adalah sebagai berikut:
 
 ![image](https://github.com/user-attachments/assets/898b1bd7-c389-411e-86c5-d0b72be6556d)
 
