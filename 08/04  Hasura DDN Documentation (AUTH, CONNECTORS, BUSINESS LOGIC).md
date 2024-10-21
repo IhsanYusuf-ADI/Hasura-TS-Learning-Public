@@ -63,6 +63,47 @@ Kita dapat membangun connector sendiri menggunakan salah satu SDK Hasura. Saat i
 ### Contoh Connector
 - **Connector CSV** - Implementasi spesifikasi NDC langsung. Dokumentasi spesifikasi NDC dapat ditemukan di sini, dan panduan berdasarkan pengembangan connector untuk CSV dapat ditemukan di sini. Kita dapat menggunakan panduan ini sebagai referensi untuk membangun connector kita sendiri.
 - **Connector Sendgrid** - Contoh implementasi API Sendgrid dapat ditemukan di GitHub di sini.
+
+## Konektor Apache Phoenix  
+Dengan konektor ini, Hasura memungkinkan Anda untuk secara instan membuat API GraphQL real-time di atas model data di Phoenix. Konektor ini mendukung fungsi-fungsi Phoenix yang tercantum dalam tabel di bawah ini, memungkinkan operasi data yang efisien dan skalabel. Selain itu, pengguna mendapatkan manfaat dari semua fitur kuat dari platform Hasura Data Delivery Network (DDN), termasuk kemampuan `query pushdown` yang mendelegasikan operasi kueri ke database, sehingga meningkatkan optimasi kueri dan performa.
+
+### Fitur  
+Berikut adalah matriks semua fitur yang didukung untuk konektor Phoenix:
+
+| Fitur                          | Didukung | Catatan                          |
+|---------------------------------|----------|----------------------------------|
+| Native Queries + Logical Models | ✅        |                                  |
+| Native Mutations                | ❌        |                                  |
+| Simple Object Query             | ✅        |                                  |
+| Filter / Search                 | ✅        |                                  |
+| Simple Aggregation              | ✅        |                                  |
+| Sort                            | ✅        |                                  |
+| Paginate                        | ✅        |                                  |
+| Table Relationships             | ❌        |                                  |
+| Views                           | ✅        |                                  |
+| Remote Relationships            | ✅        |                                  |
+| Custom Fields                   | ❌        |                                  |
+| Mutations                       | ❌        |                                  |
+| Distinct                        | ❌        |                                  |
+| Enums                           | ❌        |                                  |
+| Naming Conventions              | ❌        |                                  |
+| Default Values                  | ❌        |                                  |
+| User-defined Functions          | ❌        |                                  |
+
+### Sebelum Memulai  
+- Buat akun Hasura Cloud  
+- Instal CLI  
+- Instal ekstensi Hasura di VS Code  
+- Buat *supergraph*  
+- Buat *subgraph*
+
+### Menggunakan Konektor  
+  
+Konektor ini membutuhkan URL JDBC agar berfungsi. Contoh:
+
+```
+JDBC_URL="jdbc:phoenix:localhost:2181:/hbase"
+```
   
 # SUPERGRAPH MODELING
   
