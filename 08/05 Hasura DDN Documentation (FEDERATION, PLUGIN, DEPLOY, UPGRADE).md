@@ -238,7 +238,7 @@ Mari kita ambil contoh di mana mesin dikonfigurasi dengan dua plugin `pre-respon
   
 Dalam contoh ini, mesin dikonfigurasi dengan dua plugin `pre-response`. Mesin akan mengirim permintaan ke kedua plugin secara paralel. Mesin tidak menunggu respons dari plugin tersebut dan langsung mengirimkan respons yang dihasilkan oleh mesin ke klien.
 
-# Deployment
+# DEPLOYMENT
 
 Dibandingkan dengan Hasura v2, ada peningkatan arsitektur yang mendasar di Hasura v3 di mana buildtime dan runtime dipisahkan menjadi komponen yang berbeda. Control plane membangun metadata proyek dan membuatnya tersedia untuk mesin Hasura v3 yang berjalan di data plane.  
 
@@ -357,7 +357,7 @@ Kolaborator dapat membuat proyek di *data plane* dan mengelolanya. Untuk membuat
 ddn project create --data-plane-id <data-plane-id> --plan <plan>
 ```
 
-# Upgrade to Hasura DDN
+# UPGRADE TO HASURA DDN
 
 Hasura Data Delivery Network memperkenalkan cara baru untuk membangun aplikasi dengan Hasura. Bagian dokumentasi ini akan membantu Anda memahami kesamaan dan perbedaan antara versi Hasura yang lebih lama dan Hasura DDN, membimbing Anda melalui proses peningkatan, serta memberikan sumber daya untuk membantu migrasi aplikasi yang ada ke Hasura DDN.
 
