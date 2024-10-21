@@ -357,4 +357,309 @@ Kolaborator dapat membuat proyek di *data plane* dan mengelolanya. Untuk membuat
 ddn project create --data-plane-id <data-plane-id> --plan <plan>
 ```
 
+# Upgrade to Hasura DDN
+
+Hasura Data Delivery Network memperkenalkan cara baru untuk membangun aplikasi dengan Hasura. Bagian dokumentasi ini akan membantu Anda memahami kesamaan dan perbedaan antara versi Hasura yang lebih lama dan Hasura DDN, membimbing Anda melalui proses peningkatan, serta memberikan sumber daya untuk membantu migrasi aplikasi yang ada ke Hasura DDN.
+
+## Mengapa perlu peningkatan?
+
+Hasura DDN menghadirkan banyak fitur yang akan membantu Anda membangun aplikasi lebih cepat dan lebih efisien. Anda dapat menjelajahi dokumentasi kami untuk mendapatkan gambaran yang lebih baik tentang apa yang ditawarkan oleh Hasura DDN.
+
+### Pengembang Individu
+
+Sebagai pengembang individu yang bekerja pada proyek kecil atau hobi, Anda dapat menggunakan Hasura DDN secara gratis. Ya, gratis! Kami akan menghosting API Anda tanpa biaya, selamanya.
+
+- **Sebelum:**
+
+  - Terbatas oleh model metadata Hasura v2 yang terikat erat dengan PostgreSQL dan GraphQL, sehingga sulit untuk dianggap sebagai platform API umum.
+  - Mengalami kesulitan dalam mengelola infrastruktur server atau membayar layanan hosting (ya, bahkan Hasura Cloud). Khawatir tentang biaya jangka panjang dan skalabilitas proyek Anda.
+  - Menambahkan logika bisnis khusus tidak intuitif dan kurang fleksibel.
+
+- **Sesudah:**
+
+  - Kekhawatiran tentang infrastruktur server menjadi masa lalu — Hasura DDN mengurus hosting secara gratis. Nikmati ketenangan pikiran karena proyek Anda dapat tumbuh tanpa biaya tambahan.
+  - Anda dapat sepenuhnya fokus pada pengembangan produk, dengan infrastruktur backend yang diurus.
+  - Kemampuan yang ditingkatkan untuk menambahkan logika bisnis dalam Typescript, Python, dan Go, dengan kemampuan untuk menghosting fungsi logika bisnis di Hasura Cloud.
+
+### Small Team
+
+Sebagai small team, Anda dapat memanfaatkan Hasura DDN untuk mempercepat proses pengembangan dan mengurangi overhead. Dengan Hasura DDN, tim Anda dapat dengan cepat membuat prototipe dan iterasi fitur menggunakan build yang tidak dapat diubah, memastikan bahwa deployment konsisten dan andal. Ini berarti lebih banyak waktu untuk fokus pada penyampaian nilai kepada pelanggan dan lebih sedikit waktu yang dihabiskan untuk debugging.
+
+- **Sebelum:**
+
+  - Penyatuan build dan runtime di Hasura v2 menyebabkan masalah kinerja, memperlambat proses deployment Anda.
+  - Tidak ada kemampuan untuk mempratinjau API, menerbitkan atau mengembalikan dengan cepat.
+  - Kurangnya kejelasan tentang perubahan subgraf di API yang diterbitkan dan waktu respons yang lama karena ketidakmampuan untuk menguji selama pengembangan lokal.
+
+- **Sesudah:**
+
+  - Mempercepat alur kerja Anda dengan build yang tidak dapat diubah yang membuat pembuatan prototipe cepat menjadi mudah.
+  - Memastikan deployment yang lancar dan andal, mengurangi waktu debugging.
+  - Menyederhanakan siklus pengembangan Anda dengan metadata deklaratif yang mendefinisikan struktur API Anda.
+
+### Mature teams
+
+Bagi Mature teams di organisasi besar, Hasura DDN mengubah pendekatan Anda dalam menskalakan dan mengintegrasikan aplikasi. Dengan federasi bawaan menggunakan subgraf dan lapisan akses data berbasis metadata Hasura, Anda dapat mengembangkan aplikasi Anda seiring pertumbuhan bisnis, menambahkan sumber data dan layanan baru tanpa penulisan ulang yang ekstensif. Dua pilar nilai ini — federasi dan metadata — lebih lanjut menyederhanakan arsitektur Anda, memberikan cara yang terpadu dan skalabel untuk mengelola API Anda di berbagai lingkungan.
+
+- **Sebelum:**
+
+  - Metadata monolitik Hasura v2 membuat kolaborasi antara beberapa tim menjadi sulit, yang menyebabkan ketidakefisienan dan siklus pengembangan yang lebih lambat.
+  - Integrasi sumber data dan layanan baru memerlukan penulisan ulang yang ekstensif.
+  - Mengelola API di berbagai lingkungan sangat kompleks dan memakan waktu.
+
+- **Sesudah:**
+
+  - Dengan mudah menskalakan dengan federasi bawaan yang mengintegrasikan subgraf ke dalam pengaturan Hasura DDN Anda.
+  - Menambahkan sumber data baru dengan mulus, menghindari kebutuhan akan perombakan besar.
+  - Mengelola API Anda dengan mudah di berbagai lingkungan dengan lapisan akses metadata deklaratif pertama di dunia yang menyatukan kontrol.
+   
+
+## Panduan Upgrade  
+Saat ini, belum tersedia jalur upgrade langsung (in-place) dari Hasura v2 ke Hasura DDN. Untuk meng-upgrade instansi Hasura v2 Anda ke Hasura DDN, silakan ikuti salah satu strategi di bawah ini.
+
+### Strategi Upgrade  
+Ketika melakukan upgrade dari Hasura v2 ke Hasura DDN, Anda memiliki beberapa pendekatan untuk memastikan transisi yang mulus sambil mempertahankan kontinuitas layanan bagi klien API yang sudah ada. Tergantung pada kebutuhan Anda, Anda dapat memperkenalkan API DDN sebagai titik akhir (endpoint) terpisah, secara bertahap menghapus API v2, atau mengintegrasikan API v2 Anda yang ada sebagai skema jarak jauh (remote schema) dalam proyek DDN baru Anda.
+
+**Catatan:** Pola *Strangler Fig* dapat diterapkan dengan dua cara:
+
+1. **Routing Berbasis GraphQL:** Gunakan Hasura DDN untuk mengelola kedua sistem dengan mengintegrasikan Hasura v2 sebagai skema jarak jauh, secara bertahap memigrasikan fungsionalitas sambil mempertahankan titik akhir API yang terpusat.
+2. **Routing Berbasis URL:** Pisahkan sistem lama dan baru dengan endpoint API yang berbeda, dan alihkan lalu lintas secara bertahap dari endpoint lama ke yang baru.
+
+#### Routing Berbasis GraphQL Menggunakan DDN
+Manfaatkan API Hasura v2 yang ada sebagai skema jarak jauh dalam proyek DDN baru Anda untuk memastikan proses migrasi yang mulus dan meminimalkan gangguan.
   
+![image](https://github.com/user-attachments/assets/74227bdf-452c-4951-a0cf-0b2be25f21e0)
+
+
+1. **Membuat Proyek DDN**:  
+- Mulailah dengan membuat proyek Hasura DDN baru yang akan menjadi dasar untuk semua pengembangan dan migrasi baru.
+- Pastikan proyek DDN disiapkan dengan konfigurasi yang diperlukan, termasuk kebijakan keamanan, kontrol akses, dan pengaturan lingkungan.
+
+2. **Menghubungkan Hasura v2 sebagai skema jarak jauh**:  
+- Masukkan proyek Hasura v2 yang ada sebagai skema jarak jauh di dalam proyek DDN. Ini memungkinkan Anda untuk terus menggunakan API v2 sambil secara bertahap beralih ke DDN.
+- Gunakan NDC GraphQL Connector untuk memasukkan v2 sebagai skema jarak jauh dalam DDN. Ikuti petunjuk yang diberikan di README untuk mengonfigurasi koneksi dengan benar.
+- Pastikan pengaturan skema jarak jauh mencakup penanganan peran dan manajemen namespace yang tepat untuk menghindari konflik antara skema v2 dan DDN.
+
+3. **Mengekspos API DDN kepada konsumen**:  
+- Buat API DDN tersedia bagi konsumen, menawarkan titik akhir terpadu yang mencakup fungsionalitas DDN dan v2.
+- Biarkan proyek v2 tetap berjalan di belakang layar untuk menjaga kesinambungan bagi konsumen yang belum bermigrasi.
+- Sediakan dokumentasi dan contoh yang mendetail untuk membantu konsumen memahami cara berinteraksi dengan API DDN, terutama jika ada perubahan dari v2.
+
+4. **Iterasi dan pembaruan**:  
+- Lanjutkan iterasi pada proyek v2 sesuai kebutuhan, terutama untuk perbaikan bug, pembaruan kecil, atau tambalan kritis.
+- Pastikan juga bahwa setiap pembaruan atau perubahan yang relevan di v2 tercermin dalam proyek DDN. Ini mungkin melibatkan pembaruan skema GraphQL Connector dan penyebaran kembali konektor serta supergraph.
+- Terapkan strategi kontrol versi untuk mengelola perubahan di v2 dan DDN, mengurangi risiko inkonsistensi.
+
+5. **Menambahkan semua fitur baru ke DDN**:  
+- Kembangkan dan implementasikan semua fitur baru langsung dalam proyek DDN untuk memanfaatkan kemampuan canggihnya terutama terkait kolaborasi.
+- Pertimbangkan untuk mengadopsi pendekatan modular dalam pengembangan fitur, yang memungkinkan pengujian, penyebaran, dan migrasi di masa mendatang menjadi lebih mudah.
+
+6. **Migrasi fungsionalitas yang ada ke DDN**:
+- Secara bertahap migrasikan fungsionalitas yang ada dari v2 ke DDN, memprioritaskan fitur yang berdampak tinggi atau sering digunakan.
+- Selama migrasi, uji setiap fungsionalitas secara ekstensif di lingkungan DDN untuk memastikan bahwa semuanya berjalan sesuai harapan dan tidak memperkenalkan regresi.
+- Koordinasikan dengan konsumen API untuk mengelola transisi, memberi mereka garis waktu yang jelas dan dukungan selama proses migrasi.
+
+7. **Depresiasi model v2 melalui DDN**:  
+- Secara bertahap hentikan bidang root GraphQL v2 menggunakan metadata DDN, memberi sinyal kepada konsumen bahwa mereka harus beralih menggunakan DDN secara langsung.
+- Dalam DDN, gunakan flag `@deprecated` untuk menandai field dalam subgraph v2 yang direncanakan untuk dihapus.
+- Contoh: Jika model pengguna dalam v2 digantikan oleh model UserNew di DDN, pastikan konsumen menyadari perubahan ini dan memiliki waktu yang cukup untuk memperbarui implementasi mereka.
+- Terapkan kebijakan depresiasi yang mencakup garis waktu yang jelas, dokumentasi, dan strategi komunikasi untuk menghindari gangguan.
+
+8. **Pemantauan dan Dukungan**:  
+- Terus pantau kinerja dan penggunaan API v2 dan DDN, menggunakan analitik dan logging untuk mengidentifikasi masalah atau area yang perlu ditingkatkan.
+- Berikan dukungan yang berkelanjutan kepada konsumen, menangani kekhawatiran mereka dan membantu dalam proses migrasi. Ini dapat mencakup saluran dukungan khusus, panduan migrasi, dan lokakarya teknis.
+
+9. **Rencanakan Decommissioning Akhir**:  
+- Saat semakin banyak fungsionalitas yang dimigrasikan dan konsumen beralih ke DDN, mulailah merencanakan dekomisioning akhir dari proyek v2.
+- Ini harus melibatkan pendekatan bertahap, di mana fungsionalitas kritis dipertahankan hingga akhir, dan fitur yang kurang penting atau redundan dinonaktifkan terlebih dahulu.
+- Komunikasikan rencana dekomisioning jauh-jauh hari untuk memberi konsumen waktu yang cukup untuk menyelesaikan transisi mereka.
+
+10. **Cons**:  
+- Pemeliharaan Ganda: Setiap perubahan pada proyek v2 akan memerlukan pembaruan di kedua v2 dan DDN, yang mengakibatkan beban pemeliharaan tambahan.
+- Batasan GraphQL Connector:
+  - Subscriptions: DDN tidak dapat mem-proxy subscriptions dari v2, yang mungkin memerlukan strategi penanganan terpisah untuk kebutuhan data real-time.
+  - Direktif: Beberapa direktif, seperti mekanisme caching dan fitur Apollo federation, tidak bisa diproxy melalui DDN, yang mungkin membatasi beberapa use case lanjutan. Apollo Federation didukung di DDN, sementara caching ada di roadmap dan akan dirilis pada akhir September.
+  - Unions dan Interfaces: Unions dan interfaces di GraphQL mungkin menghadapi batasan ketika diproxy, memerlukan desain skema yang hati-hati dan kemungkinan solusi alternatif.
+
+Pendekatan ini memberikan jalur migrasi yang terstruktur dan bertahap, memanfaatkan kekuatan kedua sistem sambil meminimalkan gangguan bagi konsumen API Anda. Namun, perencanaan yang matang dan komunikasi yang efektif sangat penting untuk mengelola kompleksitas yang terlibat.
+
+#### Routing Berbasis URL
+Strategi ini melibatkan penggunaan routing berbasis URL untuk mengarahkan lalu lintas antara API GraphQL yang lama dan yang baru.
+
+- **Contoh Routing**:
+  - `/old` → v2
+  - `/new` → DDN
+- **Kelebihan**:
+  - Memungkinkan pemisahan yang jelas antara sistem lama dan yang baru.
+- **Kekurangan**:
+  - Mungkin tidak dapat dilakukan oleh klien untuk menangani dua endpoint GraphQL terpisah.
+  - Hasura v2 tidak memiliki fitur deprecations API sehingga akan sulit untuk memberi tahu konsumen API tentang migrasi.
+  
+#### Parallel Deployment
+
+![image](https://github.com/user-attachments/assets/c011b2f3-dbcd-42f6-afb0-0bbfc49225f6)
+  
+
+- Pindahkan semua development baru di Hasura DDN sambil mempertahankan dua API terpisah: satu untuk Hasura v2 dan satu untuk Hasura DDN. Ini memungkinkan Anda untuk memanfaatkan fitur dan optimasi baru di DDN tanpa mengganggu alur kerja yang ada di v2.
+- Tetapkan Batas yang Jelas: Definisikan batas yang jelas antara fungsi-fungsi yang tetap berada di v2 dan yang dikembangkan di DDN. Ini akan membantu menghindari duplikasi upaya dan memastikan transisi yang lancar bagi konsumen.
+- Perbarui Dokumentasi: Sediakan dokumentasi menyeluruh untuk API DDN baru, termasuk contoh, panduan penggunaan, dan perubahan dari API v2. Pastikan tim pengembangan dan dukungan Anda memahami perbedaan antara kedua API.
+- Komunikasi dengan Konsumen: Beritahu konsumen API tentang pengenalan API DDN baru, dengan memberikan detail tentang cara menggunakan API baru jika diperlukan.
+- Pantau Kinerja: Pantau kinerja dan penggunaan kedua API secara teratur untuk mengidentifikasi masalah lebih awal dan memastikan keduanya berjalan secara efisien.
+- Rencanakan Migrasi Masa Depan: Meski v2 dan DDN akan berjalan paralel untuk beberapa waktu, buat rencana untuk migrasi semua fitur v2 ke DDN. Rencana ini harus mencakup garis waktu, alokasi sumber daya, dan strategi untuk menonaktifkan API v2 saat waktunya tepat.
+  
+#### Phased Deprecation
+
+![image](https://github.com/user-attachments/assets/d35a4dcf-3966-41db-bbed-2b182025138e)
+
+  
+- Mulai migrasi fitur dari Hasura v2 ke DDN secara bertahap. Mulailah dengan fitur yang tidak kritis atau yang lebih sederhana untuk meminimalkan risiko.
+- Setelah fitur berhasil dimigrasi ke DDN, hapus fitur tersebut dari proyek Hasura v2 untuk menghindari duplikasi fungsi.
+- Komunikasikan setiap penghapusan fitur dari v2 kepada konsumen API dengan jelas sebelumnya.
+- Implementasikan kebijakan deprecations untuk fitur-fitur di v2 yang akan dihapus. Ini bisa melibatkan penandaan endpoint sebagai deprecated dengan garis waktu yang jelas untuk penghapusan akhirnya.
+- Pantau penggunaan v2 dan DDN selama transisi, dan dorong klien untuk beralih ke DDN dengan memberikan dukungan dan sumber daya.
+- Tes kedua sistem secara paralel untuk memastikan fitur-fitur yang dimigrasi berfungsi dengan baik di DDN.
+- Setelah semua fitur penting telah dimigrasi dan konsumen berhasil beralih, mulai mematikan proyek Hasura v2.
+  
+## Feature Availability (Ketersediaan Fitur)
+
+Kami terus melakukan pembaruan pada Hasura DDN untuk memberikan fitur-fitur baru dan peningkatan. Halaman ini akan membantu Anda memahami perbedaan antara Hasura v2 dan Hasura DDN, sehingga Anda bisa membuat keputusan yang tepat terkait peningkatan versi.
+
+### API
+
+Di halaman ini, Anda akan menemukan perbandingan berdampingan antara fitur yang tersedia di Hasura v2 dan Hasura DDN. Silakan lihat tabel di bawah untuk melihat fitur apa saja yang tersedia di setiap versi dan baca lebih lanjut tentang setiap fitur.
+
+#### Tabel Fitur
+| Fitur | v2 | DDN |
+|:--|:--|:--|
+| Instant GraphQL API | ✅ | ✅ |
+| Multiple Data Sources | ✅ | ✅ |
+| Query | ✅ | ✅ |
+| Mutation | ✅ | ✅ (C) |
+| Subscription | ✅ | WIP |
+| Streaming | ✅ | WIP |
+| Aggregate Query | ✅ | ✅ (C) |
+| Native Query | ✅ | ✅ |
+| Native Mutation | ❌ | ✅ |
+| Action | ✅ | ✅ |
+| Event Trigger | ✅ | WIP |
+| Cron Trigger | ✅ | ❌ |
+| Remote Schema | ✅ | ✅ |
+| CI/CD | ✅ | ✅ |
+| Federation | ✅ | ✅ |
+| Apollo Federation | ✅ | ✅ |
+| API Limits | ✅ | WIP |
+| Allow Lists | ✅ | ✅ |
+| Permissions | ✅ | ✅ |
+| Authentication Integrations | ✅ | ✅ |
+| Admin Secret | ✅ | ❌ |
+| Relay API | ✅ | ✅ |
+| RESTified Endpoints | ✅ | WIP |
+| Schema Registry | ✅ | ✅ |
+| Read Replica | ✅ (EE) | ✅ |
+| Caching | ✅ (EE) | WIP |
+
+*Keterangan:*
+- EE: Tersedia hanya pada edisi Cloud dan Enterprise.
+- C: Didukung oleh konektor individu.
+
+#### Penjelasan Fitur
+
+- **Instant GraphQL API:** 
+  Baik pada Hasura v2 maupun DDN, Anda dapat dengan cepat membuat GraphQL API hanya dengan menambahkan string koneksi ke proyek Anda. Pada DDN, pengembangan API lebih fleksibel dengan pendekatan berbasis kode.
+
+- **Multiple Data Sources:**
+  Pada v2, menghubungkan sumber data melibatkan pengaturan hubungan melalui console. Pada DDN, ini lebih sederhana dengan dukungan banyak jenis sumber data.
+
+- **Query:**
+  Fungsi query pada DDN ditingkatkan dengan performa yang lebih cepat dan efisien.
+
+- **Mutation:**
+  Mutasi pada DDN memiliki fleksibilitas lebih dengan dukungan mutasi native pada beberapa konektor.
+
+- **Subscription & Streaming:** 
+  Keduanya sedang dalam proses pengembangan pada DDN dengan rencana untuk peningkatan lebih lanjut.
+
+- **Aggregate Query**
+  Di Hasura v2, Query agregat memungkinkan Anda melakukan operasi seperti menghitung, menjumlahkan, dan menghitung rata-rata pada data Anda. Sedangkan, pada Hasura DDN: Query agregat sepenuhnya didukung tetapi sedikit berbeda dari API agregat di v2.
+
+- **Native Query**
+  Di Hasura v2, Query native memungkinkan interaksi langsung dengan basis data melalui SQL kustom. Sedangkan pada Hasura DDN: Query native sepenuhnya didukung, yang memungkinkan operasi pengambilan data yang lebih kompleks langsung di dalam API Anda.
+  
+- **Native Mutation**
+  Di Hasura v2, Mutasi native tidak didukung, yang membatasi kemampuan untuk melakukan modifikasi langsung pada basis data. Sedangkan pada Hasura DDN, Mutasi native kini didukung, menyediakan fleksibilitas lebih besar untuk operasi data tingkat lanjut.
+   
+- **Action**
+  Di Hasura v2, Actions memungkinkan integrasi REST API dan logika bisnis khusus dalam GraphQL API. Sementara itu, Hasura DDN menggantinya dengan konektor lambda yang mendukung logika bisnis lebih kompleks, pengayaan data, dan integrasi layanan melalui API. Konektor TypeScript, Python, dan OpenAPI juga didukung, memungkinkan pembuatan API dinamis yang memenuhi berbagai kebutuhan bisnis.
+
+- **Event & Cron Trigger:**
+  Pada DDN, event trigger masih dalam tahap pengembangan, sementara cron trigger tidak didukung.
+
+- **Remote Schema**
+  Pada Hasura v2, Remote Schema memungkinkan Anda menggabungkan beberapa skema GraphQL menjadi satu API terpadu. Sedangkan pada Hasura DDN, Skema GraphQL jarak jauh lebih mudah dikelola dan diintegrasikan menggunakan konektor data API GraphQL. Ini berarti API GraphQL eksternal diperlakukan seperti sumber data lainnya dengan seluruh izin dan relasi tersedia langsung.
+  
+- **CI/CD & Federation:**
+  Kedua fitur ini dibangun langsung ke dalam inti Hasura DDN untuk mendukung kolaborasi dan pengembangan skala besar.
+  
+- **Apollo Federation**
+  Di Hasura v2, Apollo Federation didukung untuk membuat API terpadu di berbagai layanan. Sedangkan di Hasura DDN, Apollo Federation tetap didukung.
+
+- **API Limits**
+  Di Hasura v2, Batas API tersedia untuk membantu mengelola penggunaan API Anda. Sedangkan di Hasura DDN, Batas API tidak didukung.
+
+- **Allow Lists**
+  Di Hasura v2, Allow list tersedia untuk membatasi akses ke query dan mutasi tertentu. Sedangkan di Hasura DDN, Allow list masih dalam pengembangan, dengan rencana untuk memperkenalkan mekanisme otorisasi yang lebih canggih.
+
+- **Permissions**
+Di Hasura v2, Izin tersedia untuk mengontrol akses ke data dan operasi. Sedangkan di Hasura DDN, Izin sepenuhnya didukung. Anda dapat mendefinisikan izin pada tingkat model, field, dan command.
+
+- **Authentication Integrations**
+  Di Hasura v2, Integrasi otentikasi tersedia untuk mengotentikasi pengguna. Sedangkan di Hasura DDN, Integrasi otentikasi sepenuhnya didukung.
+
+- **Admin Secret**
+  Di Hasura v2, Admin secret digunakan untuk mengotentikasi permintaan ke API Hasura. Sedangkan di Hasura DDN: Admin secret tidak didukung, tetapi Anda dapat membuat token tingkat admin.
+
+- **Relay API**
+  Di Hasura v2, Relay API didukung untuk menggunakan fitur-fitur Relay khusus dalam API GraphQL. Sedangkan, di Hasura DDN: Relay API sepenuhnya didukung.
+
+- **RESTified Endpoints**
+  Di Hasura v2, RESTified endpoints tersedia untuk mengekspos API GraphQL Anda sebagai REST API. Sedangkan di Hasura DDN, RESTified endpoints masih dalam pengembangan.
+
+- **Schema Registry**
+  Di Hasura v2, Schema registry tersedia untuk melacak perubahan pada skema API dan metadata. Sedangkan di Hasura DDN, Schema registry sepenuhnya didukung dengan fitur diffing skema.
+
+- **Read Replica**
+  Di Hasura v2, Read replicas hanya tersedia di edisi Cloud dan Enterprise. Sedangkan di Hasura DDN, Read replicas sepenuhnya didukung.
+
+- **Caching**
+  Di Hasura v2, Caching tersedia di edisi Cloud dan Enterprise. Sedangkan, di Hasura DDN, Caching masih dalam pengembangan.
+
+### Tooling
+
+Hasura DDN diperuntukkan bagi skala besar dengan peningkatan pada kinerja dan kolaborasi tim. Beberapa perbaikan signifikan diperkenalkan untuk meningkatkan pengalaman pengembangan, terutama di area di mana kolaborasi penting.
+
+#### Tabel Tooling
+| Fitur | v2 | DDN |
+|:--|:--|:--|
+| The Hasura Console | ✅ | ✅ |
+| The Hasura CLI | ✅ | ✅ |
+| IDE Integrations | ❌ | ✅ |
+| Database Migrations | ✅ | ❌ |
+| Prometheus | ✅ (EE) | ✅ |
+| OpenTelemetry | ✅ (EE) | ✅ |
+
+#### Penjelasan Tooling
+
+- **The Hasura Console:** 
+  Pada DDN, console lebih difokuskan sebagai alat eksplorasi dan manajemen daripada untuk mengedit API.
+
+- **The Hasura CLI:** 
+  CLI menjadi alat utama untuk membangun API pada DDN, dengan dukungan integrasi IDE untuk mempercepat pengembangan.
+
+- **IDE Integrations:**
+  DDN mendukung integrasi dengan IDE seperti VS Code, sehingga pengelolaan metadata API menjadi lebih mudah.
+
+- **Database Migrations**
+  Pada Hasura v2, migrasi database didukung melalui Hasura CLI, memungkinkan Anda untuk mengelola perubahan pada skema database dan metadata Anda.
+
+- **Prometheus & OpenTelemetry:**
+  Keduanya didukung secara native dan gratis pada Hasura DDN.
