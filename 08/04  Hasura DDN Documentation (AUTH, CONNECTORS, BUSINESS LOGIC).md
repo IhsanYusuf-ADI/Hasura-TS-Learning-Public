@@ -65,7 +65,7 @@ Kita dapat membangun connector sendiri menggunakan salah satu SDK Hasura. Saat i
 - **Connector Sendgrid** - Contoh implementasi API Sendgrid dapat ditemukan di GitHub di sini.
 
 ## Konektor Apache Phoenix  
-Dengan konektor ini, Hasura memungkinkan Anda untuk secara instan membuat API GraphQL real-time di atas model data di Phoenix. Konektor ini mendukung fungsi-fungsi Phoenix yang tercantum dalam tabel di bawah ini, memungkinkan operasi data yang efisien dan skalabel. Selain itu, pengguna mendapatkan manfaat dari semua fitur kuat dari platform Hasura Data Delivery Network (DDN), termasuk kemampuan `query pushdown` yang mendelegasikan operasi kueri ke database, sehingga meningkatkan optimasi kueri dan performa.
+Dengan konektor ini, Hasura memungkinkan kita untuk secara instan membuat API GraphQL real-time di atas model data di Phoenix. Konektor ini mendukung fungsi-fungsi Phoenix yang tercantum dalam tabel di bawah ini, memungkinkan operasi data yang efisien dan skalabel. Selain itu, pengguna mendapatkan manfaat dari semua fitur kuat dari platform Hasura Data Delivery Network (DDN), termasuk kemampuan `query pushdown` yang mendelegasikan operasi kueri ke database, sehingga meningkatkan optimasi kueri dan performa.
 
 ### Fitur  
 Berikut adalah matriks semua fitur yang didukung untuk konektor Phoenix:
@@ -99,9 +99,9 @@ Berikut adalah matriks semua fitur yang didukung untuk konektor Phoenix:
 
 ### Menggunakan Konektor  
   
-Apache Phoenix connector termasuk connector tidak terverifikasi. Connector ini belum diverifikasi oleh Hasura, sehingga tidak terdaftar di Hasura Hub dan tidak bisa langsung dideploy ke Hasura DDN menggunakan Hasura CLI. Connector Phoenix hanya bisa diimplementasikan dan di-deploy di infrastruktur Anda sendiri.
+Apache Phoenix connector termasuk connector tidak terverifikasi. Connector ini belum diverifikasi oleh Hasura, sehingga tidak terdaftar di Hasura Hub dan tidak bisa langsung dideploy ke Hasura DDN menggunakan Hasura CLI. Connector Phoenix hanya bisa diimplementasikan dan di-deploy di infrastruktur kita sendiri.
 
-Meskipun belum terverifikasi, Anda tetap bisa menggunakan Phoenix connector dengan mengatur konfigurasi secara manual, seperti menyediakan URL JDBC yang tepat untuk menghubungkan database Phoenix dengan Hasura. Karena belum diverifikasi, Anda harus memastikan sendiri performa, keamanan, dan kompatibilitas connector ini.
+Meskipun belum terverifikasi, kita tetap bisa menggunakan Phoenix connector dengan mengatur konfigurasi secara manual, seperti menyediakan URL JDBC yang tepat untuk menghubungkan database Phoenix dengan Hasura. Karena belum diverifikasi, kita harus memastikan sendiri performa, keamanan, dan kompatibilitas connector ini.
 
 Contoh pengaturan JDBC untuk Phoenix connector:
 
@@ -109,7 +109,7 @@ Contoh pengaturan JDBC untuk Phoenix connector:
 JDBC_URL="jdbc:phoenix:localhost:2181:/hbase"
 ```
   
-Connector ini berlisensi di bawah Apache License 2.0, sehingga bebas digunakan dan dimodifikasi dalam infrastruktur yang Anda kelola sendiri.
+Connector ini berlisensi di bawah Apache License 2.0, sehingga bebas digunakan dan dimodifikasi dalam infrastruktur yang kita kelola sendiri.
 
   
 # SUPERGRAPH MODELING
@@ -149,38 +149,38 @@ Secara keseluruhan, gambar ini mengilustrasikan bagaimana beberapa subgraph dike
 
 # BUSINESS LOGIC  
 
-Dengan Hasura, Anda dapat secara instan dan mudah menggabungkan logika bisnis khusus sebagai bagian dari Supergraph API menggunakan konektor Hasura Lambda.
+Dengan Hasura, kita dapat secara instan dan mudah menggabungkan logika bisnis khusus sebagai bagian dari Supergraph API menggunakan konektor Hasura Lambda.
 
-Transformasikan, mutasi, atau perkaya data, sambungkan ke layanan yang ada, atau perluas fungsionalitas data asli Anda menggunakan fungsi, semuanya dihosting oleh Hasura atau di infrastruktur Anda sendiri.  
+Transformasikan, mutasi, atau perkaya data, sambungkan ke layanan yang ada, atau perluas fungsionalitas data asli kita menggunakan fungsi, semuanya dihosting oleh Hasura atau di infrastruktur kita sendiri.  
 
 ## Pengenalan Lambda Connectors
 
-Lambda connectors memungkinkan Anda dengan mudah mengimplementasikan dan meng-host logika bisnis kustom dalam proyek Hasura Anda.
+Lambda connectors memungkinkan kita dengan mudah mengimplementasikan dan meng-host logika bisnis kustom dalam proyek Hasura kita.
 
-Dengan lambda connectors, Anda cukup menulis fungsi, melacaknya, dan fungsi-fungsi tersebut secara otomatis tersedia di API Anda.
+Dengan lambda connectors, kita cukup menulis fungsi, melacaknya, dan fungsi-fungsi tersebut secara otomatis tersedia di API kita.
 
 ## Pendekatan Tradisional
-Bayangkan Anda ditugaskan untuk menangani logika bisnis kustom dalam setup middleware tradisional.
+Bayangkan kita ditugaskan untuk menangani logika bisnis kustom dalam setup middleware tradisional.
 
-Setiap hari, Anda terjun ke kode kustom dan menulis skrip untuk memparsing dan merutekan permintaan yang masuk ke handler yang sesuai. Anda bahkan belum mulai menulis logika bisnis kustom.
+Setiap hari, kita terjun ke kode kustom dan menulis skrip untuk memparsing dan merutekan permintaan yang masuk ke handler yang sesuai. Kita bahkan belum mulai menulis logika bisnis kustom.
 
-Selanjutnya, Anda perlu memperkaya data. Ini kemungkinan melibatkan mengelola beberapa API yang berbeda untuk meningkatkan informasi mentah. Setelah itu, Anda dengan cermat memformat dan mentransformasi data agar sesuai dengan struktur yang diinginkan. Penanganan kesalahan memerlukan logika kustom tersendiri untuk mengelola berbagai kasus kegagalan dengan efektif. Akhirnya, Anda memformat respons dan mengirimkannya kembali ke klien, berharap tidak ada yang rusak dalam prosesnya.
+Selanjutnya, kita perlu memperkaya data. Ini kemungkinan melibatkan mengelola beberapa API yang berbeda untuk meningkatkan informasi mentah. Setelah itu, kita dengan cermat memformat dan mentransformasi data agar sesuai dengan struktur yang diinginkan. Penanganan kesalahan memerlukan logika kustom tersendiri untuk mengelola berbagai kasus kegagalan dengan efektif. Akhirnya, kita memformat respons dan mengirimkannya kembali ke klien, berharap tidak ada yang rusak dalam prosesnya.
 
-Langkah-langkah manual ini memakan waktu, rentan terhadap kesalahan, dan semakin sulit dipertahankan seiring dengan berkembangnya aplikasi dan tim Anda. Kebutuhan konstan untuk kode kustom di setiap tahap proses bisa sangat melelahkan dan membuat frustrasi.
+Langkah-langkah manual ini memakan waktu, rentan terhadap kesalahan, dan semakin sulit dipertahankan seiring dengan berkembangnya aplikasi dan tim kita. Kebutuhan konstan untuk kode kustom di setiap tahap proses bisa sangat melelahkan dan membuat frustrasi.
 
 ### Arsitektur
-Setup tradisional seperti ini membutuhkan layanan terpisah yang berjalan pada berbagai komponen infrastruktur. Anda mungkin meng-host sendiri atau bergantung pada banyak penyedia cloud. Sistem terdistribusi ini menyebabkan bottleneck, meningkatkan latensi, dan memerlukan lebih banyak sumber daya untuk pemeliharaan dan penskalaan. Koordinasi antara berbagai layanan bisa menjadi tantangan, menyebabkan potensi masalah sinkronisasi dan kompleksitas dalam proses deployment.
+Setup tradisional seperti ini membutuhkan layanan terpisah yang berjalan pada berbagai komponen infrastruktur. Kita mungkin meng-host sendiri atau bergantung pada banyak penyedia cloud. Sistem terdistribusi ini menyebabkan bottleneck, meningkatkan latensi, dan memerlukan lebih banyak sumber daya untuk pemeliharaan dan penskalaan. Koordinasi antara berbagai layanan bisa menjadi tantangan, menyebabkan potensi masalah sinkronisasi dan kompleksitas dalam proses deployment.
 
 ## Dengan Hasura DDN
 Sekarang, bayangkan skenario berbeda dengan Hasura DDN.
 
-Alih-alih memparsing dan merutekan permintaan secara manual, Hasura secara otomatis menangani tugas-tugas ini, membebaskan Anda dari menulis kode kustom untuk setiap permintaan yang masuk.
+Alih-alih memparsing dan merutekan permintaan secara manual, Hasura secara otomatis menangani tugas-tugas ini, membebaskan kita dari menulis kode kustom untuk setiap permintaan yang masuk.
 
-Pengambilan data menjadi mudah karena Anda tidak lagi harus mengelola banyak API eksternal. Hasura sudah memfederasi semua sumber Anda dan menghasilkan kueri GraphQL untuk Anda, menyederhanakan proses secara signifikan.
+Pengambilan data menjadi mudah karena kita tidak lagi harus mengelola banyak API eksternal. Hasura sudah memfederasi semua sumber kita dan menghasilkan kueri GraphQL untuk kita, menyederhanakan proses secara signifikan.
 
-Anda cukup menulis fungsi kustom dalam TypeScript atau Python, Hasura mengintrospeksinya, dan kemudian mengintegrasikan fungsi-fungsi tersebut ke dalam API GraphQL Anda secara mulus.
+Kita cukup menulis fungsi kustom dalam TypeScript atau Python, Hasura mengintrospeksinya, dan kemudian mengintegrasikan fungsi-fungsi tersebut ke dalam API GraphQL kita secara mulus.
 
-Dengan Hasura DDN, langkah-langkah manual yang membosankan dari middleware tradisional digantikan oleh proses yang efisien dan terstruktur yang memungkinkan Anda fokus pada penulisan logika bisnis yang bermakna daripada kode boilerplate.
+Dengan Hasura DDN, langkah-langkah manual yang membosankan dari middleware tradisional digantikan oleh proses yang efisien dan terstruktur yang memungkinkan kita fokus pada penulisan logika bisnis yang bermakna daripada kode boilerplate.
 
 ### Arsitektur
-Kami dapat meng-host logika bisnis kustom ini untuk Anda. Atau, jika Anda mau, Anda dapat meng-host di infrastruktur Anda sendiri. Bagaimanapun, proses deployment Anda telah disederhanakan secara signifikan. Hasura DDN menyediakan platform terpadu yang meminimalkan latensi, mengurangi kompleksitas koordinasi layanan, dan menawarkan kemampuan penskalaan yang mulus. Alat observasi dan manajemen terintegrasi memastikan bahwa logika bisnis Anda berjalan secara efisien dan andal, sambil mengekspos logika bisnis kustom Anda langsung ke konsumen API.
+Kami dapat meng-host logika bisnis kustom ini untuk kita. Atau, jika kita mau, kita dapat meng-host di infrastruktur kita sendiri. Bagaimanapun, proses deployment kita telah disederhanakan secara signifikan. Hasura DDN menyediakan platform terpadu yang meminimalkan latensi, mengurangi kompleksitas koordinasi layanan, dan menawarkan kemampuan penskalaan yang mulus. Alat observasi dan manajemen terintegrasi memastikan bahwa logika bisnis kita berjalan secara efisien dan andal, sambil mengekspos logika bisnis kustom kita langsung ke konsumen API.
