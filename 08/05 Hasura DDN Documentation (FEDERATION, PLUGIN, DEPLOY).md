@@ -1,8 +1,8 @@
 # FEDERATION  
   
-Federasi dalam Hasura DDN meningkatkan cara Anda membangun dan mengelola API.
+Federasi dalam Hasura DDN meningkatkan cara kita membangun dan mengelola API.
 
-Ini adalah proses menggabungkan beberapa subgraf dengan beberapa sumber data menjadi satu *supergraph* untuk menciptakan API GraphQL terpadu yang menyediakan akses ke semua domain data Anda melalui satu titik akhir.
+Ini adalah proses menggabungkan beberapa subgraf dengan beberapa sumber data menjadi satu *supergraph* untuk menciptakan API GraphQL terpadu yang menyediakan akses ke semua domain data kita melalui satu titik akhir.
 
 Jika digabungkan dengan fitur kolaborasi di Hasura DDN, arsitektur ini memungkinkan alur kerja yang lebih kolaboratif dan memungkinkan tim untuk mengembangkan serta menerapkan subgraf secara mandiri sambil tetap menjaga tata kelola yang kuat atas proses pengembangan.
 
@@ -46,12 +46,12 @@ Aturan otorisasi dalam satu subgraf juga dapat didefinisikan untuk merujuk pada 
 
 Setiap subgraf independen dapat memiliki satu atau lebih *data connector*.
 
-*Data Connector* tersedia untuk berbagai jenis sumber data, termasuk basis data, fungsi logika bisnis, REST API, dan GraphQL API. Anda juga dapat membuat *data connector* khusus untuk terintegrasi dengan sumber data lainnya.
+*Data Connector* tersedia untuk berbagai jenis sumber data, termasuk basis data, fungsi logika bisnis, REST API, dan GraphQL API. Kita juga dapat membuat *data connector* khusus untuk terintegrasi dengan sumber data lainnya.
 
 Sumber data yang sama dapat dihubungkan ke beberapa subgraf melalui instance *data connector* di masing-masing subgraf. Ini memungkinkan tim yang berbeda untuk bekerja dengan sumber yang sama dari perspektif domain data yang berbeda.
 
 ## Relasi
-Mendefinisikan *relationship* memungkinkan Anda melakukan kueri di seluruh informasi yang terhubung di dalam dan antar subgraf.
+Mendefinisikan *relationship* memungkinkan kita melakukan kueri di seluruh informasi yang terhubung di dalam dan antar subgraf.
 
 Seperti biasa ketika menulis metadata, ekstensi Hasura untuk VS Code dapat membantu dengan fitur *auto-complete* dan validasi. Saat bekerja dengan *relationship* antar subgraf di repositori lain, ada beberapa perbedaan yang perlu diperhatikan. Cari tahu lebih lanjut tentang *cross-repo relationships* di sini.
 
