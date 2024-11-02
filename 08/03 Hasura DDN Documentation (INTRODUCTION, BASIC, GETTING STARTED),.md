@@ -102,7 +102,7 @@ Baik menggunakan proyek sampel atau data kita sendiri, kita bisa langsung menjal
      
    Tambahkan executable ke PATH sistem agar bisa dijalankan dari terminal.
 
-2. **Validasi instalasi**
+2. **Validasi instalasi**  
    Kita dapat memverifikasi bahwa DDN CLI diinstal dengan benar dengan menjalankan:
      
    ```bash
