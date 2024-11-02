@@ -102,7 +102,14 @@ Baik menggunakan proyek sampel atau data kita sendiri, kita bisa langsung menjal
      
    Tambahkan executable ke PATH sistem agar bisa dijalankan dari terminal.
 
-2. **Install Docker**  
+2. **Validasi instalasi**
+   Kita dapat memverifikasi bahwa DDN CLI diinstal dengan benar dengan menjalankan:
+     
+   ```bash
+   ddn doctor
+   ```
+
+3. **Install Docker**  
    Pastikan Docker Compose versi 2.27.1 atau lebih baru sudah terpasang.
      
 ### Langkah-Langkah  
@@ -141,6 +148,7 @@ Baik menggunakan proyek sampel atau data kita sendiri, kita bisa langsung menjal
    
    ```bash
    ddn model add my_connector '*'
+   ddn command add my_connector '*'
    ddn relationship add my_connector '*'
    ```
    
