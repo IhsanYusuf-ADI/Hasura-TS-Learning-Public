@@ -62,6 +62,9 @@ KDC menjadi komponen penting dalam Kerberos karena menjamin integritas dan keama
 
 ## 2. Perbedaan antara Thick Client dan Thin Client
 
+![thin](https://github.com/user-attachments/assets/e22b5f69-be84-4935-9ae8-9fe754bb7cf1)
+
+
 ### Apa Itu Thick Client dan Thin Client?
 
 - **Thick Client (Fat Client):** Merupakan perangkat keras atau perangkat lunak yang memiliki lebih banyak kemampuan untuk melakukan pemrosesan di sisi pengguna. Dalam hal ini, aplikasi dan data biasanya disimpan secara lokal di perangkat tersebut.
