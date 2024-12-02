@@ -16,12 +16,13 @@ Protokol Kerberos memiliki tiga subprotokol agar dapat melakukan aksinya:
 - **Ticket-Granting Service (TGS) Exchange:** yang digunakan oleh KDC untuk mendistribusikan kunci sesi layanan dan tiket yang diasosiasikan dengannya.
 - **Client/Server (CS) Exchange:** yang digunakan oleh klien untuk mengirimkan sebuah tiket sebagai pendaftaran kepada sebuah layanan.
 
-![image](https://github.com/user-attachments/assets/5965efe0-9d4d-4412-ae25-900e8bb10039)
-
-Note:
+Penjelasan tambahan:
 - **TGT (Ticket Granting Ticket):**
    - Tiket sementara yang dikeluarkan oleh KDC setelah autentikasi awal berhasil.
    - Digunakan untuk meminta tiket layanan ke TGS tanpa perlu mengirim ulang password.
+
+![image](https://github.com/user-attachments/assets/5965efe0-9d4d-4412-ae25-900e8bb10039)
+
 
 1. **AS Request (Step 1):**
    - Klien mengirimkan permintaan autentikasi (AS Request) ke KDC Server.
