@@ -5,28 +5,55 @@
 Kerberos adalah protokol otentikasi jaringan yang dirancang untuk menyediakan komunikasi yang aman dalam jaringan yang tidak aman, seperti internet. Mekanisme Kerberos bekerja dengan cara mengonfirmasi identitas pengguna melalui penggunaan tiket yang hanya dapat digunakan dalam waktu terbatas, serta mengenkripsi komunikasi yang terjadi antara klien dan server. Berikut adalah langkah-langkah dasar dalam mekanisme Kerberos:
 
 ### Langkah-langkah Kerberos:
-1. **Klien Mengirim Permintaan ke AS (Authentication Server):** 
-   - Klien mengirimkan permintaan untuk mengakses layanan tertentu kepada server otentikasi (AS) yang terletak di dalam KDC (Key Distribution Center).
-   - Permintaan ini berisi ID klien dan ID layanan yang ingin diakses.
 
-2. **AS Mengirimkan Ticket Granting Ticket (TGT):**
-   - Jika otentikasi berhasil, AS akan memberikan TGT yang dienkripsi dengan kunci rahasia (secret key) yang hanya diketahui oleh AS dan klien tersebut.
-   - TGT ini hanya dapat digunakan oleh klien dalam waktu yang terbatas dan hanya untuk mengakses layanan tertentu.
+Kerberos adalah protokol yang terdiri dari tiga entitas, yaitu:
+- **Klien** merupakan entitas yang berusaha meminta layanan serta memberikan identitasnya.
+- **Application Server/Server Target** adalah suatu layanan yang ingin diakses oleh klien (atau pengguna).
+- **Key Distribution Center (KDC)** adalah pihak ketiga terpercaya yang bertugas selama tahap autentikasi. Pada Active Directory, setiap pengontrol domain bertindak sebagai KDC.
 
-3. **Klien Mengirimkan TGT ke TGS (Ticket Granting Server):**
-   - Klien kemudian mengirimkan TGT yang diterima ke TGS untuk meminta tiket layanan yang sesuai untuk mengakses server yang dimaksud.
+Protokol Kerberos memiliki tiga subprotokol agar dapat melakukan aksinya:
+- **Authentication Service (AS) Exchange:** yang digunakan oleh Key Distribution Center (KDC) untuk menyediakan Ticket-Granting Ticket (TGT) kepada klien dan membuat kunci sesi logon.
+- **Ticket-Granting Service (TGS) Exchange:** yang digunakan oleh KDC untuk mendistribusikan kunci sesi layanan dan tiket yang diasosiasikan dengannya.
+- **Client/Server (CS) Exchange:** yang digunakan oleh klien untuk mengirimkan sebuah tiket sebagai pendaftaran kepada sebuah layanan.
 
-4. **TGS Mengeluarkan Ticket Layanan:**
-   - TGS akan memberikan tiket layanan (service ticket) yang berisi informasi tentang pengguna yang ingin mengakses layanan.
-   - Ticket ini berisi informasi yang terenkipsi dan hanya dapat dibaca oleh server layanan yang dimaksud.
+![image](https://github.com/user-attachments/assets/5965efe0-9d4d-4412-ae25-900e8bb10039)
 
-5. **Klien Mengakses Layanan:**
-   - Klien mengirimkan tiket layanan yang diterima ke server layanan untuk mendapatkan akses ke sumber daya yang diminta.
+Note:
+- **TGT (Ticket Granting Ticket):**
+   - Tiket sementara yang dikeluarkan oleh KDC setelah autentikasi awal berhasil.
+   - Digunakan untuk meminta tiket layanan ke TGS tanpa perlu mengirim ulang password.
+
+1. **AS Request (Step 1):**
+   - Klien mengirimkan permintaan autentikasi (AS Request) ke KDC Server.
+   - Permintaan ini berisi identitas klien (misalnya, username) dan informasi terkait waktu.
+
+2. **AS Response dan Pengeluaran TGT (Step 2):**
+   - KDC Server memverifikasi identitas klien menggunakan database autentikasi.
+   - Jika berhasil diverifikasi, KDC Server memberikan TGT (Ticket Granting Ticket) kepada klien.
+   - TGT ini dienkripsi dengan kunci rahasia KDC dan hanya dapat digunakan oleh klien yang sesuai.
+
+3. **TGS Request (Step 3):**
+   - Klien mengirimkan TGT yang diterimanya ke KDC Server dengan permintaan untuk mengakses layanan tertentu.
+   - Permintaan ini disebut TGS Request (Ticket Granting Service Request).
+
+4. **TGS Response dan Tiket Layanan (Step 4):**
+   - KDC Server memverifikasi TGT dan mengecek apakah klien berhak mengakses layanan yang diminta.
+   - Jika valid, KDC Server mengeluarkan tiket layanan (Service Ticket) untuk layanan tujuan.
+   - Tiket ini dienkripsi dan hanya dapat dibaca oleh server tujuan.
+
+5. **CS Request (Step 5):**
+   - Klien mengirimkan Service Ticket kepada Server Target sebagai bagian dari permintaan untuk mengakses layanan.
+   - Tiket ini membuktikan bahwa klien telah diautentikasi oleh KDC.
+
+6. **Server Target Memberikan Akses (Step 6):**
+   - Server Target memverifikasi tiket layanan menggunakan kunci yang dibagikan dengan KDC.
+   - Jika tiket valid, Server Target memberikan akses ke layanan yang diminta oleh klien.
 
 ### Apa Itu KDC Server?
-KDC (Key Distribution Center) adalah server yang berperan sebagai otoritas pusat dalam sistem Kerberos. KDC bertanggung jawab untuk mengelola dan mengeluarkan tiket otentikasi untuk klien dan server. KDC terdiri dari dua bagian utama:
+KDC (Key Distribution Center) adalah server yang berperan sebagai otoritas pusat dalam sistem Kerberos. KDC bertanggung jawab untuk mengelola dan mengeluarkan tiket otentikasi untuk klien dan server. KDC terdiri dari tiga komponen utama:
 - **Authentication Server (AS):** Bagian yang pertama kali menerima permintaan dari klien untuk memulai proses otentikasi.
 - **Ticket Granting Server (TGS):** Setelah klien terotentikasi, TGS memberikan tiket layanan yang diperlukan untuk mengakses layanan di dalam jaringan.
+- **Database Utama (db):** Database untuk kunci rahasia bagi pengguna dan layanan yang dikelola.
 
 KDC menjadi komponen penting dalam Kerberos karena menjamin integritas dan keamanan komunikasi antara klien dan server.
 
