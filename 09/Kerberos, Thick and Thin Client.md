@@ -67,19 +67,19 @@ KDC menjadi komponen penting dalam Kerberos karena menjamin integritas dan keama
 
 Penjelasan terkait arsitektur klien-server dua tingkat (two-tier architecture) dengan variasi pengelolaan tugas antara klien dan server adalah sebagai berikut:
 
-(a) Antarmuka pengguna bergantung pada terminal:
+- (a) Antarmuka pengguna bergantung pada terminal:
    - Hanya antarmuka dasar yang berada di sisi klien.
    - Semua kendali presentasi dilakukan di server, termasuk logika aplikasi.
    - Cocok untuk sistem terminal lama atau thin client.
-(b) Antarmuka pengguna penuh di klien:
+- (b) Antarmuka pengguna penuh di klien:
    - Klien menjalankan seluruh perangkat lunak antarmuka pengguna.
    - Server hanya menangani data dan logika aplikasi utama.
    - Biasanya digunakan di aplikasi desktop yang memanfaatkan koneksi ke server.
-(c) Sebagian logika aplikasi di klien:
+- (c) Sebagian logika aplikasi di klien:
    - Sebagian kecil aplikasi, seperti validasi formulir, ditempatkan di klien.
    - Server tetap menangani sebagian besar logika dan data.
    - Meningkatkan efisiensi komunikasi jaringan.
-(d) dan (e) Untuk mesin klien yang kuat:
+- (d) dan (e) Untuk mesin klien yang kuat:
    - Klien menangani lebih banyak tugas (misalnya, antarmuka, validasi, sebagian besar aplikasi).
    - Server berfungsi sebagai penyedia data.
    - Cocok untuk perangkat modern dengan sumber daya besar.
