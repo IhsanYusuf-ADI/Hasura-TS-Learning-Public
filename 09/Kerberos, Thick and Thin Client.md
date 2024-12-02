@@ -67,8 +67,8 @@ KDC menjadi komponen penting dalam Kerberos karena menjamin integritas dan keama
 
 ### Apa Itu Thick Client dan Thin Client?
 
-- **Thick Client (Fat Client):** Merupakan perangkat keras atau perangkat lunak yang memiliki lebih banyak kemampuan untuk melakukan pemrosesan di sisi pengguna. Dalam hal ini, aplikasi dan data biasanya disimpan secara lokal di perangkat tersebut.
-- **Thin Client:** Merupakan perangkat yang bergantung pada server untuk sebagian besar prosesnya. Thin client tidak menyimpan aplikasi atau data secara lokal, melainkan mengakses aplikasi dan data yang berada di server atau cloud.
+- **Thick Client (Fat Client):** Merupakan perangkat keras atau perangkat lunak yang memiliki lebih banyak kemampuan untuk melakukan pemrosesan di sisi pengguna. Dalam hal ini, aplikasi dan data biasanya disimpan secara lokal di perangkat tersebut. Fat client lebih di bebankan pada client. Client harus menyediakan user interface, aplikasi dan aplikasi database. Sehingga client di tuntut untuk mempunyai perangkat yang cukup bagus. Sedangkan server hanya menyediakan database yang nanti akan di panggil oleh pihak client.
+- **Thin Client:** Merupakan perangkat yang bergantung pada server untuk sebagian besar prosesnya. Thin client tidak menyimpan aplikasi atau data secara lokal, melainkan mengakses aplikasi dan data yang berada di server atau cloud. Thin client lebih di bebankan pada server.  Server di tuntut harus menyediakan aplikasi, databases dan user interface yang akan di gunakan oleh pihak client. Sehingga pada pihak client hanya menyediakan peringkat keras untuk melakukan koneksi kepada server.
 
 ### Perbedaan Thick Client dan Thin Client
 
@@ -99,7 +99,7 @@ KDC menjadi komponen penting dalam Kerberos karena menjamin integritas dan keama
 - Lebih aman karena data disimpan secara terpusat.
 
 **Kekurangan:**
-- Bergantung pada koneksi jaringan yang stabil untuk dapat bekerja.
+- Bergantung pada koneksi jaringan yang stabil untuk dapat bekerja karena kita melakukan interaksi secara terus menerus dengan server sehingga tidak boleh terjadi *loss connection*.
 - Fungsionalitas terbatas, tergantung pada kapasitas dan kemampuan server.
 
 ---
