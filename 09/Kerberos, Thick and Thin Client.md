@@ -87,6 +87,7 @@ KDC menjadi komponen penting dalam Kerberos karena menjamin integritas dan keama
 **Kelebihan:**
 - Lebih mandiri, karena dapat melakukan banyak fungsi tanpa bergantung pada server.
 - Pengguna dapat bekerja meskipun terputus dari jaringan.
+- Apabila terjadi kerusakan pada server client masih bisa digunakan dan lebih memiliki privasi.
 
 **Kekurangan:**
 - Membutuhkan perangkat keras yang lebih kuat dan lebih mahal.
