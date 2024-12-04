@@ -95,7 +95,7 @@ cd OTEL
 
 3. **Buat file otel-collector-config.yaml**
   
-Kita akan membuat konfigurasi **OTEL** secara custom sehingga terlebih dahulu membuat filte **otel-collector-config.yaml**
+Kita akan membuat konfigurasi **OTEL** secara custom sehingga terlebih dahulu membuat file **otel-collector-config.yaml**
   
 ```
 touch otel-collector-config.yaml
