@@ -11,9 +11,7 @@ Langkah-langkah deployment Hsura V2 telah didokumentasikan pada BAB sebelumnya. 
 
 ### Akses Server
 
-Kita akan menginstall **OpenTelemetry** pada server yang berbeda dengan server Hasura yang berjalan. Terlebih dahulu Login ke server yang akan dipakai menggunakan Windows Powershell atau Command Prompt. Akses server menggunakan SSH dengan informasi berikut:  
-- **SSH:** `ssh root@10.100.13.239`
-- **Password:** `P@ssw0rd`
+Kita akan menginstall **OpenTelemetry** pada server yang berbeda dengan server Hasura yang berjalan. Terlebih dahulu Login ke server yang akan dipakai menggunakan Windows Powershell atau Command Prompt.
 
 ### Install Docker
 
