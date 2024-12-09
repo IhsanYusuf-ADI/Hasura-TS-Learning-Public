@@ -254,5 +254,94 @@ status: 200 extension: "jpg"
 
 ## Analisis Hasura Metrics di Elastic  
 
+Berikut adalah penjelasan mengenai metrik yang dihasilkan oleh Hasura dalam proses observabilitasnya. Metrik-metrik ini memberikan wawasan tentang performa, status, dan operasi dari layanan.
 
+---
+
+### **1. Informasi Waktu**
+- **`@timestamp`**: Menunjukkan waktu saat metrik dicatat dalam format UTC ISO8601.
+- **Interval**: Beberapa metrik melibatkan durasi pengambilan data (misalnya, per detik atau menit).
+
+---
+
+### **2. Informasi Sumber Data**
+- **`host.hostname`**: Nama host atau server tempat metrik dihasilkan.
+- **`host.name`**: Nama lengkap atau alias untuk host.
+- **`service.name`**: Nama layanan atau aplikasi (contoh: "hasura").
+- **`data_stream.type`**: Jenis data, seperti `metrics`, `logs`, atau `traces`.
+- **`data_stream.dataset`**: Nama dataset terkait (contoh: `generic`).
+- **`data_stream.namespace`**: Namespace atau lingkungan (contoh: `default` atau `production`).
+
+---
+
+### **3. Jenis dan Kategori Metrik**
+- **`metric_name`**: Nama metrik yang mencerminkan jenis datanya, seperti:
+  - `hasura_graphql_requests_total`
+  - `hasura_otel_dropped_logs`
+  - `hasura_cache_request_count`
+- **`operation_type`**: Jenis operasi yang sedang diukur (misalnya, `query`, `mutation`, `subscription`, atau `unknown`).
+- **`reason`**: Alasan yang diberikan untuk kondisi tertentu (contoh: `buffer_full`, `send_failed`).
+
+  ![Screenshot (20)](https://github.com/user-attachments/assets/3d99b31c-86d6-4269-a85a-ae9409d70bb8)
+
+- **`status`**: Status hasil operasi (misalnya, `success`, `failed`, `hit`, `miss`).
+  
+![Screenshot (15)](https://github.com/user-attachments/assets/14eda52c-fff0-4555-ab45-5e37e66bb127)
+
+
+---
+
+### **4. Nilai Utama (Value)**
+- **Counter**: Nilai kumulatif yang terus bertambah, seperti total permintaan atau error.
+  - Contoh: `hasura_graphql_requests_total: 1`
+- **Gauge**: Nilai yang dapat naik atau turun, seperti penggunaan CPU atau koneksi aktif.
+- **Histogram**: Distribusi nilai untuk mengukur latency atau ukuran payload.
+- **Summary**: Statistik ringkasan, seperti rata-rata atau persentil.
+
+---
+
+### **5. Informasi Kontekstual**
+- **`operation_name`**: Nama operasi GraphQL (jika tersedia).
+- **`parameterized_query_hash`**: Hash unik dari query parameterisasi.
+- **`response_status`**: Status respons API (contoh: `success`, `failed`).
+   
+![Screenshot (17)](https://github.com/user-attachments/assets/91351b83-46ec-4f29-a07f-d71fce5b51f5)
+
+
+- **`error_message`** (opsional): Pesan kesalahan yang terkait dengan error.
+
+---
+
+### **6. Metadata Teknis**
+- **`_index`**: Indeks dalam sistem penyimpanan (contoh: Elasticsearch).
+- **`_id`**: ID unik untuk setiap entri metrik.
+- **`_version`**: Versi data jika ada modifikasi.
+
+---
+
+### **7. Field Khusus untuk Jenis Metrik Tertentu**
+#### **GraphQL**
+- **Field**: `operation_name`, `operation_type`, `response_status`, `hasura_graphql_requests_total`.
+
+#### **Cache**
+- **Field**: `hasura_cache_request_count`, `status` (apakah `hit` atau `miss`).
+
+#### **Event**
+- **Field**: `hasura_cron_events_invocation_total`, `hasura_oneoff_events_invocation_total`.
+
+#### **Telemetry**
+- **Field**: `hasura_otel_dropped_logs`, `hasura_otel_dropped_spans`, `reason`.
+
+---
+
+### **Contoh Field dalam Setiap Jenis Metrik**
+| **Jenis Metrik**   | **Field Utama**                                                                 |
+|---------------------|---------------------------------------------------------------------------------|
+| **GraphQL**         | `operation_name`, `operation_type`, `response_status`, `hasura_graphql_requests_total` |
+| **Cache**           | `hasura_cache_request_count`, `status`                                         |
+| **Events**          | `hasura_cron_events_invocation_total`, `hasura_oneoff_events_processed_total`  |
+| **Telemetry**       | `hasura_otel_dropped_logs`, `hasura_otel_dropped_spans`, `reason`              |
+| **Generic Metrics** | `host.hostname`, `service.name`, `data_stream.dataset`, `@timestamp`           |
+
+---
   
