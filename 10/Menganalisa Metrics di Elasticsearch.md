@@ -1,9 +1,254 @@
 # Menganalisa Metrics di Elasticsearch
-Kita akan mengakses Elastic menggunakan Kibana. 
-1. **Terlebih dahulu login ke kibana untuk mengakses GUI Elastic.**  
-  
-Masuk ke endpoint elasticsearch ganti port elastic 9200 (Port Default Elastic) menjadi 5601 (Port Default Kibana) dan lalu masukkan username dan password.
 
+## Panduan Penggunaan Elastic
+
+Kita akan mengakses GUI Elastic menggunakan Kibana. 
+  
+### Login ke Kibana
+  
+Terlebih dahulu login ke kibana untuk mengakses GUI Elastic. Masuk ke endpoint elasticsearch ganti port elastic 9200 (Port Default Elastic) menjadi 5601 (Port Default Kibana) dan lalu masukkan username dan password.
+  
+![screencapture-10-100-13-25-5601-login-2024-12-06-16_17_43](https://github.com/user-attachments/assets/e7f739b8-690c-47ce-ad4d-2a5a15e68568)
 
   
-2. **Setelah itu pergi ke Discover.**
+### Masuk ke Discover
+
+Setelah itu pergi ke Discover dengan cara klik `Discover` pada sidebar menu. Lebih jelasnya perhatikan gambar berikut.
+
+![Screenshot (5) (1)](https://github.com/user-attachments/assets/38c6ca93-7e31-4113-8093-3f014b3cd54a)
+  
+### Filter Data View
+  
+Kita dapat memfilter data yang ditampilkan dengan klik dropdown button di sebelah button `Data view` pada pojok kiri atas. 
+
+![Screenshot (6)](https://github.com/user-attachments/assets/88a40089-da56-456c-b219-44528eac1644)
+
+### Munculkan Metrics
+  
+Setelah itu, pilih metrics untuk memfilter data yang dimunculkan hanya terkhusus pada metrics, metrics yang dimaksud adalah metrics dari sistem observasi atau monitoring aplikasi, khususnya terkait penggunaan dan performa layanan Hasura GraphQL Engine. Metrics seperti ini digunakan untuk memantau aktivitas, performa, dan status sistem yang berjalan. Perhatikan gambar berikut untuk lebih jelasnya.
+
+![Screenshot (7)](https://github.com/user-attachments/assets/243118a8-cf76-4d37-9340-2045fd7f152b)
+
+### Fitur Filter Metrics
+
+Kita dapat memfilter data Metrics dengan menggunakan KQL. KQL (Kibana Query Language) adalah bahasa kueri yang memungkinkan pengguna untuk membuat kueri secara cepat dan intuitif di Kibana, terutama untuk pencarian dan penyaringan data yang disimpan di Elasticsearch. Berikut panduan penggunaannya.
+  
+#### Pilih kolom `Filter your data using KQL syntax`.
+     
+   ![Screenshot (7) (1)](https://github.com/user-attachments/assets/b63d3567-2253-4d55-8826-284dbe5db255)
+
+#### Ketikan field atau element yang ingin dicari atau difilter
+  
+Dalam hal ini kita menfilter metrics berdasarkan `host.name` atau `nama host` yang mengacu pada identitas atau nama dari server atau pod yang menangani permintaan.  
+
+![Screenshot (8)](https://github.com/user-attachments/assets/24aeea6d-f23a-4cef-bf0d-731e035606be)
+
+  
+#### Equals dan exist
+  
+Ketika selesai mengetikkan `field` atau `elemen` pada kolom filter, kolom filter akan memberikan `suggestion` antara `equals` dan `exist`.
+  
+![Screenshot (9)](https://github.com/user-attachments/assets/b9c51bff-9bb2-4338-b622-807cc2091c2c)
+  
+**Perbedaan `:` (Equal Some Value) dengan `:*` (Exist in Any Form)**
+  
+Berikut adalah perbedaan utama antara penggunaan `:` dan `:*` di **Kibana Query Language (KQL)**:
+  
+---
+
+1. **`:` (Equal Some Value)**
+  
+- **Deskripsi:**
+  Operator ini digunakan untuk mencocokkan dokumen di mana sebuah field memiliki nilai **spesifik** yang ditentukan.
+
+- **Karakteristik:**
+  - Mencari kecocokan nilai secara eksplisit.
+  - Mengabaikan dokumen yang tidak memiliki field tersebut.
+
+- **Contoh:**
+  - **Mencari dokumen dengan field `status` yang bernilai `200`:**
+    ```kql
+    status: 200
+    ```
+    Artinya: Hanya dokumen yang memiliki field `status` dengan nilai **tepat** `200` yang akan ditemukan.
+
+  - **Mencari dokumen dengan field `extension` yang bernilai `"jpg"`:**
+    ```kql
+    extension: "jpg"
+    ```
+
+---
+
+2. **`:*` (Exist in Any Form)**
+
+- **Deskripsi:**
+  Operator ini digunakan untuk memeriksa apakah sebuah field **ada** di dokumen, terlepas dari nilainya.
+
+- **Karakteristik:**
+  - Tidak peduli nilai dari field, selama field tersebut ada.
+  - Berguna untuk memastikan keberadaan field di dokumen.
+
+- **Contoh:**
+  - **Mencari dokumen yang memiliki field `status`, apa pun nilainya:**
+    ```kql
+    status:*
+    ```
+    Artinya: Semua dokumen yang memiliki field `status`, bahkan jika nilainya `null`, akan ditemukan.
+
+  - **Mencari dokumen yang memiliki field `extension`:**
+    ```kql
+    extension:*
+    ```
+
+---
+
+**Perbandingan Equal Some Value and Exist in Any Form**
+
+| Aspek               | `:` (Equal Some Value)            | `:*` (Exist in Any Form)      |
+|----------------------|-----------------------------------|-------------------------------|
+| **Tujuan**          | Mencari dokumen dengan nilai spesifik. | Memeriksa keberadaan field.  |
+| **Menyaring Nilai** | Ya, hanya dokumen dengan nilai tertentu. | Tidak, semua dokumen dengan field tersebut ditemukan. |
+| **Field Tidak Ada** | Tidak mengembalikan dokumen.       | Tetap mengembalikan dokumen jika field ada. |
+
+---
+
+Dalam hal ini, kita memilih equals untuk hanya menampilkan data dengan nilai tertentu saja. 
+  
+#### Spesifik Value
+
+Ketikkan value dari field yang ingin kita cari atau filter. Namun, KQL filter akan menampilkan suggestion value yang tersedia pada metrics.
+  
+![Screenshot (10)](https://github.com/user-attachments/assets/78fdaefc-5efa-4223-bff1-b6ab8f3cd81d)
+
+Disini kita memilih `host.name` dengan value `hasura-ihsan-64595f95b5-hps99:8080`. Sehingga data yang ditampilkan nantinya hanya data yang milik `hasura-ihsan-64595f95b5-hps99:8080` saja. Hasilnya dapat dilihat pada gambar di bawah ini.
+  
+![Screenshot (11)](https://github.com/user-attachments/assets/70b93dab-f781-4927-bd87-49080217c48c)
+  
+  
+#### Toggle Details
+
+Kita bisa melihat detail dari sebuah metric dengan mengklik button berikut.
+
+![Screenshot (12)](https://github.com/user-attachments/assets/4d5e3a78-636c-4f2b-bc77-4a5cff69ad78)
+  
+Tampilan detail dari metricsnya seperti berikut. 
+  
+![Screenshot (13)](https://github.com/user-attachments/assets/e1812009-520b-4a1e-b28a-cc63d511d3cf)
+
+  
+Toggle details ini untuk melihat `element` atau `field` dan `value` dari metric yang dipilih secara lebih rapih dan mudah dibaca. Kita dapat melihat atau membaca metric dalam bentuk `tabel` ataupun file `json` seperti gambar berikut.
+
+![Screenshot (13)](https://github.com/user-attachments/assets/a14edd11-fc7e-4d1d-9364-a903ca1ccb2c)
+
+  
+#### Operator Dasar dalam KQL (Kibana Query Language) 
+
+KQL mendukung berbagai operator logika dasar seperti **AND**, **OR**, dan **NOT** untuk mempermudah pencarian dan penyaringan data di Kibana.
+
+![Screenshot (14)](https://github.com/user-attachments/assets/05851b37-52dc-4437-9276-a30b4c5c2ea5)
+
+---
+
+1. **AND (Operator Logika "Dan")**
+   
+Digunakan untuk mencari dokumen yang memenuhi **semua** kondisi yang ditentukan.
+  
+**Contoh:**
+  
+Mencari dokumen dengan `status` bernilai `200` dan ekstensi file `jpg`:
+
+```kql
+status: 200 AND extension: "jpg"
+```
+  
+**Artinya:** Dokumen harus memiliki field status bernilai 200 dan field extension bernilai "jpg".
+  
+2. **OR (Operator Logika "Atau")**
+   
+Digunakan untuk mencari dokumen yang memenuhi salah satu kondisi yang ditentukan.
+  
+**Contoh:**
+  
+Mencari dokumen dengan status bernilai 200 atau ekstensi file jpg:
+
+```kql
+status: 200 OR extension: "jpg"
+```
+  
+**Artinya:** Dokumen akan dipilih jika memiliki field status bernilai 200 atau field extension bernilai "jpg".
+
+3. **NOT (Operator Negasi)**
+   
+Digunakan untuk mengecualikan dokumen yang memenuhi kondisi tertentu.
+  
+**Contoh:**
+  
+Mencari dokumen dengan status yang bukan 404:
+  
+```kql
+NOT status: 404
+```
+  
+**Artinya:** Dokumen akan dipilih jika field status bukan bernilai 404.
+
+4. **Kombinasi AND, OR, NOT**
+   
+Operator dapat digabungkan untuk membuat query yang lebih kompleks.
+  
+**Contoh:**
+  
+Mencari dokumen dengan status bernilai 200 dan ekstensi file jpg atau png:
+  
+```kql
+status: 200 AND (extension: "jpg" OR extension: "png")
+```
+
+**Artinya:** Dokumen harus memiliki field status bernilai 200 dan field extension bernilai "jpg" atau "png".
+
+Mencari dokumen dengan ekstensi file jpg, tetapi bukan status 404:
+
+```kql
+extension: "jpg" AND NOT status: 404
+```
+  
+5. **Tanda Kurung (Parentheses)**
+    
+Digunakan untuk mengelompokkan logika dalam query agar lebih jelas atau untuk menentukan prioritas eksekusi.
+
+**Contoh:**
+Mencari dokumen dengan status 200 atau 404, dan ekstensi file jpg:
+
+```kql
+(status: 200 OR status: 404) AND extension: "jpg"
+```
+
+**Artinya:** Dokumen harus memiliki status 200 atau 404, dan ekstensi "jpg".
+
+6. **Operator Logika Default**
+   
+Jika operator logika tidak ditentukan, KQL menggunakan operator AND secara default.
+
+**Contoh:**
+  
+Query tanpa operator eksplisit:
+  
+```kql
+status: 200 extension: "jpg"
+```
+
+**Artinya:** Sama seperti status: 200 AND extension: "jpg".
+
+#### Contoh Kombinasi
+
+1. **Mencari dokumen di mana field `status` ada, tetapi nilainya bukan `404`:**
+   ```kql
+   status:* AND NOT status: 404
+   ```
+
+2. **Mencari dokumen di mana field `user_agent` ada dan memiliki nilai `"Chrome"`:**
+   ```kql
+   user_agent:* AND user_agent: "Chrome"
+   ```
+
+---
+  
