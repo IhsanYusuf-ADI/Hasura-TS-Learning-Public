@@ -4,47 +4,47 @@
 
 Kita akan mengakses GUI Elastic menggunakan Kibana. 
   
-### Login ke Kibana
+### 1. Login ke Kibana
   
 Terlebih dahulu login ke kibana untuk mengakses GUI Elastic. Masuk ke endpoint elasticsearch ganti port elastic 9200 (Port Default Elastic) menjadi 5601 (Port Default Kibana) dan lalu masukkan username dan password.
   
 ![screencapture-10-100-13-25-5601-login-2024-12-06-16_17_43](https://github.com/user-attachments/assets/e7f739b8-690c-47ce-ad4d-2a5a15e68568)
 
   
-### Masuk ke Discover
+### 2. Masuk ke Discover
 
 Setelah itu pergi ke Discover dengan cara klik `Discover` pada sidebar menu. Lebih jelasnya perhatikan gambar berikut.
 
 ![Screenshot (5) (1)](https://github.com/user-attachments/assets/38c6ca93-7e31-4113-8093-3f014b3cd54a)
   
-### Filter Data View
+### 3. Filter Data View
   
 Kita dapat memfilter data yang ditampilkan dengan klik dropdown button di sebelah button `Data view` pada pojok kiri atas. 
 
 ![Screenshot (6)](https://github.com/user-attachments/assets/88a40089-da56-456c-b219-44528eac1644)
 
-### Munculkan Metrics
+### 4. Munculkan Metrics
   
 Setelah itu, pilih metrics untuk memfilter data yang dimunculkan hanya terkhusus pada metrics, metrics yang dimaksud adalah metrics dari sistem observasi atau monitoring aplikasi, khususnya terkait penggunaan dan performa layanan Hasura GraphQL Engine. Metrics seperti ini digunakan untuk memantau aktivitas, performa, dan status sistem yang berjalan. Perhatikan gambar berikut untuk lebih jelasnya.
 
 ![Screenshot (7)](https://github.com/user-attachments/assets/243118a8-cf76-4d37-9340-2045fd7f152b)
 
-### Fitur Filter Metrics
+### 5. Fitur Filter Metrics
 
 Kita dapat memfilter data Metrics dengan menggunakan KQL. KQL (Kibana Query Language) adalah bahasa kueri yang memungkinkan pengguna untuk membuat kueri secara cepat dan intuitif di Kibana, terutama untuk pencarian dan penyaringan data yang disimpan di Elasticsearch. Berikut panduan penggunaannya.
   
-#### Pilih kolom `Filter your data using KQL syntax`.
+#### 1. Pilih kolom `Filter your data using KQL syntax`.
      
    ![Screenshot (7) (1)](https://github.com/user-attachments/assets/b63d3567-2253-4d55-8826-284dbe5db255)
 
-#### Ketikan field atau element yang ingin dicari atau difilter
+#### 2. Ketikan field atau element yang ingin dicari atau difilter
   
 Dalam hal ini kita menfilter metrics berdasarkan `host.name` atau `nama host` yang mengacu pada identitas atau nama dari server atau pod yang menangani permintaan.  
 
 ![Screenshot (8)](https://github.com/user-attachments/assets/24aeea6d-f23a-4cef-bf0d-731e035606be)
 
   
-#### Equals dan exist
+#### 3. Equals dan exist
   
 Ketika selesai mengetikkan `field` atau `elemen` pada kolom filter, kolom filter akan memberikan `suggestion` antara `equals` dan `exist`.
   
@@ -114,7 +114,7 @@ Berikut adalah perbedaan utama antara penggunaan `:` dan `:*` di **Kibana Query 
 
 Dalam hal ini, kita memilih equals untuk hanya menampilkan data dengan nilai tertentu saja. 
   
-#### Spesifik Value
+#### 4. Spesifik Value
 
 Ketikkan value dari field yang ingin kita cari atau filter. Namun, KQL filter akan menampilkan suggestion value yang tersedia pada metrics.
   
@@ -125,7 +125,7 @@ Disini kita memilih `host.name` dengan value `hasura-ihsan-64595f95b5-hps99:8080
 ![Screenshot (11)](https://github.com/user-attachments/assets/70b93dab-f781-4927-bd87-49080217c48c)
   
   
-#### Toggle Details
+#### 5. Toggle Details
 
 Kita bisa melihat detail dari sebuah metric dengan mengklik button berikut.
 
@@ -141,7 +141,7 @@ Toggle details ini untuk melihat `element` atau `field` dan `value` dari metric 
 ![Screenshot (13)](https://github.com/user-attachments/assets/a14edd11-fc7e-4d1d-9364-a903ca1ccb2c)
 
   
-#### Operator Dasar dalam KQL (Kibana Query Language) 
+#### 6. Operator Dasar dalam KQL (Kibana Query Language) 
 
 KQL mendukung berbagai operator logika dasar seperti **AND**, **OR**, dan **NOT** untuk mempermudah pencarian dan penyaringan data di Kibana.
 
@@ -238,7 +238,7 @@ status: 200 extension: "jpg"
 
 **Artinya:** Sama seperti status: 200 AND extension: "jpg".
 
-#### Contoh Kombinasi
+#### 7. Contoh Kombinasi
 
 1. **Mencari dokumen di mana field `status` ada, tetapi nilainya bukan `404`:**
    ```kql
