@@ -17,7 +17,8 @@ Linux memiliki struktur direktori yang hierarkis. Berikut adalah beberapa direkt
 | `/usr`    | Aplikasi pengguna dan library          |
 
 ### Ilustrasi Struktur Direktori Linux
-![Struktur Direktori Linux](./images/struktur-direktori-linux.png)
+![Struktur Direktori Linux](![image](https://github.com/user-attachments/assets/c6f6770e-447e-4754-a549-370697e7eb9b)
+)
 
 ---
 
