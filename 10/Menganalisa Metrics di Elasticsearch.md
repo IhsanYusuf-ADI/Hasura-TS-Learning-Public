@@ -281,10 +281,28 @@ Berikut adalah penjelasan mengenai metrik yang dihasilkan oleh Hasura dalam pros
   - `hasura_cache_request_count`
 - **`operation_type`**: Jenis operasi yang sedang diukur (misalnya, `query`, `mutation`, `subscription`, atau `unknown`).
 - **`reason`**: Alasan yang diberikan untuk kondisi tertentu (contoh: `buffer_full`, `send_failed`).
+  - **Definisi**: 
+    Field ini menjelaskan alasan spesifik untuk suatu status atau kegagalan.
+  - **Nilai Umum**:
+    - `buffer_full`: Terjadi ketika buffer penuh, sehingga data tidak dapat dikirim atau diterima.
+    - `send_failed`: Gagal mengirim data karena alasan tertentu, seperti masalah jaringan.
+    - `connection_failed`: Koneksi tidak berhasil terjalin.
+  - **Contoh Penggunaan**:
+    - Jika log menampilkan `reason: buffer_full`, hal ini biasanya mengindikasikan adanya kemacetan pada sistem.
 
   ![Screenshot (20)](https://github.com/user-attachments/assets/3d99b31c-86d6-4269-a85a-ae9409d70bb8)
 
 - **`status`**: Status hasil operasi (misalnya, `success`, `failed`, `hit`, `miss`).
+  - **Definisi**: 
+    Menandakan hasil operasi yang lebih spesifik atau status cache.
+  - **Nilai Umum**:
+    - `hit`: Data ditemukan di cache dan digunakan.
+    - `miss`: Data tidak ditemukan di cache, sehingga harus diambil dari sumber utama.
+    - `success`: Operasi berhasil.
+    - `failed`: Operasi gagal.
+  - **Contoh Penggunaan**:
+    - Log dengan `status: hit` menunjukkan bahwa data berhasil diambil dari cache, mempercepat proses.
+
   
 ![Screenshot (15)](https://github.com/user-attachments/assets/14eda52c-fff0-4555-ab45-5e37e66bb127)
 
@@ -304,7 +322,15 @@ Berikut adalah penjelasan mengenai metrik yang dihasilkan oleh Hasura dalam pros
 - **`operation_name`**: Nama operasi GraphQL (jika tersedia).
 - **`parameterized_query_hash`**: Hash unik dari query parameterisasi.
 - **`response_status`**: Status respons API (contoh: `success`, `failed`).
-   
+  - **Definisi**: 
+    Field ini menunjukkan status respons dari operasi yang dilakukan oleh API Hasura atau telemetri.
+  - **Nilai Umum**:
+    - `success`: Operasi berhasil dilakukan.
+    - `failed`: Operasi gagal.
+    - `unknown`: Tidak dapat ditentukan statusnya.
+  - **Contoh Penggunaan**:
+    - Jika `response_status` adalah `failed`, maka penyebab kegagalan dapat dianalisis melalui field `reason`.
+
 ![Screenshot (17)](https://github.com/user-attachments/assets/91351b83-46ec-4f29-a07f-d71fce5b51f5)
 
 
@@ -344,4 +370,93 @@ Berikut adalah penjelasan mengenai metrik yang dihasilkan oleh Hasura dalam pros
 | **Generic Metrics** | `host.hostname`, `service.name`, `data_stream.dataset`, `@timestamp`           |
 
 ---
+
+### **8. Jenis Subscription dalam Hasura: `live-query` vs. `streaming`**
   
+![Screenshot (19)](https://github.com/user-attachments/assets/93ef9823-88f6-4b1a-b3c7-6505c140f24c)
+  
+
+Pada Hasura, field `subscription_kind` mendefinisikan jenis mekanisme subscription yang digunakan saat memanfaatkan **API Subscription**. Ada dua jenis utama: **`live-query`** dan **`streaming`**. Berikut adalah penjelasan detail mengenai masing-masing jenis:
+
+---
+
+#### **1. `live-query`**
+
+##### **Definisi**
+- Ini adalah pendekatan tradisional yang digunakan oleh Hasura untuk berlangganan perubahan data.
+- **Live-query** melakukan polling secara periodik pada server untuk memeriksa perubahan di database.
+- Ketika ada perubahan terdeteksi, data yang diperbarui akan dikirimkan ke klien.
+
+##### **Karakteristik Utama**
+- Memberikan snapshot terbaru dari hasil query kepada klien.
+- Cocok untuk aplikasi yang tidak memerlukan latensi sangat rendah tetapi tetap membutuhkan data yang selalu diperbarui.
+- Beban server lebih tinggi karena adanya polling konstan pada database.
+
+##### **Kasus Penggunaan**
+- Memantau data yang relatif statis, seperti total jumlah pengguna atau statistik sistem.
+
+---
+
+#### **2. `streaming`**
+
+##### **Definisi**
+- Jenis subscription ini memanfaatkan fitur PostgreSQL seperti **logical decoding** dan **change data capture (CDC)**.
+- Dengan **streaming**, perubahan data langsung dikirim ke klien secara real-time.
+
+##### **Karakteristik Utama**
+- Memberikan pembaruan secara real-time tanpa polling, sehingga lebih efisien untuk beban kerja tinggi.
+- Data dikirim secara incremental, artinya hanya perubahan (delta) yang didorong ke klien.
+- Ideal untuk skenario yang membutuhkan pembaruan dengan latensi rendah.
+
+##### **Kasus Penggunaan**
+- Aplikasi dengan umpan data langsung, seperti harga saham, skor pertandingan, atau notifikasi transaksi.
+
+---
+
+#### **Perbandingan: `live-query` vs. `streaming`**
+
+| **Kriteria**          | **Live-Query**                     | **Streaming**                     |
+|-----------------------|-------------------------------------|------------------------------------|
+| **Metode Pembaruan**  | Polling                            | Push-based (real-time)            |
+| **Beban Server**      | Tinggi (karena polling)            | Rendah (efisien)                  |
+| **Latensi**           | Sedang (berbasis interval polling) | Rendah (real-time)                |
+| **Data yang Dikirim** | Snapshot hasil query               | Pembaruan incremental saja        |
+| **Kasus Penggunaan**  | Pembaruan real-time non-kritis     | Pembaruan real-time yang krusial  |
+
+---
+
+#### **Cara Kerja `subscription_kind`**
+- Field `subscription_kind` menentukan mekanisme yang digunakan untuk API subscription:
+  1. **`live-query`**: Digunakan untuk subscription data berbasis polling.
+  2. **`streaming`**: Digunakan untuk subscription data real-time berdasarkan perubahan.
+
+---
+
+#### **Catatan:**
+- Pilih **`streaming`** jika latensi rendah dan responsivitas real-time sangat penting.
+- Pilih **`live-query`** untuk aplikasi sederhana yang tidak memerlukan pembaruan segera tetapi tetap membutuhkan data yang segar.
+
+---
+
+### **9. Field `body`**
+
+  ![Screenshot (18)](https://github.com/user-attachments/assets/eb708477-a92e-4854-a376-dac4e3d2cc58)
+
+  
+- **Definisi**:
+  Field `body` mencakup detail atau payload yang berkaitan dengan operasi tertentu.
+- **Kemungkinan Nilai** (Berdasarkan Gambar yang Diunggah):
+  - **`"Closing all websocket connections as the metadata has changed"`**:
+    - Artinya: Semua koneksi websocket ditutup karena metadata telah diperbarui.
+    - Biasanya terjadi setelah perubahan pada konfigurasi metadata.
+  - **`"Otel exporter: Delivered metrics"`**:
+    - Artinya: Metode telemetri berhasil mengirim metrik ke sistem observasi.
+  - **`"Otel exporter: Delivered spans"`**:
+    - Artinya: Spans (jejak log distribusi) berhasil dikirim.
+  - **`"Otel exporter: Failed to deliver logs"`**:
+    - Artinya: Gagal mengirim log telemetri, kemungkinan karena koneksi HTTP bermasalah.
+    - Alasan kegagalan biasanya terdapat pada `reason` (contoh: `ConnectionFailure`).
+  - **`"Obtained telemetry sample"`**:
+    - Artinya: Sampel telemetri berhasil diambil untuk diproses.
+
+---
