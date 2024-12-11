@@ -5,7 +5,9 @@ Kita melakukan hit elastic mengunakan Postman dengan cara menjalankan Perintah P
 
 1. Berikut untuk penggunaan perintah Put pada postman
 
+Ini bertujuan untuk membuat directory baru pada Index Management Elastic.
    Lakukan hit dengan alamat 10.100.13.25:9200/nama-indexmu -> Klik Send
+   Sebelum klik `SEND` terlebih dahulu set 
 ![image](https://github.com/user-attachments/assets/c294f538-8cee-4aba-9a9a-4376217ad3df)
 
 
