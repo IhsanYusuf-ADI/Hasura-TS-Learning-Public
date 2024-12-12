@@ -371,3 +371,25 @@ Kode **dokumen JSON** untuk **data transaksi APM (Application Performance Monito
    Waktu ketika transaksi ini dimulai.
 - **`timestamp.us`**: `1733815369236887`  
    Waktu transaksi dalam format **microseconds** sejak epoch time.
+
+## Latency Per Operation Name
+
+Gunakan filter custom KQL untuk menampilkan grafik hanya `metrics` dengan `operation name` tertentu. Dalam hal ini aku mau filter by operation name dengan menuliskan di kolom search custom KQL. Berikut contoh commandnya.
+  
+```
+labels.graphql_operation_name : "getAttendance" 
+```
+  
+Lebih jelasnya perhatikan gambar berikut.
+   
+![image](https://github.com/user-attachments/assets/0f752873-2719-41f8-afc4-684a61f38328)
+  
+Setiap `operation name` tentu tidak hanya melakukan sekali `transaction`.Kita dapat melihat latency per transaction atau per hit seperti berikut.
+
+![image](https://github.com/user-attachments/assets/f196641d-e464-4460-8b51-df7dbd430737)
+
+Kita juga bisa melihat average dari keseluruhan hit/transaction dengan operation name yang sama seperti gambar berikut.
+  
+![image](https://github.com/user-attachments/assets/56b5145a-1362-4e95-9969-8cd1cf9849fc)
+
+  
