@@ -193,7 +193,7 @@ Editor vim adalah alat pengeditan teks interaktif yang memungkinkan Anda membuat
 2. **Input Mode**: Untuk memasukkan teks. Tekan `Esc` untuk kembali ke Command Mode.
 3. **Last Line Mode**: Tekan `:` untuk menjalankan perintah lanjutan.
 
-### Perintah Dasar Navigasi Vim
+##### Perintah Dasar Navigasi Vim
 | Perintah | Aksi |
 |----------|------|
 | h        | Gerak mundur satu karakter |
