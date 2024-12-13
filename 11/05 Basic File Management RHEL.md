@@ -260,4 +260,6 @@ Setelah selesai melakukan modifikasi, Anda dapat menyimpan atau membatalkan peru
 
 Tanda seru (`!`) dapat digunakan untuk mengabaikan perlindungan tulis pada file bagi pemiliknya.
 
+**Dokumentasi terakhir `Saving and Quitting vim` Halaman:142**
+
 
