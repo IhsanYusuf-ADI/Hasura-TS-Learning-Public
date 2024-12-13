@@ -1,4 +1,4 @@
-# Manajemen File Dasar di Linux
+# Basic File Management
 
 Linux mendukung berbagai jenis file yang diidentifikasi berdasarkan jenis data yang disimpan. File-file ini bisa berupa teks biasa atau format biner, yang merupakan jenis file paling umum. Ada juga file lain yang menyimpan informasi perangkat atau hanya menunjuk ke data yang sama di disk. Pemahaman yang baik tentang jenis-jenis file Linux penting bagi pengguna dan administrator Linux.
 
