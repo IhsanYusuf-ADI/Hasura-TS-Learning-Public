@@ -14,17 +14,27 @@ Terdapat dua cara untuk membuat link file dan direktori di RHEL (Red Hat Enterpr
 
 **Contoh:** Dua nama file—`file10` dan `file20`—keduanya berbagi nomor inode **10176147**. Masing-masing nama file pada dasarnya adalah hard link yang menunjuk ke inode yang sama.
 
+![image](https://github.com/user-attachments/assets/4c913e3e-bb7a-4e88-b58a-ec31531005c0)
+
+  
+
 ### **Karakteristik Hard Link:**
 1. Hard link **tidak dapat** melintasi batas sistem file.
 2. Hard link **tidak dapat** digunakan untuk menghubungkan direktori karena pembatasan dalam Linux untuk menghindari masalah dengan beberapa perintah.
 
 ### **Contoh Perintah Hard Link:**
 Untuk membuat file kosong bernama `file10` dan hard link bernama `file20` di direktori yang sama:
+  
 ```bash
 $ touch file10
 $ ln file10 file20
 $ ls -li
 ```
+
+![image](https://github.com/user-attachments/assets/008e0fbb-6eb1-4d7e-ae2e-18fa40a8db4c)  
+![image](https://github.com/user-attachments/assets/4c1a23da-f82f-4734-a823-d0d22e108b3a)
+
+  
 **Keluaran:**
 Kolom **1** menampilkan nomor inode yang sama (**10176147**), sedangkan kolom **3** menampilkan jumlah link dari file yang di-hard link (misalnya `file10` menunjuk ke `file20` dan sebaliknya). Jika file asli (`file10`) dihapus, data masih dapat diakses melalui `file20`.
 
@@ -36,6 +46,10 @@ Setiap kali Anda menambahkan hard link ke file yang sudah ada, jumlah link akan 
 
 Dengan soft link, Anda dapat mengakses file melalui nama asli maupun shortcut. Setiap soft link memiliki nomor inode unik yang menyimpan **path** menuju file yang ditautkan. Untuk symlink, jumlah link tidak bertambah atau berkurang; setiap file yang di-symlink mendapatkan nomor inode baru.
 
+![image](https://github.com/user-attachments/assets/34ddfe86-a054-4599-a265-715a463d71b0)
+
+  
+
 ### **Karakteristik Soft Link:**
 1. Soft link **dapat melintasi** batas sistem file.
 2. Soft link **dapat digunakan** untuk menghubungkan direktori karena hanya menyimpan path ke objek tujuan.
@@ -43,19 +57,29 @@ Dengan soft link, Anda dapat mengakses file melalui nama asli maupun shortcut. S
 
 ### **Contoh Perintah Soft Link:**
 Untuk membuat soft link untuk `file10` dengan nama `soft10` di direktori yang sama:
+  
 ```bash
 $ ln -s file10 soft10
 $ ls -l
 ```
+
+![image](https://github.com/user-attachments/assets/302d8e40-46e8-4edf-b027-019981353304)  
+
+  
 **Keluaran:**
 - Huruf **`l`** di kolom kedua menandakan bahwa `soft10` adalah symbolic link.
 - Tanda panah (`->`) menunjukkan file asli yang ditautkan.
+
+  ![image](https://github.com/user-attachments/assets/f16f1012-4568-406d-8106-9ed50a905f93)
 
 Jika file asli (`file10`) dihapus, link `soft10` akan tetap ada tetapi menunjuk ke file yang tidak ada (broken link).
 
 **Direktori Soft Link di RHEL 8:**
 RHEL 8 memiliki empat direktori soft link di bawah `/`.
 
+![image](https://github.com/user-attachments/assets/04a06489-5da5-4a6f-9fa9-22ebc5773b69)
+
+  
 ---
 ## **Perbedaan antara Copying dan Linking**
 Terdapat perbedaan utama antara operasi **copying** dan **linking**. Tabel berikut menjelaskan kapan harus menggunakan copy atau link (hard link dan soft link):
@@ -76,3 +100,5 @@ Terdapat perbedaan utama antara operasi **copying** dan **linking**. Tabel berik
 Perbedaan-perbedaan ini penting untuk dipahami ketika Anda perlu memutuskan apakah akan menggunakan operasi **copy** atau **link** (hard link atau soft link). Pilih pendekatan yang paling sesuai dengan kebutuhan Anda berdasarkan tujuan dan karakteristik file atau direktori yang ingin dihubungkan.
 
 ---
+
+**Dokumentasi dari halaman 151 sampai pada terakhir `Differences between Copying and Linking` Halaman:155**
