@@ -135,15 +135,22 @@ Baik menggunakan proyek sampel atau data kita sendiri, kita bisa langsung menjal
    ```bash
    ddn connector init my_connector -i
    ```
-  
-4. **Introspeksi Sumber Data**
+
+4. **Deploy Postgres Local**
+   Inisialisasi postgres secara local menggunakan docker compose:
+          
+   ```bash
+   docker compose -f app\connector\mypostgres\compose.postgres-adminer.yaml up -d
+   ```
+     
+5. **Introspeksi Sumber Data**
    Jalankan introspeksi sumber data:
    
    ```bash
    ddn connector introspect my_connector
    ```
    
-5. **Tambahkan Sumber Daya**
+6. **Tambahkan Sumber Daya**
    Buat metadata untuk model, command, dan relasi:
    
    ```bash
@@ -152,27 +159,27 @@ Baik menggunakan proyek sampel atau data kita sendiri, kita bisa langsung menjal
    ddn relationship add my_connector '*'
    ```
    
-6. **Build Supergraph untuk Pengembangan Lokal**
+7. **Build Supergraph untuk Pengembangan Lokal**
    Buat build lokal supergraph:
    
    ```bash
    ddn supergraph build local
    ```
    
-7. **Jalankan Supergraph**
+8. **Jalankan Supergraph**
    Mulai supergraph menggunakan Docker:
    ```bash
    ddn run docker-start
    ```
    
-8. **Deploy ke Hasura DDN**
+9. **Deploy ke Hasura DDN**
    Inisialisasi proyek di Hasura DDN:
    
    ```bash
    ddn project init
    ```
    
-9. **Build dan Deploy Supergraph**
+10. **Build dan Deploy Supergraph**
    Bangun dan deploy supergraph ke Hasura DDN:
    
    ```bash
