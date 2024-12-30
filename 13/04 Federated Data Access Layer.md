@@ -14,6 +14,41 @@ Konsumen FDAL mencakup berbagai kebutuhan, mulai dari akses data realtime dengan
 - **Pengembang pihak ketiga**
 - **Aplikasi AI dan LLMs (Large Language Models)** yang sedang berkembang
 
+![image](https://github.com/user-attachments/assets/ff72171a-94d7-467c-b58c-1a9aa45f160f)
+
+Gambar berikut menjelaskan arsitektur Federated Data Access Layer (FDAL) yang berfungsi untuk menghubungkan berbagai sumber data secara fleksibel dan aman, sambil memastikan kepatuhan terhadap model domain dan kebutuhan bisnis.
+
+#### Komponen-Komponen
+
+##### 1. Produk, Microservices, APIs, Internal Apps, dan LLMs/AI
+- Bagian atas gambar menggambarkan berbagai konsumen dari FDAL, seperti:
+  - **Produk/microservices/BFFs (Backend for Frontends)**: Aplikasi atau layanan internal.
+  - **APIs**: Konsumen yang berinteraksi melalui API standar.
+  - **Internal Apps**: Misalnya, aplikasi analitik atau pelaporan internal.
+  - **LLMs/AI**: Aplikasi berbasis kecerdasan buatan yang menggunakan FDAL untuk mengakses data.
+
+##### 2. Federated Data Access Layer
+- Lapisan ini bertindak sebagai penghubung antara konsumen di atas dan berbagai domain data di bawahnya.
+- FDAL menyediakan akses ke data secara real-time, konsisten, dan sesuai dengan kebijakan otorisasi.
+
+##### 3. Domain (data + business logic)
+- Di bawah FDAL, terdapat beberapa domain yang mewakili sumber data yang terpisah tetapi tetap terintegrasi melalui FDAL.
+- Setiap domain mencakup:
+  - **Data**: Data mentah atau informasi dari sumbernya.
+  - **Business Logic**: Logika bisnis spesifik domain, seperti validasi, transformasi, dan otorisasi.
+- **Tim**: Masing-masing domain dikelola oleh tim yang independen, memungkinkan federasi dan kolaborasi antar domain.
+
+##### 4. Koneksi Antar Domain
+- Garis-garis antar elemen di setiap domain menunjukkan hubungan atau integrasi antar elemen data di dalam domain tersebut.
+- Garis horizontal antar domain menunjukkan adanya orkestrasi atau agregasi data lintas domain.
+
+#### Tujuan Arsitektur
+
+- **Federasi Data**: Menghubungkan sumber data tanpa perlu memindahkan atau menduplikasi data.
+- **Efisiensi & Kepatuhan**: Mengurangi biaya, mencegah data duplikasi, dan meningkatkan kualitas data dengan kontrol otorisasi terpusat.
+- **Kolaborasi**: Mendukung model operasi lintas domain yang stabil dan terstandardisasi.
+- **Skalabilitas**: Memungkinkan pengembangan independen oleh tim domain masing-masing.
+
 ---
 
 ## Manfaat FDAL
