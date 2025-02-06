@@ -154,4 +154,3 @@ Dalam Kubernetes, **Network Policy** digunakan untuk mengontrol komunikasi antar
 | **Rate Limiting & Query Timeout** | Mencegah API abuse & serangan DDoS |
 | **Alerting & Incident Response** | Memantau & merespons anomali dengan cepat |
 
-Jika ada kasus spesifik yang ingin didiskusikan, saya siap membantu! 🚀
