@@ -4,7 +4,7 @@ Keamanan dalam monitoring Hasura sangat penting untuk memastikan sistem tetap am
 
 ---
 
-## 1️⃣ Firewall
+## 1. Firewall
 Firewall digunakan untuk menyaring lalu lintas jaringan berdasarkan aturan keamanan.
 
 ### Membatasi Akses ke Hasura dan Endpoint Monitoring
@@ -33,7 +33,7 @@ Firewall digunakan untuk menyaring lalu lintas jaringan berdasarkan aturan keama
 
 ---
 
-## 2️⃣ DNS Security
+## 2. DNS Security
 DNS digunakan untuk mengarahkan request ke Hasura dan layanan terkait.
 
 ### Gunakan Private DNS untuk Monitoring
@@ -70,7 +70,7 @@ DNS digunakan untuk mengarahkan request ke Hasura dan layanan terkait.
 
 ---
 
-## 3️⃣ Network Policy
+## 3. Network Policy
 Dalam Kubernetes, **Network Policy** digunakan untuk mengontrol komunikasi antar **Pods** dan **Namespaces**.
 
 ### Membatasi Akses Layanan Hasura
@@ -117,9 +117,7 @@ Dalam Kubernetes, **Network Policy** digunakan untuk mengontrol komunikasi antar
 
 ---
 
-## 4️⃣ Security Layer Tambahan
-
-### Authentication & Authorization pada Monitoring
+## 4. Authentication & Authorization pada Monitoring
 - **Gunakan Auth untuk Prometheus & OpenTelemetry**
   - Tambahkan **Basic Auth atau OAuth2** di Prometheus.
   - Gunakan **Role-Based Access Control (RBAC)** di Grafana.
@@ -127,16 +125,16 @@ Dalam Kubernetes, **Network Policy** digunakan untuk mengontrol komunikasi antar
   - Pastikan Hasura dan monitoring services hanya bisa diakses via **API Gateway**.
   - Gunakan **JWT atau API Keys** untuk keamanan.
 
-### Audit Logs & Logging Security
+## 5. Audit Logs & Logging Security
 - **Aktifkan Query Logs di Hasura** untuk mendeteksi anomali.
 - **Integrasi dengan SIEM** (Splunk, ELK, Datadog) untuk analisis keamanan.
 - **Gunakan OpenTelemetry untuk mendeteksi serangan API**.
 
-### Proteksi terhadap Serangan API & Query Overload
+## 6. Proteksi terhadap Serangan API & Query Overload
 - Gunakan **Rate Limiting & Query Timeouts** untuk mencegah **GraphQL Abuse**.
 - **Hardened GraphQL API Security** dengan introspection **disabled** di production.
 
-### Alerting & Incident Response
+## 7. Alerting & Incident Response
 - **Gunakan Prometheus AlertManager** untuk memantau **anomali pada request atau query execution time**.
 - **Buat playbook incident response** untuk troubleshooting security.
 
