@@ -18,18 +18,29 @@ Control Plane adalah pusat kendali dari klaster Kubernetes. Ia bertanggung jawab
 #### **Komponen Control Plane**:
 
 1. **API Server (`kube-apiserver`)**
-    - Menyediakan RESTful API untuk berkomunikasi dengan komponen internal dan eksternal.
-    - Semua perintah dari `kubectl`, Dashboard, atau API eksternal diterima oleh API Server.
+    - Menyediakan **RESTful API** untuk berkomunikasi dengan komponen internal dan eksternal dalam klaster Kubernetes.
+    - Semua perintah dari `kubectl`, Dashboard, atau API eksternal diterima oleh API Server sebelum diteruskan ke komponen lainnya.
+    - Berperan sebagai pintu gerbang utama yang menangani permintaan administrasi dan operasional dalam klaster Kubernetes.
+
 2. **Controller Manager (`kube-controller-manager`)**
-    - Mengelola berbagai kontrol dalam Kubernetes, seperti:
-        - **Node Controller**: Memantau status node.
-        - **Replication Controller**: Memastikan jumlah replika pod sesuai.
-        - **Endpoint Controller**: Menghubungkan service dengan pod.
+    - Bertanggung jawab untuk menjalankan berbagai kontrol dalam Kubernetes, termasuk:
+        - **Node Controller** → Memantau status node dan mengambil tindakan jika node mengalami kegagalan.
+        - **Replication Controller** → Memastikan jumlah replika pod tetap sesuai dengan yang didefinisikan dalam deployment.
+        - **Endpoint Controller** → Menghubungkan service dengan pod yang sesuai, memungkinkan komunikasi dalam klaster tetap berjalan dengan lancar.
+        - **Service Account & Token Controller** → Mengelola akun layanan dan token autentikasi yang digunakan oleh pod untuk berkomunikasi dengan API Server.
+
 3. **Scheduler (`kube-scheduler`)**
-    - Menentukan di node mana sebuah pod akan dijalankan, berdasarkan resource yang tersedia.
+    - Menentukan di **node mana** sebuah pod akan dijalankan, berdasarkan berbagai faktor seperti:
+        - Resource yang tersedia (CPU, memori, storage)
+        - Affinity dan anti-affinity
+        - Node taints dan tolerations
+        - Workload prioritas
+    - Scheduler memastikan beban kerja terdistribusi secara optimal dalam klaster untuk menghindari **resource contention**.
+
 4. **Etcd** (Key-Value Store)
-    - Menyimpan semua konfigurasi klaster Kubernetes secara konsisten.
-    - Bertindak sebagai database pusat untuk status klaster.
+    - **Menyimpan semua konfigurasi dan status klaster** dalam bentuk key-value store yang terdistribusi.
+    - Bertindak sebagai **database pusat** yang menyimpan informasi tentang pod, service, konfigurasi, dan policy Kubernetes.
+    - Etcd direplikasi di seluruh control plane untuk memastikan **ketersediaan tinggi (High Availability/HA)** dan **konsistensi data**.
 
 ---
 
@@ -41,10 +52,18 @@ Worker Nodes menjalankan aplikasi dalam container. Setiap worker node memiliki a
 
 1. **Kubelet**
     - Agen utama di setiap node yang bertanggung jawab untuk menjalankan pod dan berkomunikasi dengan API Server.
+    - Memantau status pod dan memastikan bahwa container berjalan sesuai dengan spesifikasi yang diberikan dalam YAML deployment.
+    - Mengunduh dan menjalankan container berdasarkan instruksi dari API Server.
+
 2. **Container Runtime**
-    - Menjalankan container dalam pod, misalnya Docker, containerd, atau CRI-O.
+    - Bertanggung jawab untuk menjalankan container dalam pod.
+    - Contoh container runtime yang dapat digunakan adalah **Docker**, **containerd**, atau **CRI-O**.
+    - Mengelola siklus hidup container, termasuk start, stop, dan restart berdasarkan instruksi dari Kubelet.
+
 3. **Kube Proxy**
     - Mengatur jaringan dalam klaster Kubernetes, termasuk routing traffic antar pod dan ke dunia luar.
+    - Mengimplementasikan mekanisme load balancing untuk mendistribusikan traffic ke beberapa instance pod dalam satu service.
+    - Mengatur aturan firewall dan Network Policy agar pod dapat berkomunikasi dengan aman.
 
 ---
 
@@ -54,10 +73,17 @@ Worker Nodes menjalankan aplikasi dalam container. Setiap worker node memiliki a
 
 1. **Developer membuat deployment** menggunakan `kubectl apply -f deployment.yaml` atau melalui API.
 2. **API Server menerima request** dan menyimpannya di etcd.
-3. **Scheduler memilih node** yang cocok untuk menjalankan pod.
+3. **Scheduler memilih node** yang cocok untuk menjalankan pod berdasarkan resource yang tersedia.
 4. **Kubelet pada worker node mengambil tugas** dari API Server dan meminta container runtime untuk menjalankan pod.
-5. **Kube Proxy mengatur komunikasi** antara pod dalam satu klaster maupun ke eksternal.
-6. **Controller Manager memastikan pod tetap berjalan** sesuai dengan yang ditentukan dalam deployment.
+5. **Container Runtime menarik image container** dari registry (misalnya Docker Hub) dan menjalankannya di dalam pod.
+6. **Kube Proxy mengatur komunikasi** antara pod dalam satu klaster maupun ke eksternal dengan menerapkan policy yang sesuai.
+7. **Controller Manager memastikan pod tetap berjalan** sesuai dengan yang ditentukan dalam deployment. Jika ada pod yang gagal atau mati, sistem akan membuat ulang pod baru.
+
+### **B. Cara Kubernetes Mengatur Traffic dan Load Balancing**
+
+1. **Service Discovery** → Kubernetes menggunakan mekanisme DNS internal untuk menghubungkan pod dengan service yang sesuai.
+2. **Load Balancer** → Service dalam Kubernetes dapat dikonfigurasi untuk membagi traffic ke beberapa pod menggunakan mekanisme round-robin atau lainnya.
+3. **Ingress Controller** → Untuk traffic dari luar klaster, Kubernetes menggunakan Ingress Controller (misalnya Traefik atau Nginx) untuk menangani traffic masuk berdasarkan aturan yang telah didefinisikan.
 
 ---
 
@@ -67,10 +93,10 @@ Worker Nodes menjalankan aplikasi dalam container. Setiap worker node memiliki a
 - **Scaling otomatis** → Bisa menambah/mengurangi jumlah pod berdasarkan traffic.
 - **Load Balancing** → Mengarahkan traffic ke pod yang tersedia.
 - **Service Discovery** → Pod dalam satu klaster bisa saling berkomunikasi tanpa konfigurasi manual.
+- **Rolling Updates & Rollbacks** → Kubernetes memungkinkan deployment baru dilakukan secara bertahap tanpa downtime, serta dapat kembali ke versi sebelumnya jika terjadi masalah.
+- **Resource Quotas** → Administrator dapat menentukan batas penggunaan resource agar workload tidak menghabiskan seluruh kapasitas klaster.
 
 ---
-
-Itulah ringkasan arsitektur Kubernetes dan cara kerjanya. Jika Anda ingin mengimplementasikan atau memiliki pertanyaan lebih lanjut, saya siap membantu! 🚀
 
 # **Arsitektur Kubernetes dan Implementasi dalam SLA**
 
@@ -143,17 +169,15 @@ Jika SLA mencakup pemulihan dari kegagalan, strategi berikut diterapkan:
 ---
 
 ## **5. Kesimpulan**
-Untuk memenuhi SLA yang tinggi, Kubernetes harus memiliki:
-✅ **High Availability**
-✅ **Autoscaling**
-✅ **Multi-Region Deployment**
-✅ **Monitoring & Observability**
-✅ **Disaster Recovery**
+Untuk memenuhi SLA yang tinggi, Kubernetes harus memiliki:  
+✅ **High Availability**  
+✅ **Autoscaling**  
+✅ **Multi-Region Deployment**  
+✅ **Monitoring & Observability**  
+✅ **Disaster Recovery**  
 
 📌 **Contoh SLA yang dapat diterapkan:**
 - *99.9% uptime*
 - *Latency API <100ms*
 - *Recovery dalam 15 menit*
-
-Jika Anda ingin membuat SLA Kubernetes yang lebih spesifik, pastikan untuk mendefinisikan SLO (Service Level Objective) yang jelas sesuai kebutuhan bisnis!
 
