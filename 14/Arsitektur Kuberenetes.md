@@ -13,6 +13,10 @@ Arsitektur Kubernetes terdiri dari **dua bagian utama**:
 
 ![image](https://github.com/user-attachments/assets/5ae03c58-4ca0-466f-83d9-6368fe1f49ca)
 
+Gambar di atas menunjukkan bagaimana komponen Control Plane dan Worker Nodes bekerja bersama dalam arsitektur Kubernetes. 
+
+- **Control Plane** terdiri dari API Server, Scheduler, Controller Manager, dan Etcd untuk mengelola seluruh klaster.
+- **Worker Nodes** bertugas menjalankan container dan memastikan pod bekerja dengan baik, menggunakan komponen seperti Kubelet, Kube Proxy, dan Container Runtime.
 
 ### **A. Control Plane (Master Node)**
 
@@ -67,6 +71,29 @@ Worker Nodes menjalankan aplikasi dalam container. Setiap worker node memiliki a
     - Mengatur jaringan dalam klaster Kubernetes, termasuk routing traffic antar pod dan ke dunia luar.
     - Mengimplementasikan mekanisme load balancing untuk mendistribusikan traffic ke beberapa instance pod dalam satu service.
     - Mengatur aturan firewall dan Network Policy agar pod dapat berkomunikasi dengan aman.
+  
+### **C. UI dan CLI pada Kubernetes**
+
+#### **UI (User Interface)**
+
+- **UI** pada Kubernetes biasanya merujuk ke antarmuka grafis seperti **Kubernetes Dashboard** atau tools pihak ketiga seperti **Rancher**.  
+- Dengan UI, pengguna dapat:
+  - Melihat status klaster, pod, deployment, dan service.
+  - Melakukan scaling pod atau deployment secara visual.
+  - Mengatur resource tanpa perlu menulis command manual.
+  - Memantau log dan event dalam klaster dengan mudah.
+- Antarmuka ini cocok untuk pengguna yang lebih menyukai pendekatan visual dan interaktif.
+
+#### **CLI (Command Line Interface)**
+
+- **CLI** merujuk pada alat seperti `kubectl`, yang merupakan command-line tool utama untuk berinteraksi dengan klaster Kubernetes.
+- Melalui CLI, pengguna dapat menjalankan perintah untuk:
+  - Membuat, menghapus, atau memodifikasi resource Kubernetes.
+  - Mengecek status pod, node, atau service dalam klaster.
+  - Menerapkan file konfigurasi (YAML/JSON) dengan perintah seperti `kubectl apply`.
+  - Melakukan debug dengan log dari pod.
+- CLI memberikan fleksibilitas dan kontrol penuh bagi pengguna yang lebih nyaman dengan terminal atau ingin mengotomatiskan pekerjaan menggunakan skrip.
+
 
 ---
 
