@@ -97,6 +97,8 @@ Worker Nodes menjalankan aplikasi dalam container. Setiap worker node memiliki a
 - **Resource Quotas** → Administrator dapat menentukan batas penggunaan resource agar workload tidak menghabiskan seluruh kapasitas klaster.
 
 ---
+---
+---
 
 # **Arsitektur Kubernetes dan Implementasi dalam SLA**
 
