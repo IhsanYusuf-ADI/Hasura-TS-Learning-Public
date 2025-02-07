@@ -11,6 +11,9 @@ Arsitektur Kubernetes terdiri dari **dua bagian utama**:
 1. **Control Plane (Master Node)**
 2. **Worker Nodes**
 
+![image](https://github.com/user-attachments/assets/5ae03c58-4ca0-466f-83d9-6368fe1f49ca)
+
+
 ### **A. Control Plane (Master Node)**
 
 Control Plane adalah pusat kendali dari klaster Kubernetes. Ia bertanggung jawab untuk mengatur status klaster, menjadwalkan pod, serta mengelola komunikasi antara komponen.
