@@ -1,15 +1,15 @@
 **BAB 2: Model Deployment Kubernetes**
 
-### **Pendahuluan**
+# **Pendahuluan**
 Langkah pertama dalam menggunakan Kubernetes di lingkungan produksi adalah memastikan Kubernetes dapat berjalan dengan baik. Ini mencakup pemasangan sistem untuk menyediakan klaster Kubernetes serta pengelolaan pembaruan di masa mendatang. Berbeda dengan instalasi perangkat lunak biasa, Kubernetes sangat bergantung pada infrastruktur yang digunakan. Oleh karena itu, instalasi perangkat lunak dan infrastruktur harus direncanakan secara bersamaan.
 
 Bab ini membahas berbagai pertimbangan sebelum menerapkan Kubernetes, termasuk penggunaan layanan terkelola dibandingkan membangun klaster sendiri. Jika menggunakan layanan terkelola, sebagian besar isi bab ini mungkin tidak relevan, tetapi tetap berguna untuk memahami berbagai alat yang tersedia dalam deployment Kubernetes.
 
 ---
 
-### **Layanan Terkelola vs. Membangun Sendiri**
+# **Layanan Terkelola vs. Membangun Sendiri**
 
-#### **Layanan Terkelola (Managed Services)**
+## **Layanan Terkelola (Managed Services)**
 Menggunakan layanan Kubernetes terkelola mengurangi beban kerja tim teknik karena banyak aspek manajemen klaster ditangani oleh penyedia layanan cloud. Beberapa manfaat layanan terkelola meliputi:
 - Pengurangan upaya rekayasa teknis dalam mengelola siklus hidup Kubernetes.
 - Kontrol plane Kubernetes yang siap digunakan tanpa harus mengelola skalabilitas dan ketersediaannya secara langsung.
@@ -22,7 +22,7 @@ Namun, layanan terkelola memiliki beberapa keterbatasan, seperti:
 - Keterbatasan fleksibilitas dalam mengkonfigurasi Kubernetes.
 - Potensi inkonsistensi dalam fitur yang tersedia di berbagai penyedia cloud.
 
-#### **Membangun Klaster Kubernetes Sendiri**
+## **Membangun Klaster Kubernetes Sendiri**
 Membangun Kubernetes sendiri memberikan fleksibilitas penuh dalam mengonfigurasi dan mengelola klaster. Beberapa manfaat utama dari pendekatan ini meliputi:
 - Tidak tergantung pada penyedia layanan tertentu.
 - Dapat menerapkan fitur Kubernetes secara lebih luas dan mendalam.
@@ -34,20 +34,20 @@ Namun, ada tantangan yang harus dihadapi, seperti:
 - Membutuhkan tim dengan pengalaman teknis tinggi.
 - Membutuhkan investasi sumber daya yang besar untuk membangun dan mengelola infrastruktur.
 
-### **Memilih Pendekatan yang Tepat**
+# **Memilih Pendekatan yang Tepat**
 Jika mengalami kesulitan dalam memahami Kubernetes atau merasa bahwa manajemen sistem terdistribusi terlalu berisiko, layanan terkelola bisa menjadi pilihan terbaik. Namun, jika fleksibilitas lebih diutamakan dan ada kepercayaan rendah terhadap penyedia cloud, membangun Kubernetes sendiri adalah pilihan yang lebih tepat.
 
 Jika memilih layanan terkelola, beberapa bagian bab ini dapat dilewati, kecuali bagian tentang add-ons dan mekanisme pemicu.
 
 ---
 
-### **Automasi dalam Deployment Kubernetes**
+# **Automasi dalam Deployment Kubernetes**
 Baik menggunakan layanan terkelola maupun membangun klaster sendiri, automasi menjadi elemen kunci dalam deployment Kubernetes. Automasi mengurangi biaya operasional, meningkatkan stabilitas, dan menghilangkan potensi kesalahan manusia dalam proses instalasi dan pemeliharaan klaster.
 
-#### **Menggunakan Installer Kubernetes**
+## **Menggunakan Installer Kubernetes**
 Ada banyak installer Kubernetes yang tersedia, baik yang open-source maupun yang berbayar. Beberapa installer dapat dengan mudah digunakan untuk menyiapkan klaster Kubernetes hanya dengan beberapa klik. Jika pilihan ini sesuai dengan kebutuhan dan anggaran, maka menggunakan installer prebuilt bisa menjadi solusi yang efisien.
 
-#### **Automasi Kustom**
+## **Automasi Kustom**
 Meskipun menggunakan installer, sering kali tetap diperlukan beberapa automasi kustom untuk mengintegrasikan Kubernetes dengan sistem yang ada. Namun, membangun sistem deployment dari nol hanya direkomendasikan jika:
 - Terdapat lebih dari satu atau dua engineer yang didedikasikan untuk tugas ini.
 - Tim memiliki pengalaman mendalam dalam Kubernetes.
@@ -57,7 +57,7 @@ Jika memilih pendekatan ini, penting untuk selalu memahami kebutuhan platform da
 
 ---
 
-### **Kesimpulan**
+# **Kesimpulan**
 Pemilihan model deployment Kubernetes bergantung pada berbagai faktor, seperti sumber daya tim, kebutuhan fleksibilitas, dan tingkat kepercayaan terhadap penyedia layanan cloud. Layanan terkelola menawarkan kemudahan dengan mengurangi beban kerja tim teknik, sedangkan membangun klaster sendiri memberikan fleksibilitas dan kontrol penuh atas sistem.
 
 Automasi menjadi aspek kunci dalam deployment Kubernetes, baik dalam menggunakan layanan terkelola maupun membangun sendiri. Dengan memilih strategi yang tepat, organisasi dapat memaksimalkan efisiensi dan keberlanjutan penggunaan Kubernetes dalam lingkungan produksi mereka.
