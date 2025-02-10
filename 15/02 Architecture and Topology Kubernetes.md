@@ -108,4 +108,6 @@ Namun, pada saat ini, banyak organisasi masih mengandalkan alat CI/CD yang dikon
 
 ---
 
+**Dokumentasi dari halaman 28-35**
+
 ---
