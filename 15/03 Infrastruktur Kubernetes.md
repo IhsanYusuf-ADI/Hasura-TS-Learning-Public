@@ -114,3 +114,8 @@ Jika alat manajemen infrastruktur memiliki keterbatasan yang memerlukan pemrogra
 
 Kubernetes menawarkan opsi luar biasa untuk mengotomatisasi manajemen penerapan perangkat lunak berbasis container. Demikian pula, Kubernetes menyediakan manfaat yang signifikan untuk strategi otomatisasi infrastruktur klaster melalui penggunaan Kubernetes operators. Pertimbangkan untuk menggunakan dan berkontribusi pada proyek seperti Cluster API untuk meningkatkan efisiensi dan fleksibilitas manajemen klaster Anda.
 
+---
+
+**Dokumentasi dari halaman 35-46**
+
+---
