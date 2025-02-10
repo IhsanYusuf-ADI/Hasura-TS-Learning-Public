@@ -52,3 +52,7 @@ Meskipun menggunakan installer, sering kali tetap diperlukan beberapa automasi k
 - Terdapat lebih dari satu atau dua engineer yang didedikasikan untuk tugas ini.
 - Tim memiliki pengalaman mendalam dalam Kubernetes.
 - Ada kebutuhan khusus yang tidak dapat dipenuhi oleh installer prebuilt atau layanan terkelola.
+
+---
+
+**Dokumentasi dari Hal 23-27**
