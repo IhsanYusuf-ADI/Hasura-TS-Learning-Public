@@ -82,6 +82,25 @@
 - **Command ke Model**
 - **Command ke Command**
 
+## DDN API Interfaces
+
+### GraphQL
+- **GraphiQL explorer on DDN Console**
+- **Local Development Endpoint**: `http://localhost:3280/graphql`
+- **Public DDN Endpoint**: `https://<project-name>.ddn.hasura.app/graphql`
+- **Private DDN Endpoint**: `https://<project-name>.domain-name/graphql`
+
+### Restified Endpoints
+- Gunakan plugin restified endpoint:
+  [https://github.com/hasura/engine-plugin-restified-endpoint](https://github.com/hasura/engine-plugin-restified-endpoint)
+
+### PromptQL
+- **PromptQL Playground on DDN Console**
+- **Natural Language Query Endpoint**: `https://api.promptql.pro.hasura.io/query`
+- **Execute Program Endpoint**: `https://api.promptql.pro.hasura.io/execute_program`
+
+### JSON API (Coming Soon)
+
 ## Business Logic dengan Lambda Connectors
 
 ### Node.js
@@ -118,9 +137,22 @@
 - Optimasi query kompleks
 
 ## Tracing dalam Hasura DDN
+
+![image](https://github.com/user-attachments/assets/447fa89a-3d6b-4692-ab07-d4cd423d5a4e)
+
+
 - **OTEL Collector** mengumpulkan data dari Data Plane
 - Data diteruskan ke **Control Plane** atau **3rd Party APM Tool**
 - Dapat divisualisasikan di **DDN Console** atau **APM Console**
+
+### Contoh Tracing pada DDN Console
+
+![image](https://github.com/user-attachments/assets/5803e171-e4c4-4f0f-ab22-6cf3dc068c44)
+
+### Contoh Metrics pada DDN Console
+
+![image](https://github.com/user-attachments/assets/5e919617-1486-4b00-88dc-a96ad4bd9d63)
+
 
 ## Authentication Modes & Configuration
 
@@ -150,6 +182,23 @@
 
 # QnA
 
+### 1. Bagaimana V3-Engine menangani threading dan concurrency?
+V3-Engine dalam Hasura DDN menggunakan model worker pool dan pemrosesan asinkron untuk menangani beban kerja secara efisien. Karena deployment dilakukan di Kubernetes, Anda bisa memilih antara **scale horizontally** (menambah lebih banyak pod) atau **scale vertically** (menambah alokasi sumber daya per pod) sesuai dengan kebutuhan performa optimal.
 
+### 2. Bagaimana V3-Engine menangani berbagai jenis tugas?
+- **Data Aggregation** dari berbagai sumber data
+- **Observability Tasks** untuk monitoring dan analisis
+- **Custom Logic Execution** menggunakan Lambda Connectors
+- **GraphQL Query Serialization** untuk meningkatkan performa query
+Lebih lanjut mengenai observability dapat ditemukan di [Hasura Docs](https://hasura.io/docs/3.0/observability/built-in/explain/).
+
+### 3. Apakah memungkinkan menggunakan cloud control plane dengan private cloud data plane? Apakah ada keterbatasan fitur di control plane?
+Ya, memungkinkan. Namun, beberapa fitur mungkin memiliki keterbatasan jika menggunakan kombinasi ini. Detailnya dapat ditemukan di [Hasura Docs](https://hasura.io/docs/3.0/plugins/introduction).
+
+### 4. Jika hubungan bisa lintas konektor atau sumber data, di mana perhitungan dilakukan dalam query agregasi GraphQL?
+Perhitungan dilakukan di **engine node**, bukan di connectors node.
+
+### 5. Bagaimana cara mengakses subgraph dalam pendekatan cross-repository?
+Setiap subgraph memiliki repository sendiri tetapi tergabung dalam proyek supergraph. Jika subgraph dideploy sebagai proyek terpisah di Kubernetes (bukan di DDN cloud), maka aksesnya bisa dilakukan melalui **supergraph sebagai API Gateway** yang mengatur routing ke setiap subgraph. Dengan demikian, sistem tetap memiliki **satu endpoint unified**, bukan harus mengakses setiap subgraph seperti microservices.
 
 ---
